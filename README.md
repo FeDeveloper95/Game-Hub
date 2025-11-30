@@ -19,17 +19,16 @@ This app acts as a dedicated sanctuary for your games. It automatically detects 
 
 The UI is crafted following the latest **Material 3 Expressive** guidelines.
 
+### Feedback
+
+Found a bug or have a feature request? Reach me directly via Telegram.
+
+[Contact me on Telegram](https://t.me/fedeveloper95)
+
 ### Screenshots
 
 <details>
   <summary><b>Click to expand screenshots</b></summary>
   <br>
   <img width="260" alt="Game Hub" src="https://github.com/user-attachments/assets/67c97bb0-2ca2-46e4-a2fd-75116c87b09b" />
-  
   <img width="260" alt="Game Hub menu" src="https://github.com/user-attachments/assets/0b0a19a3-d215-430b-9081-1c130c7cf4c1" />
-
-### Feedback
-
-Found a bug or have a feature request? Reach me directly via Telegram.
-
-[Contact me on Telegram](https://t.me/fedeveloper95)
