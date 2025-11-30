@@ -33,9 +33,6 @@ import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.rounded.SportsEsports
 import androidx.compose.material3.*
-import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.pulltorefresh.PullToRefreshDefaults
-import androidx.compose.material3.pulltorefresh.rememberPullToRefreshState
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -43,12 +40,18 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.graphics.toArgb
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalView
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.ExperimentalTextApi
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -61,22 +64,74 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
+// --- GOOGLE SANS FLEX FONT (Variabile & Rounded) ---
+@OptIn(ExperimentalTextApi::class)
+val GoogleSansFlex = FontFamily(
+    Font(
+        resId = R.font.sans_flex,
+        weight = FontWeight.Normal,
+        style = FontStyle.Normal,
+        variationSettings = FontVariation.Settings(
+            FontVariation.weight(400),
+            FontVariation.width(100f),
+            FontVariation.Setting("ROND", 100f)
+        )
+    )
+)
+
+// --- TIPOGRAFIA EXPRESSIVE ---
+val ExpressiveTypography = Typography(
+    headlineLarge = TextStyle(
+        fontFamily = GoogleSansFlex,
+        fontWeight = FontWeight.Normal,
+        fontSize = 48.sp,
+        lineHeight = 56.sp,
+        letterSpacing = (-1).sp
+    ),
+    titleLarge = TextStyle(
+        fontFamily = GoogleSansFlex,
+        fontWeight = FontWeight.Normal,
+        fontSize = 22.sp,
+        lineHeight = 28.sp,
+        letterSpacing = 0.sp
+    ),
+    titleMedium = TextStyle(
+        fontFamily = GoogleSansFlex,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.15.sp
+    ),
+    bodyLarge = TextStyle(
+        fontFamily = GoogleSansFlex,
+        fontWeight = FontWeight.Normal,
+        fontSize = 16.sp,
+        lineHeight = 24.sp,
+        letterSpacing = 0.5.sp
+    ),
+    labelLarge = TextStyle(
+        fontFamily = GoogleSansFlex,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.1.sp
+    )
+)
+
 // --- TEMA AUTOMATICO ---
 @Composable
 fun GameHubTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(), // Rileva impostazione sistema
+    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
     val context = LocalContext.current
     val view = LocalView.current
 
-    // Gestione colori dinamici (Material You) o fallback
     val colorScheme = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
         if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
     } else {
@@ -98,23 +153,19 @@ fun GameHubTheme(
                 primaryContainer = Color(0xFFEADDFF),
                 onPrimaryContainer = Color(0xFF21005D),
                 secondary = Color(0xFF625B71),
-                background = Color(0xFFF9F9FF), // Sfondo chiaro pulito
+                background = Color(0xFFF9F9FF),
                 surface = Color(0xFFF9F9FF),
                 surfaceContainer = Color(0xFFE7E0EC)
             )
         }
     }
 
-    // Gestione Barre di Sistema (Status Bar e Navigation Bar)
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            // Le rendiamo trasparenti per l'Edge-to-Edge
             window.statusBarColor = Color.Transparent.toArgb()
             window.navigationBarColor = Color.Transparent.toArgb()
 
-            // Se il tema è chiaro (!darkTheme), vogliamo icone scure (true).
-            // Se il tema è scuro (darkTheme), vogliamo icone chiare (false).
             WindowCompat.getInsetsController(window, view).apply {
                 isAppearanceLightStatusBars = !darkTheme
                 isAppearanceLightNavigationBars = !darkTheme
@@ -124,7 +175,7 @@ fun GameHubTheme(
 
     MaterialTheme(
         colorScheme = colorScheme,
-        typography = Typography(), // Font di sistema
+        typography = ExpressiveTypography,
         content = content
     )
 }
@@ -159,7 +210,7 @@ class GameViewModel : ViewModel() {
     private val _allApps = MutableStateFlow<List<GameApp>>(emptyList())
     val allApps: StateFlow<List<GameApp>> = _allApps
 
-    private val _isLoading = MutableStateFlow(false)
+    private val _isLoading = MutableStateFlow(true)
     val isLoading: StateFlow<Boolean> = _isLoading
 
     private val HIDDEN_GAMES_PREF = "hidden_games"
@@ -167,13 +218,10 @@ class GameViewModel : ViewModel() {
 
     private var loadJob: Job? = null
 
-    fun loadGames(context: Context, showLoadingIndicator: Boolean = false) {
+    fun loadGames(context: Context) {
         loadJob?.cancel()
         loadJob = viewModelScope.launch {
-            if (showLoadingIndicator) {
-                _isLoading.value = true
-                delay(800)
-            }
+            _isLoading.value = true
 
             val packageManager = context.packageManager
             val loadedData = withContext(Dispatchers.IO) {
@@ -225,20 +273,20 @@ class GameViewModel : ViewModel() {
 
             _games.value = loadedData.first
             _allApps.value = loadedData.second
-            if (showLoadingIndicator) _isLoading.value = false
+            _isLoading.value = false
         }
     }
 
     fun hideGame(context: Context, packageName: String) {
         removeFromPrefs(context, MANUAL_GAMES_PREF, packageName)
         addToPrefs(context, HIDDEN_GAMES_PREF, packageName)
-        loadGames(context, false)
+        loadGames(context)
     }
 
     fun addManualGame(context: Context, packageName: String) {
         removeFromPrefs(context, HIDDEN_GAMES_PREF, packageName)
         addToPrefs(context, MANUAL_GAMES_PREF, packageName)
-        loadGames(context, false)
+        loadGames(context)
     }
 
     private fun getPrefsSet(context: Context, key: String): Set<String> {
@@ -290,22 +338,25 @@ fun GameHubScreen(viewModel: GameViewModel = viewModel()) {
     var showAddSheet by remember { mutableStateOf(false) }
     var gameToRemove by remember { mutableStateOf<GameApp?>(null) }
 
+    // Manteniamo lo scroll behavior SOLO per il collasso del titolo
     val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-    val pullRefreshState = rememberPullToRefreshState()
 
     LaunchedEffect(Unit) {
-        if (games.isEmpty()) viewModel.loadGames(context, false)
+        viewModel.loadGames(context)
     }
 
     Scaffold(
-        modifier = Modifier.fillMaxSize(),
+        modifier = Modifier
+            .fillMaxSize()
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
         topBar = {
             LargeTopAppBar(
                 title = {
                     Column {
                         Text(
-                            stringResource(R.string.app_name),
-                            fontWeight = FontWeight.Bold
+                            text = stringResource(R.string.app_name),
+                            style = MaterialTheme.typography.headlineLarge,
+                            modifier = Modifier.padding(bottom = 4.dp)
                         )
                         if (scrollBehavior.state.collapsedFraction < 0.5f) {
                             Text(
@@ -335,23 +386,18 @@ fun GameHubScreen(viewModel: GameViewModel = viewModel()) {
             }
         }
     ) { padding ->
-        PullToRefreshBox(
-            isRefreshing = isLoading,
-            onRefresh = { viewModel.loadGames(context, true) },
-            state = pullRefreshState,
-            modifier = Modifier.padding(top = padding.calculateTopPadding()).fillMaxSize(),
-            indicator = {
-                PullToRefreshDefaults.Indicator(
-                    state = pullRefreshState,
-                    isRefreshing = isLoading,
-                    modifier = Modifier.align(Alignment.TopCenter),
-                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                    color = MaterialTheme.colorScheme.primary
-                )
-            }
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(top = padding.calculateTopPadding())
         ) {
             if (games.isEmpty() && !isLoading) {
                 EmptyState()
+            } else if (isLoading && games.isEmpty()) {
+                // Indicatore di caricamento solo iniziale se la lista è vuota
+                Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                    CircularProgressIndicator()
+                }
             } else {
                 LazyColumn(
                     contentPadding = PaddingValues(start = 20.dp, end = 20.dp, top = 8.dp, bottom = 120.dp),
@@ -360,7 +406,9 @@ fun GameHubScreen(viewModel: GameViewModel = viewModel()) {
                 ) {
                     items(items = games, key = { it.packageName }) { game ->
                         SwipeToDeleteContainer(item = game, onDelete = { gameToRemove = game }) {
-                            GameListItem(game = game, onLaunch = { game.launchIntent?.let { context.startActivity(it) } })
+                            GameListItem(game = game, onLaunch = {
+                                game.launchIntent?.let { context.startActivity(it) }
+                            })
                         }
                     }
                 }
@@ -463,7 +511,7 @@ fun AddGameBottomSheet(
         ) {
             Text(
                 stringResource(R.string.add_to_library),
-                style = MaterialTheme.typography.headlineSmall,
+                style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp)
             )
 
