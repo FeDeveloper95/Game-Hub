@@ -1,18 +1,15 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Game Hub</string>
     <string name="games_count_suffix">games ready</string>
-    <string name="refresh">Refresh</string>
     <string name="add_game">Add Game</string>
     <string name="search_apps">Search apps…</string>
     <string name="cancel">Cancel</string>
     <string name="remove">Remove</string>
     <string name="play">Play</string>
-    <string name="close">Close</string>
     <string name="later">Later</string>
     <string name="save">Save</string>
     <string name="discard">Cancel</string>
 
-    <string name="welcome_subtitle">Your minimalist game collection manager.</string>
     <string name="next">Next</string>
     <string name="back">Back</string>
     <string name="get_started">Get Started</string>
@@ -65,19 +62,14 @@
     <string name="add_to_library">Add to library</string>
     <string name="remove_game_title">Remove Game?</string>
     <string name="remove_game_desc">This will remove %1$s from the Game Hub.</string>
-    <string name="remove_action">Remove</string>
 
-    <string name="edit_mode_title">Edit Order</string>
-    <string name="edit_mode_description">Drag to move</string>
-    <string name="save_order_title">Save order?</string>
-    <string name="save_order_description">Save the new order?</string>
+    <string name="edit_mode_title">Edit</string>
 
     <string name="settings_title">Settings</string>
     <string name="settings_header_appearance">Appearance</string>
     <string name="settings_header_preferences">Preferences</string>
     <string name="settings_header_info">Information</string>
 
-    <string name="settings_theme_title">Theme</string>
     <string name="settings_theme_system">System default</string>
     <string name="settings_theme_light">Light</string>
     <string name="settings_theme_dark">Dark</string>
@@ -89,7 +81,6 @@
     <string name="settings_show_name_title">Show User Name</string>
     <string name="settings_show_name_desc">Display your name in the header</string>
     <string name="settings_edit_name_title">Your Name</string>
-    <string name="settings_edit_name_desc">Tap to edit the displayed name</string>
     <string name="dialog_edit_name_title">Enter your name</string>
     <string name="dialog_edit_name_hint">Name</string>
 
@@ -112,8 +103,6 @@
 
     <string name="settings_show_get_more_title">Show Get More Games</string>
     <string name="settings_show_get_more_desc">Show link to store</string>
-    <string name="settings_google_play_title">Game Dashboard</string>
-    <string name="settings_google_play_desc">Manage in GMS settings</string>
 
     <string name="settings_advanced_title">Advanced</string>
     <string name="settings_advanced_desc">Experimental features and updates</string>
@@ -129,13 +118,9 @@
     <string name="settings_auto_updates_title">Automatic updates</string>
     <string name="settings_auto_updates_desc">Check for updates on startup</string>
 
-    <string name="update_checking">Checking…</string>
-    <string name="update_no_update">You have the latest version</string>
     <string name="update_latest_version_msg">No updates available at the moment.</string>
     <string name="update_available">Version %1$s Available!</string>
     <string name="update_action">Update</string>
-    <string name="update_downloading">Downloading…</string>
-    <string name="update_error">Error</string>
     <string name="update_error_msg">Could not check or download update.</string>
     <string name="unknown">Unknown</string>
 
@@ -159,7 +144,6 @@
     <string name="sure_action">Sure!</string>
     <string name="see_source_code">See source code</string>
     <string name="check_updates_action">Check for updates</string>
-    <string name="update_error_check">Unable to check for updates</string>
     <string name="cancel_action">Cancel</string>
     <string name="edit_app_icon_title">Choose Icon</string>
     <string name="edit_app_icons">App icons</string>
@@ -184,26 +168,39 @@
     <string name="add_favorite">Add to favorites</string>
     <string name="remove_favorite">Remove from favorites</string>
     <string name="favorites">Favorites</string>
-    <string name="settings_app_icon_title">App Icon</string>
-    <string name="settings_app_icon_expressive">Expressive</string>
-    <string name="settings_app_icon_flat">Flat</string>
-    <string name="dialog_app_icon_title">Choose App Icon</string>
     <string name="feat_order_desc">Tap the pencil button to enter Edit Mode or hold a game to customize its appearance.</string>
 
-    <string name="controller_connected" tools:ignore="MissingTranslation">Controller Connected</string>
-    <string name="action_settings" tools:ignore="MissingTranslation">Settings</string>
-    <string name="action_ok" tools:ignore="MissingTranslation">OK</string>
-    <string name="settings_test_controller_title" tools:ignore="MissingTranslation">Test more wireless controller features</string>
-    <string name="settings_test_controller_desc" tools:ignore="MissingTranslation">Enable experimental features for controllers</string>
-    <string name="settings_test_controller_simulate_title" tools:ignore="MissingTranslation">Simulate controller connection</string>
-    <string name="settings_test_controller_simulate_desc" tools:ignore="MissingTranslation">Show the controller connection bottom sheet</string>
-    <string name="controller_xbox" tools:ignore="MissingTranslation">Xbox</string>
-    <string name="controller_playstation" tools:ignore="MissingTranslation">PlayStation</string>
-    <string name="controller_joycon" tools:ignore="MissingTranslation">Joy-Con</string>
-    <string name="controller_name_xbox" tools:ignore="MissingTranslation">Xbox Wireless Controller</string>
-    <string name="controller_name_playstation" tools:ignore="MissingTranslation">DualSense Wireless Controller</string>
-    <string name="controller_name_joycon" tools:ignore="MissingTranslation">Joy-Con (L/R)</string>
-    <string name="controller_generic" tools:ignore="MissingTranslation">Generic Controller</string>
-    <string name="controller_name_generic" tools:ignore="MissingTranslation">Unknown controller</string>
+    <string name="controller_connected">Controller Connected</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Controller connection</string>
+    <string name="settings_test_controller_desc">Show a popup on your phone when a controller is connected</string>
+    <string name="settings_test_controller_simulate_title">Simulate controller connection</string>
+    <string name="settings_test_controller_simulate_desc">Show the controller connection bottom sheet</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Xbox Wireless Controller</string>
+    <string name="controller_name_playstation">DualSense Wireless Controller</string>
+    <string name="controller_name_joycon">Joy-Con (L/R)</string>
+    <string name="controller_generic">Generic Controller</string>
+    <string name="controller_name_generic">Unknown controller</string>
+    <string name="settings_header_more">More</string>
+    <string name="settings_game_bubble_title">Game Bubble</string>
+    <string name="settings_game_bubble_desc">Manage Game Bubble settings</string>
+    <string name="settings_bubble_enable_title">Enable Game Bubble</string>
+    <string name="settings_bubble_autohide_title">Auto-hide</string>
+    <string name="settings_bubble_autohide_desc">Minimize to screen edge after 3 seconds</string>
+    <string name="settings_bubble_tools_title">Game Bubble tiles</string>
+    <string name="tool_fps">FPS Counter</string>
+    <string name="tool_dnd">Do Not Disturb</string>
+    <string name="tool_brightness">Max Brightness</string>
+    <string name="tool_screenshot">Screenshot</string>
+    <string name="tool_ping">Ping Monitor</string>
+    <string name="tool_boost">RAM Boost</string>
+    <string name="open_in_store">Open in store</string>
+    <string name="move_up">Move up</string>
+    <string name="move_down">Move down</string>
+    <string name="stats">Stats</string>
 
 </resources>

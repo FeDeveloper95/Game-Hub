@@ -1,12 +1,10 @@
 package com.fedeveloper95.games
 
 import android.Manifest
-import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.Settings
@@ -15,23 +13,33 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.BugReport
+import androidx.compose.material.icons.rounded.Check
+import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.CloudDownload
 import androidx.compose.material.icons.rounded.CloudUpload
 import androidx.compose.material.icons.rounded.DeleteForever
@@ -39,6 +47,7 @@ import androidx.compose.material.icons.rounded.Flag
 import androidx.compose.material.icons.rounded.Gamepad
 import androidx.compose.material.icons.rounded.Group
 import androidx.compose.material.icons.rounded.MoreVert
+import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -48,9 +57,12 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBarDefaults
@@ -60,12 +72,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -81,7 +94,6 @@ import com.fedeveloper95.games.elements.ui.GoogleSansFlex
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.util.Calendar
-import androidx.compose.material.icons.rounded.Settings as SettingsIcon
 
 class AdvancedSettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -100,7 +112,6 @@ class AdvancedSettingsActivity : ComponentActivity() {
     }
 }
 
-@SuppressLint("LocalContextGetResourceValueCall")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AdvancedSettingsScreen(onBack: () -> Unit) {
@@ -109,19 +120,23 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
     val isExpandedScreen = configuration.screenWidthDp >= 600
     val scope = rememberCoroutineScope()
     val prefs = remember { context.getSharedPreferences("game_hub_settings", Context.MODE_PRIVATE) }
+    val haptic = LocalHapticFeedback.current
 
     var autoUpdates by remember { mutableStateOf(prefs.getBoolean("pref_auto_updates", true)) }
-    var testControllerFeatures by remember { mutableStateOf(prefs.getBoolean("test_controller_features", false)) }
+
     var showRestartDialog by remember { mutableStateOf(false) }
     var showCommunitySheet by remember { mutableStateOf(false) }
     var showResetPopup by remember { mutableStateOf(false) }
+
+    val hasOverlay = Settings.canDrawOverlays(context)
+    val hasBt = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+        ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+    } else true
+
+    val testControllerFeatures = prefs.getBoolean("test_controller_features", hasOverlay && hasBt)
     var showControllerSheet by remember { mutableStateOf(false) }
     var selectedControllerName by remember { mutableStateOf(context.getString(R.string.controller_name_xbox)) }
     var showControllerMenu by remember { mutableStateOf(false) }
-
-    val bluetoothPermissionLauncher = rememberLauncherForActivityResult(
-        ActivityResultContracts.RequestPermission()
-    ) { }
 
     val exportLauncher = rememberLauncherForActivityResult(ActivityResultContracts.CreateDocument("application/json")) { uri ->
         uri?.let {
@@ -183,36 +198,55 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
                 .padding(horizontal = 16.dp)
                 .padding(top = 8.dp, bottom = padding.calculateBottomPadding() + 48.dp)
         ) {
-            SettingsSwitchCard(
-                icon = Icons.Rounded.SettingsIcon,
-                title = stringResource(R.string.settings_auto_updates_title),
-                subtitle = stringResource(R.string.settings_auto_updates_desc),
-                containerColor = Color(0xFFfcbd00),
-                iconColor = Color(0xFF6d3a01),
-                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 4.dp, bottomEnd = 4.dp),
-                checked = autoUpdates,
-                onCheckedChange = {
-                    autoUpdates = it
-                    prefs.edit().putBoolean("pref_auto_updates", it).apply()
-                }
-            )
-
-            Spacer(modifier = Modifier.height(2.dp))
-
-            SettingsItemCard(
-                icon = Icons.Rounded.Flag,
-                title = stringResource(R.string.settings_setup_title),
-                subtitle = stringResource(R.string.settings_setup_desc),
-                containerColor = Color(0xFFffaee4),
-                iconColor = Color(0xFF8d0053),
-                shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
-                onClick = {
-                    val intent = Intent(context, WelcomeActivity::class.java).apply {
-                        putExtra("FORCE_SHOW", true)
+            Column(verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)) {
+                GameSettingsSegmentedItem(
+                    icon = Icons.Rounded.Settings,
+                    title = stringResource(R.string.settings_auto_updates_title),
+                    subtitle = stringResource(R.string.settings_auto_updates_desc),
+                    containerColor = Color(0xFFfcbd00),
+                    iconColor = Color(0xFF6d3a01),
+                    index = 0,
+                    count = 2,
+                    onClick = {
+                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        autoUpdates = !autoUpdates
+                        prefs.edit().putBoolean("pref_auto_updates", autoUpdates).apply()
+                    },
+                    trailingContent = {
+                        Switch(
+                            checked = autoUpdates,
+                            onCheckedChange = {
+                                haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                autoUpdates = it
+                                prefs.edit().putBoolean("pref_auto_updates", it).apply()
+                            },
+                            thumbContent = {
+                                if (autoUpdates) {
+                                    Icon(Icons.Rounded.Check, contentDescription = null, modifier = Modifier.size(SwitchDefaults.IconSize))
+                                } else {
+                                    Icon(Icons.Rounded.Close, contentDescription = null, modifier = Modifier.size(SwitchDefaults.IconSize))
+                                }
+                            }
+                        )
                     }
-                    context.startActivity(intent)
-                }
-            )
+                )
+
+                GameSettingsSegmentedItem(
+                    icon = Icons.Rounded.Flag,
+                    title = stringResource(R.string.settings_setup_title),
+                    subtitle = stringResource(R.string.settings_setup_desc),
+                    containerColor = Color(0xFFffaee4),
+                    iconColor = Color(0xFF8d0053),
+                    index = 1,
+                    count = 2,
+                    onClick = {
+                        val intent = Intent(context, WelcomeActivity::class.java).apply {
+                            putExtra("FORCE_SHOW", true)
+                        }
+                        context.startActivity(intent)
+                    }
+                )
+            }
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -226,32 +260,34 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
                 modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
             )
 
-            SettingsItemCard(
-                icon = Icons.Rounded.CloudUpload,
-                title = stringResource(R.string.settings_export_title),
-                subtitle = stringResource(R.string.settings_export_desc),
-                containerColor = Color(0xFF80da88),
-                iconColor = Color(0xFF00522c),
-                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 4.dp, bottomEnd = 4.dp),
-                onClick = {
-                    val timestamp = Calendar.getInstance().timeInMillis
-                    exportLauncher.launch("gamehub_backup_$timestamp.json")
-                }
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)) {
+                GameSettingsSegmentedItem(
+                    icon = Icons.Rounded.CloudUpload,
+                    title = stringResource(R.string.settings_export_title),
+                    subtitle = stringResource(R.string.settings_export_desc),
+                    containerColor = Color(0xFF80da88),
+                    iconColor = Color(0xFF00522c),
+                    index = 0,
+                    count = 2,
+                    onClick = {
+                        val timestamp = Calendar.getInstance().timeInMillis
+                        exportLauncher.launch("gamehub_backup_$timestamp.json")
+                    }
+                )
 
-            Spacer(modifier = Modifier.height(2.dp))
-
-            SettingsItemCard(
-                icon = Icons.Rounded.CloudDownload,
-                title = stringResource(R.string.settings_import_title),
-                subtitle = stringResource(R.string.settings_import_desc),
-                containerColor = Color(0xFF67d4ff),
-                iconColor = Color(0xFF004e5d),
-                shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
-                onClick = {
-                    importLauncher.launch(arrayOf("application/json"))
-                }
-            )
+                GameSettingsSegmentedItem(
+                    icon = Icons.Rounded.CloudDownload,
+                    title = stringResource(R.string.settings_import_title),
+                    subtitle = stringResource(R.string.settings_import_desc),
+                    containerColor = Color(0xFF67d4ff),
+                    iconColor = Color(0xFF004e5d),
+                    index = 1,
+                    count = 2,
+                    onClick = {
+                        importLauncher.launch(arrayOf("application/json"))
+                    }
+                )
+            }
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -265,146 +301,92 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
                 modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
             )
 
-            SettingsItemCard(
-                icon = Icons.Rounded.Group,
-                title = stringResource(R.string.settings_test_telegram_title),
-                subtitle = stringResource(R.string.settings_test_telegram_desc),
-                containerColor = Color(0xFF97cbff),
-                iconColor = Color(0xFF003355),
-                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 4.dp, bottomEnd = 4.dp),
-                onClick = {
-                    showCommunitySheet = true
-                }
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)) {
+                val testCount = 2 + (if (testControllerFeatures) 1 else 0)
+                var testIndex = 0
 
-            Spacer(modifier = Modifier.height(2.dp))
+                GameSettingsSegmentedItem(
+                    icon = Icons.Rounded.Group,
+                    title = stringResource(R.string.settings_test_telegram_title),
+                    subtitle = stringResource(R.string.settings_test_telegram_desc),
+                    containerColor = Color(0xFF97cbff),
+                    iconColor = Color(0xFF003355),
+                    index = minOf(testIndex++, testCount - 1),
+                    count = testCount,
+                    onClick = { showCommunitySheet = true }
+                )
 
-            SettingsSwitchCard(
-                icon = Icons.Rounded.Gamepad,
-                title = stringResource(R.string.settings_test_controller_title),
-                subtitle = stringResource(R.string.settings_test_controller_desc),
-                containerColor = Color(0xFFcba6ff),
-                iconColor = Color(0xFF320073),
-                shape = RoundedCornerShape(4.dp),
-                checked = testControllerFeatures,
-                onCheckedChange = {
-                    testControllerFeatures = it
-                    prefs.edit().putBoolean("test_controller_features", it).apply()
-                    if (it) {
-                        if (!Settings.canDrawOverlays(context)) {
-                            val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}"))
-                            context.startActivity(intent)
-                        }
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                            if (ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) {
-                                bluetoothPermissionLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT)
-                            }
-                        }
-                    }
-                }
-            )
-
-            if (testControllerFeatures) {
-                Spacer(modifier = Modifier.height(2.dp))
-
-                Box(
-                    modifier = Modifier.fillMaxWidth(),
-                    contentAlignment = Alignment.CenterEnd
-                ) {
-                    SettingsItemCard(
+                if (testControllerFeatures) {
+                    GameSettingsSegmentedItem(
                         icon = Icons.Rounded.Gamepad,
                         title = stringResource(R.string.settings_test_controller_simulate_title),
                         subtitle = stringResource(R.string.settings_test_controller_simulate_desc),
                         containerColor = Color(0xFFFCBD00),
                         iconColor = Color(0xFF6D3A01),
-                        shape = RoundedCornerShape(4.dp),
-                        onClick = {
-                            showControllerSheet = true
+                        index = minOf(testIndex++, testCount - 1),
+                        count = testCount,
+                        onClick = { showControllerSheet = true },
+                        trailingContent = {
+                            Box {
+                                IconButton(
+                                    onClick = { showControllerMenu = true }
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.MoreVert,
+                                        contentDescription = null,
+                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
+                                DropdownMenu(
+                                    expanded = showControllerMenu,
+                                    onDismissRequest = { showControllerMenu = false },
+                                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+                                ) {
+                                    DropdownMenuItem(
+                                        text = { Text(text = stringResource(R.string.controller_xbox), fontFamily = GoogleSansFlex) },
+                                        onClick = {
+                                            selectedControllerName = context.getString(R.string.controller_name_xbox)
+                                            showControllerMenu = false
+                                        }
+                                    )
+                                    DropdownMenuItem(
+                                        text = { Text(text = stringResource(R.string.controller_playstation), fontFamily = GoogleSansFlex) },
+                                        onClick = {
+                                            selectedControllerName = context.getString(R.string.controller_name_playstation)
+                                            showControllerMenu = false
+                                        }
+                                    )
+                                    DropdownMenuItem(
+                                        text = { Text(text = stringResource(R.string.controller_joycon), fontFamily = GoogleSansFlex) },
+                                        onClick = {
+                                            selectedControllerName = context.getString(R.string.controller_name_joycon)
+                                            showControllerMenu = false
+                                        }
+                                    )
+                                    DropdownMenuItem(
+                                        text = { Text(text = stringResource(R.string.controller_generic), fontFamily = GoogleSansFlex) },
+                                        onClick = {
+                                            selectedControllerName = context.getString(R.string.controller_name_generic)
+                                            showControllerMenu = false
+                                        }
+                                    )
+                                }
+                            }
                         }
                     )
-
-                    Box(modifier = Modifier.padding(end = 4.dp)) {
-                        IconButton(
-                            onClick = { showControllerMenu = true }
-                        ) {
-                            Icon(
-                                imageVector = Icons.Rounded.MoreVert,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurfaceVariant
-                            )
-                        }
-
-                        DropdownMenu(
-                            expanded = showControllerMenu,
-                            onDismissRequest = { showControllerMenu = false },
-                            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
-                        ) {
-                            DropdownMenuItem(
-                                text = {
-                                    Text(
-                                        text = stringResource(R.string.controller_xbox),
-                                        fontFamily = GoogleSansFlex
-                                    )
-                                },
-                                onClick = {
-                                    selectedControllerName = context.getString(R.string.controller_name_xbox)
-                                    showControllerMenu = false
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = {
-                                    Text(
-                                        text = stringResource(R.string.controller_playstation),
-                                        fontFamily = GoogleSansFlex
-                                    )
-                                },
-                                onClick = {
-                                    selectedControllerName = context.getString(R.string.controller_name_playstation)
-                                    showControllerMenu = false
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = {
-                                    Text(
-                                        text = stringResource(R.string.controller_joycon),
-                                        fontFamily = GoogleSansFlex
-                                    )
-                                },
-                                onClick = {
-                                    selectedControllerName = context.getString(R.string.controller_name_joycon)
-                                    showControllerMenu = false
-                                }
-                            )
-                            DropdownMenuItem(
-                                text = {
-                                    Text(
-                                        text = stringResource(R.string.controller_generic),
-                                        fontFamily = GoogleSansFlex
-                                    )
-                                },
-                                onClick = {
-                                    selectedControllerName = context.getString(R.string.controller_name_generic)
-                                    showControllerMenu = false
-                                }
-                            )
-                        }
-                    }
                 }
+
+                GameSettingsSegmentedItem(
+                    icon = Icons.Rounded.BugReport,
+                    title = stringResource(R.string.settings_test_crash_title),
+                    subtitle = stringResource(R.string.settings_test_crash_desc),
+                    containerColor = Color(0xFFffb869),
+                    iconColor = Color(0xFF5c3000),
+                    index = minOf(testIndex++, testCount - 1),
+                    count = testCount,
+                    onClick = { throw RuntimeException("Test Crash Triggered") }
+                )
             }
-
-            Spacer(modifier = Modifier.height(2.dp))
-
-            SettingsItemCard(
-                icon = Icons.Rounded.BugReport,
-                title = stringResource(R.string.settings_test_crash_title),
-                subtitle = stringResource(R.string.settings_test_crash_desc),
-                containerColor = Color(0xFFffb869),
-                iconColor = Color(0xFF5c3000),
-                shape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 20.dp, bottomEnd = 20.dp),
-                onClick = {
-                    throw RuntimeException("Test Crash Triggered")
-                }
-            )
 
             Spacer(modifier = Modifier.height(32.dp))
 
@@ -418,17 +400,18 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
                 modifier = Modifier.padding(start = 16.dp, bottom = 8.dp)
             )
 
-            SettingsItemCard(
-                icon = Icons.Rounded.DeleteForever,
-                title = stringResource(R.string.settings_reset_title),
-                subtitle = stringResource(R.string.settings_reset_desc),
-                containerColor = MaterialTheme.colorScheme.errorContainer,
-                iconColor = MaterialTheme.colorScheme.onErrorContainer,
-                shape = RoundedCornerShape(20.dp),
-                onClick = {
-                    showResetPopup = true
-                }
-            )
+            Column(verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)) {
+                GameSettingsSegmentedItem(
+                    icon = Icons.Rounded.DeleteForever,
+                    title = stringResource(R.string.settings_reset_title),
+                    subtitle = stringResource(R.string.settings_reset_desc),
+                    containerColor = MaterialTheme.colorScheme.errorContainer,
+                    iconColor = MaterialTheme.colorScheme.onErrorContainer,
+                    index = 0,
+                    count = 1,
+                    onClick = { showResetPopup = true }
+                )
+            }
         }
     }
 
@@ -470,16 +453,22 @@ fun ResetPopup(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val cornerPercent by animateIntAsState(
-        targetValue = if (isPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "btnMorph"
     )
 
     val textInteractionSource = remember { MutableInteractionSource() }
     val textIsPressed by textInteractionSource.collectIsPressedAsState()
     val textCornerPercent by animateIntAsState(
-        targetValue = if (textIsPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (textIsPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "txtBtnMorph"
     )
 

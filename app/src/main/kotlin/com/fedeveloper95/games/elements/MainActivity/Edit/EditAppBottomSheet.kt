@@ -4,8 +4,9 @@ import android.content.Intent
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -129,16 +130,22 @@ fun EditAppBottomSheet(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val cornerPercent by animateIntAsState(
-        targetValue = if (isPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "btnMorph"
     )
 
     val favInteractionSource = remember { MutableInteractionSource() }
     val isFavPressed by favInteractionSource.collectIsPressedAsState()
     val favCornerPercent by animateIntAsState(
-        targetValue = if (isFavPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isFavPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "favBtnMorph"
     )
 
@@ -165,6 +172,7 @@ fun EditAppBottomSheet(
             )
 
             val isBuiltIn = customIconUri?.startsWith("builtin://") == true
+
             if (isBuiltIn) {
                 val uriStr = customIconUri!!
                 val name = uriStr.substringAfter("builtin://").substringBefore("#")
@@ -218,6 +226,7 @@ fun EditAppBottomSheet(
                 stringResource(R.string.edit_builtin_icons),
                 stringResource(R.string.edit_gallery)
             )
+
             val icons = listOf(Icons.Outlined.Apps, Icons.Outlined.Category, Icons.Outlined.Image)
 
             Row(
@@ -415,6 +424,7 @@ fun EditAppBottomSheet(
         } else {
             "default"
         }
+
         val currentColor = if (customIconUri?.startsWith("builtin://") == true) {
             customIconUri!!.substringAfter("#").toIntOrNull() ?: 0
         } else {

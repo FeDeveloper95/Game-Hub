@@ -418,3 +418,65 @@ class GameViewModel : ViewModel() {
         }
     }
 }
+
+object GamesCacheManager {
+    fun saveGames(context: Context, games: List<GameApp>) {
+        val prefs = context.getSharedPreferences("game_hub_cache", Context.MODE_PRIVATE)
+        val data = games.joinToString("|||") {
+            "${it.packageName}:::${it.name}:::${it.customName ?: ""}:::${it.customIconUri ?: ""}:::${it.isFavorite}:::${it.launchCount}:::${it.totalPlayTime}"
+        }
+        prefs.edit().putString("cached_games", data).apply()
+    }
+
+    fun loadGames(context: Context): List<GameApp> {
+        val prefs = context.getSharedPreferences("game_hub_cache", Context.MODE_PRIVATE)
+        val data = prefs.getString("cached_games", "") ?: ""
+        if (data.isEmpty()) return emptyList()
+
+        val pm = context.packageManager
+        return data.split("|||").mapNotNull {
+            val parts = it.split(":::")
+            if (parts.size >= 7) {
+                val pkg = parts[0]
+                val intent = pm.getLaunchIntentForPackage(pkg)
+                GameApp(
+                    packageName = pkg,
+                    name = parts[1],
+                    customName = parts[2].takeIf { it.isNotEmpty() },
+                    customIconUri = parts[3].takeIf { it.isNotEmpty() },
+                    isFavorite = parts[4].toBoolean(),
+                    launchCount = parts[5].toIntOrNull() ?: 0,
+                    totalPlayTime = parts[6].toLongOrNull() ?: 0L,
+                    launchIntent = intent
+                )
+            } else null
+        }
+    }
+}
+
+object AllAppsCacheManager {
+    fun saveApps(context: Context, apps: List<GameApp>) {
+        val prefs = context.getSharedPreferences("game_hub_all_apps_cache", Context.MODE_PRIVATE)
+        val data = apps.joinToString("|||") { "${it.packageName}:::${it.name}" }
+        prefs.edit().putString("cached_all_apps", data).apply()
+    }
+
+    fun loadApps(context: Context): List<GameApp> {
+        val prefs = context.getSharedPreferences("game_hub_all_apps_cache", Context.MODE_PRIVATE)
+        val data = prefs.getString("cached_all_apps", "") ?: ""
+        if (data.isEmpty()) return emptyList()
+
+        val pm = context.packageManager
+        return data.split("|||").mapNotNull {
+            val parts = it.split(":::")
+            if (parts.size >= 2) {
+                val pkg = parts[0]
+                GameApp(
+                    packageName = pkg,
+                    name = parts[1],
+                    launchIntent = pm.getLaunchIntentForPackage(pkg)
+                )
+            } else null
+        }
+    }
+}

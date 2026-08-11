@@ -1,8 +1,9 @@
 package com.fedeveloper95.games.elements.SettingsActivity
 
 import android.content.Context
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -61,8 +62,11 @@ fun CardStylePopup(
     val dismissInteractionSource = remember { MutableInteractionSource() }
     val isDismissPressed by dismissInteractionSource.collectIsPressedAsState()
     val dismissCorner by animateIntAsState(
-        targetValue = if (isDismissPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isDismissPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "dismissCorner"
     )
 

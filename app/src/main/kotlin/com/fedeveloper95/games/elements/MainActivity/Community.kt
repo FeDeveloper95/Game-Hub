@@ -1,11 +1,11 @@
 @file:OptIn(ExperimentalMaterial3Api::class, ExperimentalTextApi::class)
-
 package com.fedeveloper95.games.elements.MainActivity
 
 import android.content.Intent
 import android.net.Uri
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
@@ -59,17 +59,25 @@ fun CommunityBottomSheet(
 
     val cancelInteractionSource = remember { MutableInteractionSource() }
     val saveInteractionSource = remember { MutableInteractionSource() }
+
     val isCancelPressed by cancelInteractionSource.collectIsPressedAsState()
     val isSavePressed by saveInteractionSource.collectIsPressedAsState()
 
     val cancelCorner by animateIntAsState(
-        targetValue = if (isCancelPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isCancelPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "cancelCorner"
     )
+
     val saveCorner by animateIntAsState(
-        targetValue = if (isSavePressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isSavePressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "saveCorner"
     )
 
@@ -100,9 +108,7 @@ fun CommunityBottomSheet(
                     tint = MaterialTheme.colorScheme.onPrimaryContainer
                 )
             }
-
             Spacer(modifier = Modifier.height(24.dp))
-
             Text(
                 text = stringResource(R.string.community_title),
                 fontFamily = GoogleSansFlex,
@@ -110,9 +116,7 @@ fun CommunityBottomSheet(
                 style = MaterialTheme.typography.titleLarge,
                 color = MaterialTheme.colorScheme.onSurface
             )
-
             Spacer(modifier = Modifier.height(16.dp))
-
             Text(
                 text = stringResource(R.string.community_desc),
                 fontFamily = GoogleSansFlex,

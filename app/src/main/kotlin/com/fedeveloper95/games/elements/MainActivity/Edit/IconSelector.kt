@@ -1,7 +1,9 @@
 package com.fedeveloper95.games.elements.MainActivity.Edit
 
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -68,8 +70,11 @@ fun ExpressiveTextButton(
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
     val cornerPercent by animateIntAsState(
-        targetValue = if (isPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "btnMorph"
     )
 
@@ -158,8 +163,11 @@ fun IconSelector(
                                 val isPressed by interactionSource.collectIsPressedAsState()
 
                                 val cornerPercent by animateIntAsState(
-                                    targetValue = if (isPressed) 15 else 50,
-                                    animationSpec = tween(durationMillis = 200),
+                                    targetValue = if (isPressed) 20 else 50,
+                                    animationSpec = spring(
+                                        dampingRatio = Spring.DampingRatioMediumBouncy,
+                                        stiffness = Spring.StiffnessMediumLow
+                                    ),
                                     label = "iconCorner"
                                 )
 
@@ -237,7 +245,10 @@ fun IconSelector(
 
                         val cornerPercent by animateIntAsState(
                             targetValue = targetCorner,
-                            animationSpec = tween(durationMillis = 200),
+                            animationSpec = spring(
+                                dampingRatio = Spring.DampingRatioMediumBouncy,
+                                stiffness = Spring.StiffnessMediumLow
+                            ),
                             label = "colorCorner"
                         )
 

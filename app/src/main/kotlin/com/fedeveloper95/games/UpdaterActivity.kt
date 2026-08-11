@@ -20,8 +20,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -38,21 +39,24 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Sync
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.ContainedLoadingIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeTopAppBar
+import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
@@ -66,6 +70,9 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
@@ -82,7 +89,6 @@ import com.fedeveloper95.games.elements.ui.GoogleSansFlex
 import com.fedeveloper95.games.services.SettingsActivity.UpdateStatus
 import com.fedeveloper95.games.services.SettingsActivity.Updater
 import dev.jeziellago.compose.markdowntext.MarkdownText
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
 class UpdaterActivity : ComponentActivity() {
@@ -107,7 +113,9 @@ fun AnimatedActionButton(
     text: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
-    isOutlined: Boolean = false,
+    containerColor: Color = MaterialTheme.colorScheme.primary,
+    contentColor: Color = MaterialTheme.colorScheme.onPrimary,
+    leadingIcon: @Composable (() -> Unit)? = null,
     enabled: Boolean = true,
     buttonHeight: Dp = 56.dp
 ) {
@@ -115,48 +123,35 @@ fun AnimatedActionButton(
     val isPressed by interactionSource.collectIsPressedAsState()
 
     val cornerPercent by animateIntAsState(
-        targetValue = if (isPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "btnMorph"
     )
 
-    if (isOutlined) {
-        OutlinedButton(
-            onClick = onClick,
-            modifier = modifier.height(buttonHeight),
-            shape = RoundedCornerShape(cornerPercent),
-            enabled = enabled,
-            interactionSource = interactionSource,
-            colors = ButtonDefaults.outlinedButtonColors(
-                contentColor = MaterialTheme.colorScheme.primary
-            )
-        ) {
-            Text(
-                text = text,
-                fontFamily = GoogleSansFlex,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium
-            )
+    Button(
+        onClick = onClick,
+        modifier = modifier.height(buttonHeight),
+        shape = RoundedCornerShape(cornerPercent),
+        enabled = enabled,
+        interactionSource = interactionSource,
+        colors = ButtonDefaults.buttonColors(
+            containerColor = containerColor,
+            contentColor = contentColor
+        )
+    ) {
+        if (leadingIcon != null) {
+            leadingIcon()
+            Spacer(modifier = Modifier.width(8.dp))
         }
-    } else {
-        Button(
-            onClick = onClick,
-            modifier = modifier.height(buttonHeight),
-            shape = RoundedCornerShape(cornerPercent),
-            enabled = enabled,
-            interactionSource = interactionSource,
-            colors = ButtonDefaults.buttonColors(
-                containerColor = MaterialTheme.colorScheme.primary,
-                contentColor = MaterialTheme.colorScheme.onPrimary
-            )
-        ) {
-            Text(
-                text = text,
-                fontFamily = GoogleSansFlex,
-                fontWeight = FontWeight.Bold,
-                style = MaterialTheme.typography.titleMedium
-            )
-        }
+        Text(
+            text = text,
+            fontFamily = GoogleSansFlex,
+            fontWeight = FontWeight.Bold,
+            style = MaterialTheme.typography.titleMedium
+        )
     }
 }
 
@@ -168,6 +163,9 @@ fun UpdaterScreen(onBack: () -> Unit) {
     val scope = rememberCoroutineScope()
     var status by remember { mutableStateOf<UpdateStatus>(UpdateStatus.Idle) }
     var isDownloading by remember { mutableStateOf(false) }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val errorMessage = stringResource(R.string.update_error_msg)
+    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
 
     val currentVersionName = remember {
         try {
@@ -239,7 +237,6 @@ fun UpdaterScreen(onBack: () -> Unit) {
     fun checkUpdates() {
         status = UpdateStatus.Checking
         scope.launch {
-            val startTime = System.currentTimeMillis()
             var isOnline = true
 
             try {
@@ -254,28 +251,26 @@ fun UpdaterScreen(onBack: () -> Unit) {
             }
 
             if (!isOnline) {
-                val elapsed = System.currentTimeMillis() - startTime
-                if (elapsed < 3000L) {
-                    delay(3000L - elapsed)
-                }
                 status = UpdateStatus.Error
+                snackbarHostState.currentSnackbarData?.dismiss()
+                snackbarHostState.showSnackbar(
+                    message = errorMessage,
+                    withDismissAction = true
+                )
                 return@launch
             }
 
             try {
                 val update = Updater.checkForUpdates(currentVersionName)
-                val elapsed = System.currentTimeMillis() - startTime
-                if (elapsed < 3000L) {
-                    delay(3000L - elapsed)
-                }
                 status =
                     if (update != null) UpdateStatus.Available(update) else UpdateStatus.NoUpdate
             } catch (e: Exception) {
-                val elapsed = System.currentTimeMillis() - startTime
-                if (elapsed < 3000L) {
-                    delay(3000L - elapsed)
-                }
                 status = UpdateStatus.Error
+                snackbarHostState.currentSnackbarData?.dismiss()
+                snackbarHostState.showSnackbar(
+                    message = errorMessage,
+                    withDismissAction = true
+                )
             }
         }
     }
@@ -284,48 +279,91 @@ fun UpdaterScreen(onBack: () -> Unit) {
         checkUpdates()
     }
 
-    val scrollBehavior = TopAppBarDefaults.exitUntilCollapsedScrollBehavior()
-
-    val appBarTypography = MaterialTheme.typography.copy(
-        headlineMedium = MaterialTheme.typography.displaySmall.copy(
-            fontFamily = GoogleSansFlex,
-            fontWeight = FontWeight.Normal
-        )
-    )
-
     Box(
         modifier = Modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
     ) {
         Scaffold(
+            modifier = Modifier
+                .widthIn(max = 700.dp)
+                .fillMaxSize()
+                .nestedScroll(scrollBehavior.nestedScrollConnection),
             topBar = {
-                MaterialTheme(typography = appBarTypography) {
-                    LargeTopAppBar(
-                        title = {
-                            Text(
-                                text = stringResource(R.string.settings_check_updates_title),
-                                maxLines = 1
-                            )
-                        },
-                        navigationIcon = {
-                            Box(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
-                                ExpressiveIconButton(
-                                    onClick = onBack,
-                                    icon = Icons.AutoMirrored.Rounded.ArrowBack,
-                                    contentDescription = stringResource(R.string.cancel_action),
-                                    containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
-                                    contentColor = MaterialTheme.colorScheme.onSurface
-                                )
-                            }
-                        },
-                        scrollBehavior = scrollBehavior,
-                        colors = TopAppBarDefaults.largeTopAppBarColors(
-                            containerColor = MaterialTheme.colorScheme.background,
-                            scrolledContainerColor = MaterialTheme.colorScheme.background,
-                            titleContentColor = MaterialTheme.colorScheme.onBackground
-                        )
-                    )
+                val topBarColor = if (status is UpdateStatus.Available) {
+                    MaterialTheme.colorScheme.surfaceContainer
+                } else {
+                    MaterialTheme.colorScheme.background
                 }
+
+                LargeTopAppBar(
+                    title = {
+                        if (status is UpdateStatus.Available) {
+                            val currentStatus = status as UpdateStatus.Available
+                            val titleText = stringResource(R.string.update_available, currentStatus.info.version)
+                            val versionText = "v${currentStatus.info.version.replace("v", "", ignoreCase = true).trim()}"
+
+                            val fraction = scrollBehavior.state.collapsedFraction
+                            val alphaValue = (1f - (fraction / 0.6f)).coerceIn(0f, 1f)
+
+                            if (alphaValue > 0f) {
+                                Row(
+                                    modifier = Modifier
+                                        .padding(end = 24.dp)
+                                        .alpha(alphaValue),
+                                    verticalAlignment = Alignment.CenterVertically
+                                ) {
+                                    Box(contentAlignment = Alignment.Center) {
+                                        Icon(
+                                            imageVector = ImageVector.vectorResource(R.drawable.ic_nine_sided_cookie),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(60.dp),
+                                            tint = MaterialTheme.colorScheme.primaryContainer
+                                        )
+                                        Icon(
+                                            imageVector = ImageVector.vectorResource(R.drawable.ic_update_avaiable),
+                                            contentDescription = null,
+                                            modifier = Modifier.size(30.dp),
+                                            tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                        )
+                                    }
+                                    Spacer(modifier = Modifier.width(16.dp))
+                                    Column {
+                                        Text(
+                                            text = titleText,
+                                            fontFamily = GoogleSansFlex,
+                                            style = MaterialTheme.typography.titleLarge,
+                                            color = MaterialTheme.colorScheme.onSurface,
+                                            fontWeight = FontWeight.Bold
+                                        )
+                                        Text(
+                                            text = versionText,
+                                            fontFamily = GoogleSansFlex,
+                                            style = MaterialTheme.typography.bodyLarge,
+                                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                                        )
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    navigationIcon = {
+                        Box(modifier = Modifier.padding(start = 16.dp, end = 16.dp)) {
+                            ExpressiveIconButton(
+                                onClick = onBack,
+                                icon = Icons.AutoMirrored.Rounded.ArrowBack,
+                                contentDescription = stringResource(R.string.cancel_action),
+                                containerColor = MaterialTheme.colorScheme.surfaceContainerHigh,
+                                contentColor = MaterialTheme.colorScheme.onSurface
+                            )
+                        }
+                    },
+                    colors = TopAppBarDefaults.largeTopAppBarColors(
+                        containerColor = topBarColor,
+                        scrolledContainerColor = topBarColor
+                    ),
+                    scrollBehavior = scrollBehavior,
+                    modifier = Modifier.clip(RoundedCornerShape(bottomStart = 24.dp, bottomEnd = 24.dp))
+                )
             },
             bottomBar = {
                 Surface(
@@ -349,7 +387,15 @@ fun UpdaterScreen(onBack: () -> Unit) {
                                 context.startActivity(intent)
                             },
                             modifier = Modifier.fillMaxWidth(),
-                            isOutlined = true,
+                            containerColor = MaterialTheme.colorScheme.primaryContainer,
+                            contentColor = MaterialTheme.colorScheme.onPrimaryContainer,
+                            leadingIcon = {
+                                Icon(
+                                    imageVector = ImageVector.vectorResource(R.drawable.ic_github),
+                                    contentDescription = null,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            },
                             buttonHeight = 48.dp,
                             enabled = !isDownloading
                         )
@@ -361,6 +407,15 @@ fun UpdaterScreen(onBack: () -> Unit) {
                                 AnimatedActionButton(
                                     text = stringResource(R.string.check_updates_action),
                                     onClick = { checkUpdates() },
+                                    containerColor = MaterialTheme.colorScheme.primary,
+                                    contentColor = MaterialTheme.colorScheme.onPrimary,
+                                    leadingIcon = {
+                                        Icon(
+                                            imageVector = Icons.Rounded.Sync,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(24.dp)
+                                        )
+                                    },
                                     enabled = currentStatus !is UpdateStatus.Checking && !isDownloading,
                                     modifier = Modifier.fillMaxWidth()
                                 )
@@ -375,11 +430,14 @@ fun UpdaterScreen(onBack: () -> Unit) {
                                         text = stringResource(R.string.later),
                                         onClick = onBack,
                                         modifier = Modifier.weight(1f),
-                                        isOutlined = true,
+                                        containerColor = MaterialTheme.colorScheme.surfaceVariant,
+                                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                         enabled = !isDownloading
                                     )
                                     AnimatedActionButton(
-                                        text = if (isDownloading) "Downloading..." else stringResource(R.string.update_action),
+                                        text = if (isDownloading) "Downloading..." else stringResource(
+                                            R.string.update_action
+                                        ),
                                         onClick = {
                                             isDownloading = true
                                             Updater.startDownload(
@@ -397,11 +455,7 @@ fun UpdaterScreen(onBack: () -> Unit) {
                     }
                 }
             },
-            containerColor = MaterialTheme.colorScheme.background,
-            modifier = Modifier
-                .widthIn(max = 700.dp)
-                .fillMaxSize()
-                .nestedScroll(scrollBehavior.nestedScrollConnection)
+            containerColor = MaterialTheme.colorScheme.background
         ) { padding ->
             Box(
                 modifier = Modifier
@@ -426,8 +480,8 @@ fun UpdaterScreen(onBack: () -> Unit) {
                         ) {
                             when (val currentStatus = status) {
                                 is UpdateStatus.Checking -> {
-                                    ContainedLoadingIndicator(
-                                        modifier = Modifier.size(64.dp)
+                                    LoadingIndicator(
+                                        modifier = Modifier.size(180.dp)
                                     )
                                 }
 
@@ -435,18 +489,26 @@ fun UpdaterScreen(onBack: () -> Unit) {
                                     Column(
                                         horizontalAlignment = Alignment.CenterHorizontally
                                     ) {
-                                        Icon(
-                                            imageVector = ImageVector.vectorResource(R.drawable.ic_no_updates),
-                                            contentDescription = null,
-                                            modifier = Modifier.size(120.dp),
-                                            tint = MaterialTheme.colorScheme.primary
-                                        )
+                                        Box(contentAlignment = Alignment.Center) {
+                                            Icon(
+                                                imageVector = ImageVector.vectorResource(R.drawable.ic_nine_sided_cookie),
+                                                contentDescription = null,
+                                                modifier = Modifier.size(180.dp),
+                                                tint = MaterialTheme.colorScheme.primaryContainer
+                                            )
+                                            Icon(
+                                                imageVector = ImageVector.vectorResource(R.drawable.ic_no_updates),
+                                                contentDescription = null,
+                                                modifier = Modifier.size(90.dp),
+                                                tint = MaterialTheme.colorScheme.onPrimaryContainer
+                                            )
+                                        }
                                         Spacer(modifier = Modifier.height(24.dp))
                                         Text(
                                             text = stringResource(R.string.update_latest_version_msg),
                                             fontFamily = GoogleSansFlex,
                                             style = MaterialTheme.typography.titleLarge,
-                                            color = MaterialTheme.colorScheme.onSurface,
+                                            color = MaterialTheme.colorScheme.primary,
                                             textAlign = TextAlign.Center
                                         )
                                     }
@@ -474,34 +536,12 @@ fun UpdaterScreen(onBack: () -> Unit) {
                                 }
 
                                 is UpdateStatus.Available -> {
-                                    Column(
+                                    MarkdownText(
+                                        markdown = currentStatus.info.changelog,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        fontResource = R.font.sans_flex,
                                         modifier = Modifier.fillMaxWidth()
-                                    ) {
-                                        Text(
-                                            text = stringResource(
-                                                R.string.update_available,
-                                                currentStatus.info.version
-                                            ),
-                                            fontFamily = GoogleSansFlex,
-                                            style = MaterialTheme.typography.headlineSmall,
-                                            color = MaterialTheme.colorScheme.primary,
-                                            fontWeight = FontWeight.Bold
-                                        )
-                                        Spacer(modifier = Modifier.height(24.dp))
-                                        Surface(
-                                            modifier = Modifier.fillMaxWidth(),
-                                            color = MaterialTheme.colorScheme.surfaceContainerHighest,
-                                            shape = RoundedCornerShape(24.dp)
-                                        ) {
-                                            Box(modifier = Modifier.padding(24.dp)) {
-                                                MarkdownText(
-                                                    markdown = currentStatus.info.changelog,
-                                                    color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                                    fontResource = R.font.sans_flex
-                                                )
-                                            }
-                                        }
-                                    }
+                                    )
                                 }
 
                                 else -> {}
@@ -509,6 +549,15 @@ fun UpdaterScreen(onBack: () -> Unit) {
                         }
                     }
                 }
+
+                SnackbarHost(
+                    hostState = snackbarHostState,
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .fillMaxWidth()
+                        .padding(horizontal = 24.dp)
+                        .padding(bottom = 12.dp)
+                )
             }
         }
     }

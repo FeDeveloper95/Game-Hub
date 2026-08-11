@@ -1,7 +1,8 @@
 package com.fedeveloper95.games.elements.MainActivity
 
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
-import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.spring
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
@@ -39,24 +40,33 @@ fun DeletePopup(
     val confirmInteractionSource = remember { MutableInteractionSource() }
     val isConfirmPressed by confirmInteractionSource.collectIsPressedAsState()
     val confirmCorner by animateIntAsState(
-        targetValue = if (isConfirmPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isConfirmPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "confirmCorner"
     )
 
     val uninstallInteractionSource = remember { MutableInteractionSource() }
     val isUninstallPressed by uninstallInteractionSource.collectIsPressedAsState()
     val uninstallCorner by animateIntAsState(
-        targetValue = if (isUninstallPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isUninstallPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "uninstallCorner"
     )
 
     val dismissInteractionSource = remember { MutableInteractionSource() }
     val isDismissPressed by dismissInteractionSource.collectIsPressedAsState()
     val dismissCorner by animateIntAsState(
-        targetValue = if (isDismissPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isDismissPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "dismissCorner"
     )
 
@@ -105,6 +115,7 @@ fun DeletePopup(
                         fontWeight = FontWeight.Bold
                     )
                 }
+
                 Button(
                     onClick = onConfirm,
                     colors = ButtonDefaults.buttonColors(

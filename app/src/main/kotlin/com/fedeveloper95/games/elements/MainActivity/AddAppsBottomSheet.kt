@@ -1,29 +1,28 @@
 package com.fedeveloper95.games.elements.MainActivity
 
+import android.content.Context
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.ExperimentalFoundationApi
-import androidx.compose.foundation.LocalIndication
-import androidx.compose.foundation.background
-import androidx.compose.foundation.combinedClickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
@@ -33,15 +32,19 @@ import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -51,6 +54,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -60,9 +64,11 @@ import com.fedeveloper95.games.R
 import com.fedeveloper95.games.elements.ui.AppIcon
 import com.fedeveloper95.games.elements.ui.GoogleSansFlex
 import com.fedeveloper95.games.services.mainactivity.GameApp
+import com.fedeveloper95.games.services.mainactivity.AllAppsCacheManager
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AddAppsBottomSheet(
     allApps: List<GameApp>,
@@ -75,8 +81,29 @@ fun AddAppsBottomSheet(
     val scope = rememberCoroutineScope()
     val context = LocalContext.current
 
-    val filteredApps = remember(searchQuery, allApps) {
-        allApps
+    var cachedAllApps by remember { mutableStateOf<List<GameApp>>(emptyList()) }
+
+    LaunchedEffect(Unit) {
+        launch(Dispatchers.IO) {
+            val loaded = AllAppsCacheManager.loadApps(context)
+            if (loaded.isNotEmpty()) {
+                cachedAllApps = loaded
+            }
+        }
+    }
+
+    val displayApps = if (allApps.isEmpty() && cachedAllApps.isNotEmpty()) cachedAllApps else allApps
+
+    LaunchedEffect(allApps) {
+        if (allApps.isNotEmpty()) {
+            launch(Dispatchers.IO) {
+                AllAppsCacheManager.saveApps(context, allApps)
+            }
+        }
+    }
+
+    val filteredApps = remember(searchQuery, displayApps) {
+        displayApps
             .distinctBy { it.packageName }
             .filter { app ->
                 app.packageName != context.packageName &&
@@ -90,12 +117,16 @@ fun AddAppsBottomSheet(
 
     ModalBottomSheet(
         onDismissRequest = onDismiss,
-        sheetState = sheetState
+        sheetState = sheetState,
+        modifier = Modifier.statusBarsPadding(),
+        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
+        containerColor = MaterialTheme.colorScheme.surfaceContainerLow,
+        shape = RoundedCornerShape(topStart = 28.dp, topEnd = 28.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .navigationBarsPadding()
+                .windowInsetsPadding(WindowInsets.ime)
         ) {
             Text(
                 text = stringResource(R.string.add_to_library),
@@ -138,21 +169,22 @@ fun AddAppsBottomSheet(
                         .fillMaxWidth()
                         .padding(horizontal = 16.dp),
                     contentPadding = PaddingValues(bottom = 88.dp),
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                    verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
                 ) {
                     itemsIndexed(
                         items = filteredApps,
-                        key = { _, app -> app.packageName }
+                        key = { _, app -> app.packageName },
+                        contentType = { _, _ -> "appItem" }
                     ) { index, app ->
                         val isSelected = selectedApps.contains(app.packageName)
                         val inSelectionMode = selectedApps.isNotEmpty()
 
-                        GroupedAppItem(
+                        AddAppSegmentedItem(
                             app = app,
-                            isSingle = filteredApps.size == 1,
-                            isFirst = index == 0,
-                            isLast = index == filteredApps.size - 1,
                             isSelected = isSelected,
+                            isSingle = filteredApps.size == 1,
+                            index = index,
+                            count = filteredApps.size,
                             onClick = {
                                 if (inSelectionMode) {
                                     selectedApps = if (isSelected) selectedApps - app.packageName else selectedApps + app.packageName
@@ -177,6 +209,7 @@ fun AddAppsBottomSheet(
                     modifier = Modifier
                         .align(Alignment.BottomEnd)
                         .padding(end = 16.dp, bottom = 16.dp)
+                        .navigationBarsPadding()
                 ) {
                     ExtendedFloatingActionButton(
                         onClick = {
@@ -196,94 +229,71 @@ fun AddAppsBottomSheet(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun GroupedAppItem(
+fun AddAppSegmentedItem(
     app: GameApp,
-    isSingle: Boolean,
-    isFirst: Boolean,
-    isLast: Boolean,
     isSelected: Boolean,
+    isSingle: Boolean,
+    index: Int,
+    count: Int,
     onClick: () -> Unit,
     onLongClick: () -> Unit
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
+    val baseModifier = if (isSingle) Modifier.clip(RoundedCornerShape(20.dp)) else Modifier
 
-    val topRound = if (isSingle || isFirst) 20.dp else 4.dp
-    val bottomRound = if (isSingle || isLast) 20.dp else 4.dp
-
-    val targetTopStart = if (isSelected) 50.dp else if (isPressed) 20.dp else topRound
-    val targetTopEnd = if (isSelected) 50.dp else if (isPressed) 20.dp else topRound
-    val targetBottomStart = if (isSelected) 50.dp else if (isPressed) 20.dp else bottomRound
-    val targetBottomEnd = if (isSelected) 50.dp else if (isPressed) 20.dp else bottomRound
-
-    val topStart by animateDpAsState(targetTopStart, tween(200), label = "")
-    val topEnd by animateDpAsState(targetTopEnd, tween(200), label = "")
-    val bottomStart by animateDpAsState(targetBottomStart, tween(200), label = "")
-    val bottomEnd by animateDpAsState(targetBottomEnd, tween(200), label = "")
-
-    val shape = RoundedCornerShape(topStart, topEnd, bottomStart, bottomEnd)
-
-    val bgColor = when {
-        isSelected -> MaterialTheme.colorScheme.primaryContainer
-        isPressed -> MaterialTheme.colorScheme.surfaceContainerHigh
-        else -> MaterialTheme.colorScheme.surfaceContainer
-    }
-
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(72.dp)
-            .clip(shape)
-            .background(bgColor)
-            .combinedClickable(
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-                onClick = onClick,
-                onLongClick = onLongClick
+    SegmentedListItem(
+        selected = false,
+        onClick = onClick,
+        modifier = baseModifier.pointerInput(Unit) {
+            detectTapGestures(
+                onLongPress = { onLongClick() },
+                onTap = { onClick() }
             )
-            .padding(horizontal = 16.dp),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        AppIcon(
-            packageName = app.packageName,
-            modifier = Modifier
-                .size(42.dp)
-                .clip(CircleShape)
-        )
-        Spacer(modifier = Modifier.width(16.dp))
-        Column(modifier = Modifier.weight(1f)) {
-            Text(
-                text = app.name,
-                style = MaterialTheme.typography.bodyLarge,
-                color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                fontFamily = GoogleSansFlex,
-                fontWeight = FontWeight.Medium
-            )
-            Text(
-                text = app.packageName,
-                style = MaterialTheme.typography.bodySmall,
-                color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = 0.8f) else MaterialTheme.colorScheme.onSurfaceVariant,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-                fontFamily = GoogleSansFlex
-            )
+        },
+        colors = ListItemDefaults.colors(
+            containerColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer else MaterialTheme.colorScheme.surfaceContainerHigh
+        ),
+        shapes = ListItemDefaults.segmentedShapes(index = index, count = count),
+        content = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                AppIcon(
+                    packageName = app.packageName,
+                    modifier = Modifier
+                        .size(42.dp)
+                        .clip(CircleShape)
+                )
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = app.name,
+                        style = MaterialTheme.typography.bodyLarge,
+                        color = if (isSelected) MaterialTheme.colorScheme.onPrimaryContainer else MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        fontFamily = GoogleSansFlex,
+                        fontWeight = FontWeight.Medium
+                    )
+                }
+                if (isSelected) {
+                    Icon(
+                        Icons.Default.Check,
+                        null,
+                        tint = MaterialTheme.colorScheme.primary
+                    )
+                } else {
+                    Icon(
+                        Icons.Default.Add,
+                        null,
+                        tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f)
+                    )
+                }
+            }
         }
-        if (isSelected) {
-            Icon(
-                Icons.Default.Check,
-                null,
-                tint = MaterialTheme.colorScheme.primary
-            )
-        } else {
-            Icon(
-                Icons.Default.Add,
-                null,
-                tint = MaterialTheme.colorScheme.primary.copy(alpha = 0.8f)
-            )
-        }
-    }
+    )
 }
