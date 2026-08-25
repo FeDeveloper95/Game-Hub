@@ -145,12 +145,20 @@ class WelcomeActivity : ComponentActivity() {
         installSplashScreen()
         super.onCreate(savedInstanceState)
         val prefs = getSharedPreferences("game_hub_settings", MODE_PRIVATE)
-        val isFirstRun = prefs.getBoolean("is_first_run", true)
+        val currentVersion = try {
+            packageManager.getPackageInfo(packageName, 0).versionName ?: "1.0"
+        } catch (e: Exception) {
+            "1.0"
+        }
+        val lastWelcomeVersion = prefs.getString("last_welcome_version", null)
+        val isFirstRunOrUpdate = lastWelcomeVersion != currentVersion
         val forceShow = intent.getBooleanExtra("FORCE_SHOW", false)
-        if (!isFirstRun && !forceShow) {
+
+        if (!isFirstRunOrUpdate && !forceShow) {
             finishOnboarding()
             return
         }
+
         enableEdgeToEdge()
         setContent {
             GameHubTheme {
@@ -159,6 +167,7 @@ class WelcomeActivity : ComponentActivity() {
                     color = MaterialTheme.colorScheme.background
                 ) {
                     WelcomePagerScreen(onFinished = {
+                        prefs.edit().putString("last_welcome_version", currentVersion).apply()
                         prefs.edit().putBoolean("is_first_run", false).apply()
                         if (forceShow) {
                             finish()
@@ -210,6 +219,7 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
             } else true
         )
     }
+
     var canInstallPackages by remember {
         mutableStateOf(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -217,9 +227,11 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
             } else true
         )
     }
+
     var hasUsageStatsPermission by remember {
         mutableStateOf(checkUsageStatsPermission(context))
     }
+
     var hasBluetoothPermission by remember {
         mutableStateOf(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
@@ -227,22 +239,26 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
             } else true
         )
     }
+
     var hasOverlayPermission by remember {
         mutableStateOf(Settings.canDrawOverlays(context))
     }
+
     var hasDndPermission by remember {
         mutableStateOf((context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager).isNotificationPolicyAccessGranted)
     }
+
     var hasWriteSettingsPermission by remember {
         mutableStateOf(Settings.System.canWrite(context))
     }
+
     var hasAccessibilityPermission by remember {
         mutableStateOf(isAccessibilityServiceEnabled(context, com.fedeveloper95.games.services.GameBubbleAccessibilityService::class.java))
     }
 
     var isLastPageScrolledToEnd by remember { mutableStateOf(false) }
-    val lifecycleOwner = LocalLifecycleOwner.current
 
+    val lifecycleOwner = LocalLifecycleOwner.current
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
@@ -256,7 +272,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                     hasBluetoothPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
                 }
                 hasUsageStatsPermission = checkUsageStatsPermission(context)
-
                 hasOverlayPermission = Settings.canDrawOverlays(context)
                 hasDndPermission = (context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager).isNotificationPolicyAccessGranted
                 hasWriteSettingsPermission = Settings.System.canWrite(context)
@@ -540,7 +555,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 }
                             }
                         )
-
                         Spacer(modifier = Modifier.height(100.dp))
                     }
                 }
@@ -583,17 +597,14 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                         verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
                     ) {
                         var isBubbleEnabled by remember { mutableStateOf(prefs.getBoolean("pref_bubble_enabled", true)) }
-
                         val haptic = LocalHapticFeedback.current
                         val interactionSource = remember { MutableInteractionSource() }
                         val shape = RoundedCornerShape(64.dp)
-
                         val handleBubbleToggle = {
                             haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                             isBubbleEnabled = !isBubbleEnabled
                             prefs.edit().putBoolean("pref_bubble_enabled", isBubbleEnabled).apply()
                         }
-
                         Card(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -636,7 +647,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 colors = ListItemDefaults.colors(containerColor = Color.Transparent)
                             )
                         }
-
                         Spacer(modifier = Modifier.height(16.dp))
 
                         val bubbleCount = 4
@@ -737,7 +747,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
                             }
                         )
-
                         Spacer(modifier = Modifier.height(100.dp))
                     }
                 }
@@ -782,11 +791,9 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 layoutInfo == 0 || scrollState.value >= (layoutInfo - 20)
                             }
                         }
-
                         LaunchedEffect(isAtBottom) {
                             onUpdateScroll(isAtBottom)
                         }
-
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
@@ -805,7 +812,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 index = featIndex++,
                                 count = featCount
                             )
-
                             WelcomeSegmentedItem(
                                 icon = Icons.Rounded.GridView,
                                 iconColor = Color(0xFF80da88),
@@ -815,7 +821,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 index = featIndex++,
                                 count = featCount
                             )
-
                             WelcomeSegmentedItem(
                                 icon = Icons.Rounded.Person,
                                 iconColor = Color(0xFFffb683),
@@ -825,7 +830,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 index = featIndex++,
                                 count = featCount
                             )
-
                             WelcomeSegmentedItem(
                                 icon = Icons.Rounded.SwipeRight,
                                 iconColor = Color(0xFFffb3ae),
@@ -835,7 +839,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 index = featIndex++,
                                 count = featCount
                             )
-
                             WelcomeSegmentedItem(
                                 icon = Icons.Rounded.ShoppingBag,
                                 iconColor = Color(0xFFffaee4),
@@ -845,7 +848,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 index = featIndex++,
                                 count = featCount
                             )
-
                             WelcomeSegmentedItem(
                                 icon = Icons.Rounded.History,
                                 iconColor = Color(0xFFd8b9fc),
@@ -855,7 +857,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 index = featIndex++,
                                 count = featCount
                             )
-
                             WelcomeSegmentedItem(
                                 icon = R.drawable.ic_phone_update,
                                 iconColor = Color(0xFF67d4ff),
@@ -865,7 +866,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 index = featIndex++,
                                 count = featCount
                             )
-
                             Spacer(modifier = Modifier.height(100.dp))
                         }
 
@@ -940,6 +940,7 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
             animationSpec = commonAnimSpec,
             label = "backWeight"
         )
+
         val spacerWeight by animateFloatAsState(
             targetValue = if (isFirstPage) 0.0001f else 0.05f,
             animationSpec = commonAnimSpec,
@@ -978,7 +979,9 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                     modifier = Modifier.fillMaxSize()
                 )
             }
+
             Spacer(modifier = Modifier.weight(spacerWeight))
+
             Box(
                 modifier = Modifier
                     .weight(1f)
@@ -989,6 +992,7 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                     targetValue = if (isNextEnabled) 1f else 0.5f,
                     label = "nextAlpha"
                 )
+
                 ExpressiveButton(
                     text = if (isLastPage) stringResource(R.string.get_started) else stringResource(R.string.next),
                     onClick = {
@@ -1154,6 +1158,7 @@ fun ExpressiveButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
+
     val cornerPercent by animateIntAsState(
         targetValue = if (isPressed) 20 else 50,
         animationSpec = spring(
@@ -1198,6 +1203,7 @@ fun ExpressiveOutlinedButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
+
     val cornerPercent by animateIntAsState(
         targetValue = if (isPressed) 20 else 50,
         animationSpec = spring(

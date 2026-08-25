@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES"
         tools:ignore="PackageVisibilityPolicy,QueryAllPackagesPermission" />
@@ -18,7 +17,6 @@
     <uses-permission android:name="android.permission.KILL_BACKGROUND_PROCESSES" />
     <uses-permission android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-
     <application
         android:allowBackup="false"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -31,13 +29,11 @@
         android:enableOnBackInvokedCallback="true"
         android:localeConfig="@xml/locales_config"
         tools:targetApi="37">
-
         <activity
             android:name=".WelcomeActivity"
             android:exported="true"
             android:theme="@style/Theme.App.Starting">
         </activity>
-
         <activity-alias
             android:name=".ExpressiveIcon"
             android:enabled="true"
@@ -50,37 +46,42 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity-alias>
-
+        <activity-alias
+            android:name=".FlatIcon"
+            android:enabled="false"
+            android:exported="true"
+            android:icon="@mipmap/ic_launcher"
+            android:roundIcon="@mipmap/ic_launcher_round"
+            android:targetActivity=".WelcomeActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity-alias>
         <activity
             android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.GameHub" />
-
         <activity
             android:name=".SettingsActivity"
             android:exported="true"
             android:theme="@style/Theme.GameHub" />
-
         <activity
             android:name=".AdvancedSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.GameHub" />
-
         <activity
             android:name=".GameBubbleSettingsActivity"
             android:exported="false"
             android:theme="@style/Theme.GameHub" />
-
         <activity
             android:name=".UpdaterActivity"
             android:exported="false"
             android:theme="@style/Theme.GameHub" />
-
         <activity
             android:name=".services.ControllerOverlayActivity"
             android:exported="false"
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
-
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -90,7 +91,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />
         </provider>
-
         <receiver
             android:name=".services.SettingsActivity.UpdateReceiver"
             android:exported="true">
@@ -98,7 +98,6 @@
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
         </receiver>
-
         <receiver
             android:name=".services.BluetoothControllerReceiver"
             android:exported="true">
@@ -106,12 +105,10 @@
                 <action android:name="android.bluetooth.device.action.ACL_CONNECTED" />
             </intent-filter>
         </receiver>
-
         <service
             android:name=".elements.GameBubble.GameBubbleService"
             android:enabled="true"
             android:exported="false" />
-
         <service
             android:name=".services.GameBubbleAccessibilityService"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE"
@@ -124,6 +121,5 @@
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
         </service>
-
     </application>
 </manifest>

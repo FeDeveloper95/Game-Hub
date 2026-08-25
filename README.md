@@ -29,9 +29,10 @@ No fork of this project will receive support, if you use a fork, ask the forker 
 ### :camera: Screenshots
 
 <details>
-  <summary><b>Click to expand screenshots</b></summary>
-  <br>
-  <img width="265" alt="Main default" src="https://github.com/user-attachments/assets/0e8b82e5-0656-4de9-b508-6fbc191dfbd1" />
-  <img width="265" alt="Main grid" src="https://github.com/user-attachments/assets/2cad8cdf-8433-4049-986b-b83be9b2cbe6" />
-  <img width="265" alt="Edit app" src="https://github.com/user-attachments/assets/22d15318-0975-42fb-90b4-9ac852579a41" />
-  <img width="265" alt="Settings" src="https://github.com/user-attachments/assets/d05a2ceb-e85b-42e0-b668-baad39df8049" />
+  <summary><b>Click to expand screenshots</b></summary>
+  <br>
+  <img width="265" alt="Main default" src="/images/screenshots/main_default.png" />
+  <img width="265" alt="Main grid" src="/images/screenshots/main_grid.png" />
+  <img width="265" alt="Options" src="/images/screenshots/options.png" />
+  <img width="265" alt="Settings" src="/images/screenshots/settings.png" />
+</details>

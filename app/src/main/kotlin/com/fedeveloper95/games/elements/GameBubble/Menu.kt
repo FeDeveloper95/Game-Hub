@@ -77,9 +77,9 @@ data class BubbleTool(val id: String, val title: String, val icon: Any)
 object GameBubbleStateManager {
     val activeTools = mutableStateMapOf<String, Boolean>()
     val toolValues = mutableStateMapOf<String, String>()
+
     var originalBrightness = -1
     var originalBrightnessMode = -1
-
     private var pingJob: Job? = null
     private var fpsCallback: Choreographer.FrameCallback? = null
     private var isFpsActive = false
@@ -270,12 +270,12 @@ fun GameBubbleMenu(onCollapse: () -> Unit) {
         val toolsOrder = toolsOrderString.split(",")
 
         val toolMap = mapOf(
-            "fps" to Pair("FPS", Icons.Rounded.Speed),
-            "dnd" to Pair("DND", Icons.Rounded.DoNotDisturbOn),
-            "brightness" to Pair("Lum", Icons.Rounded.BrightnessHigh),
-            "screenshot" to Pair("Screen", R.drawable.screenshot_frame),
-            "ping" to Pair("Ping", Icons.Rounded.Wifi),
-            "boost" to Pair("Boost", Icons.Rounded.RocketLaunch)
+            "fps" to Pair(context.getString(R.string.tool_fps), Icons.Rounded.Speed),
+            "dnd" to Pair(context.getString(R.string.tool_dnd), Icons.Rounded.DoNotDisturbOn),
+            "brightness" to Pair(context.getString(R.string.tool_brightness), Icons.Rounded.BrightnessHigh),
+            "screenshot" to Pair(context.getString(R.string.tool_screenshot), R.drawable.screenshot_frame),
+            "ping" to Pair(context.getString(R.string.tool_ping), Icons.Rounded.Wifi),
+            "boost" to Pair(context.getString(R.string.tool_boost), Icons.Rounded.RocketLaunch)
         )
 
         toolsOrder.filter { toolId ->
@@ -339,7 +339,6 @@ fun GameBubbleMenu(onCollapse: () -> Unit) {
                     animationSpec = tween(durationMillis = 150),
                     label = "cornerAnim"
                 )
-
                 val isExpandedTile = index < 4
                 val tileBgColor by animateColorAsState(
                     targetValue = if (!isExpandedTile && isActive) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.surfaceContainerHigh,
