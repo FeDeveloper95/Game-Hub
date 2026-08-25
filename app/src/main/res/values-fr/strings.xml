@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">jeux prêts</string>
+    <string name="add_game">Ajouter un jeu</string>
+    <string name="search_apps">Rechercher des applications…</string>
+    <string name="cancel">Annuler</string>
+    <string name="remove">Supprimer</string>
+    <string name="play">Jouer</string>
+    <string name="later">Plus tard</string>
+    <string name="save">Enregistrer</string>
+    <string name="discard">Annuler</string>
+
+    <string name="next">Suivant</string>
+    <string name="back">Retour</string>
+    <string name="get_started">Commencer</string>
+
+    <string name="welcome_to">Bienvenue dans</string>
+    <string name="welcome_preparing_subtitle">Préparons tout pour vous.</string>
+
+    <string name="perm_required">Suggéré</string>
+    <string name="perm_permissions">Autorisations</string>
+    <string name="perm_intro_text">Ces autorisations sont facultatives mais fortement recommandées pour assurer le bon fonctionnement de Game Hub.</string>
+
+    <string name="perm_notif_title">Notifications</string>
+    <string name="perm_notif_desc">Soyez immédiatement informé de la sortie d\'une nouvelle mise à jour.</string>
+
+    <string name="perm_install_title">Installation d\'applications</string>
+    <string name="perm_install_desc">Nécessaire pour télécharger et installer les mises à jour.</string>
+
+    <string name="perm_usage_desc">Nécessaire pour suivre le temps de jeu et les statistiques de lancement.</string>
+
+    <string name="feat_discover">Découvrir</string>
+    <string name="feat_features">Fonctionnalités</string>
+    <string name="feat_intro">Voici ce que vous pouvez faire avec votre nouveau Game Hub.</string>
+
+    <string name="feat_order_title">Contrôle total</string>
+
+    <string name="feat_layout_title">Changement de forme</string>
+    <string name="feat_layout_desc">Allez dans les paramètres pour modifier le style de la carte : Par défaut, Horizontal ou Grille. Personnalisez-le.</string>
+
+    <string name="feat_name_title">Touche personnelle</string>
+    <string name="feat_name_desc">Affichez votre nom dans l\'en-tête. Personnalisez-le ou masquez-le dans les paramètres.</string>
+
+    <string name="feat_manage_title">Gestion facile</string>
+    <string name="feat_manage_desc">Appuyez sur + pour ajouter des jeux. Balayez vers la droite pour supprimer, balayez vers la gauche pour afficher les statistiques de temps de jeu.</string>
+
+    <string name="feat_update_title">Restez à jour</string>
+    <string name="feat_update_desc">Vérifiez les mises à jour de Game Hub directement dans les paramètres. Ne manquez jamais une fonctionnalité.</string>
+
+    <string name="feat_store_title">Découvrir des jeux</string>
+    <string name="feat_store_desc">Trouvez de nouveaux titres via le Google Play Store. Vous pouvez désactiver cela dans les paramètres.</string>
+
+    <string name="feat_history_title">Historique de jeu</string>
+    <string name="feat_history_desc">Suivez combien de fois vous avez lancé chaque jeu. Ce compteur peut être masqué dans les paramètres.</string>
+
+    <string name="no_games_title">Aucun jeu trouvé</string>
+    <string name="no_games_subtitle">Appuyez sur + pour en ajouter un</string>
+    <string name="download_games">Obtenir de nouveaux jeux</string>
+    <string name="add_to_library">Ajouter à la bibliothèque</string>
+    <string name="remove_game_title">Supprimer le jeu ?</string>
+    <string name="remove_game_desc">Cela supprimera %1$s de Game Hub.</string>
+
+    <string name="edit_mode_title">Modifier</string>
+
+    <string name="settings_title">Paramètres</string>
+    <string name="settings_header_appearance">Apparence</string>
+    <string name="settings_header_preferences">Préférences</string>
+    <string name="settings_header_info">Informations</string>
+
+    <string name="settings_theme_system">Par défaut du système</string>
+    <string name="settings_theme_light">Clair</string>
+    <string name="settings_theme_dark">Sombre</string>
+    <string name="settings_card_style_title">Style de carte</string>
+    <string name="settings_card_style_default">Par défaut</string>
+    <string name="settings_card_style_horizontal">Horizontal</string>
+    <string name="settings_card_style_grid">Grille</string>
+
+    <string name="settings_show_name_title">Afficher le nom d\'utilisateur</string>
+    <string name="settings_show_name_desc">Affichez votre nom dans l\'en-tête</string>
+    <string name="settings_edit_name_title">Votre nom</string>
+    <string name="dialog_edit_name_title">Entrez votre nom</string>
+    <string name="dialog_edit_name_hint">Nom</string>
+
+    <string name="settings_sort_title">Ordre des jeux</string>
+    <string name="sort_alphabetical">Alphabétique</string>
+    <string name="sort_playtime">Temps de jeu</string>
+    <string name="sort_custom">Personnalisé</string>
+
+    <string name="settings_show_launch_count_title">Afficher le nombre de lancements</string>
+    <string name="settings_show_launch_count_desc">Afficher combien de fois vous avez joué</string>
+
+    <string name="settings_show_playtime_title">Afficher le temps de jeu</string>
+    <string name="settings_show_playtime_desc">Afficher les statistiques d\'utilisation</string>
+
+    <string name="settings_stats_interval_title">Intervalle des statistiques</string>
+    <string name="interval_daily">Quotidien</string>
+    <string name="interval_weekly">Hebdomadaire</string>
+    <string name="interval_monthly">Mensuel</string>
+    <string name="interval_yearly">Annuel</string>
+
+    <string name="settings_show_get_more_title">Afficher \"Obtenir plus de jeux\"</string>
+    <string name="settings_show_get_more_desc">Afficher le lien vers le magasin</string>
+
+    <string name="settings_advanced_title">Avancé</string>
+    <string name="settings_advanced_desc">Fonctionnalités expérimentales et mises à jour</string>
+
+    <string name="settings_version_title">Version de l\'application</string>
+    <string name="settings_developer_title">Développeur</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Signaler un bug / une fonctionnalité</string>
+    <string name="settings_report_desc">Discutez avec le développeur sur Telegram</string>
+
+    <string name="settings_check_updates_title">Rechercher des mises à jour</string>
+    <string name="settings_check_updates_desc">Trouver la dernière version</string>
+    <string name="settings_auto_updates_title">Mises à jour automatiques</string>
+    <string name="settings_auto_updates_desc">Rechercher les mises à jour au démarrage</string>
+
+    <string name="update_latest_version_msg">Aucune mise à jour disponible pour le moment.</string>
+    <string name="update_available">Version %1$s disponible !</string>
+    <string name="update_action">Mettre à jour</string>
+    <string name="update_error_msg">Impossible de vérifier ou de télécharger la mise à jour.</string>
+    <string name="unknown">Inconnu</string>
+
+    <string name="settings_setup_title">Configuration initiale</string>
+    <string name="settings_setup_desc">Relancer l\'assistant de bienvenue</string>
+    <string name="settings_backup_header">Sauvegarde et restauration</string>
+    <string name="settings_export_title">Exporter les paramètres</string>
+    <string name="settings_export_desc">Enregistrer la configuration et la liste des jeux</string>
+    <string name="settings_import_title">Importer les paramètres</string>
+    <string name="settings_import_desc">Restaurer à partir d\'un fichier de sauvegarde</string>
+    <string name="dialog_restart_title">Redémarrage requis</string>
+    <string name="dialog_restart_desc">Les paramètres ont été importés. Redémarrez l\'application pour appliquer les modifications.</string>
+    <string name="restart_now">Redémarrer maintenant</string>
+    <string name="export_success">Paramètres exportés avec succès</string>
+    <string name="export_error">Erreur lors de l\'exportation des paramètres</string>
+    <string name="import_error">Erreur lors de l\'importation des paramètres</string>
+
+    <string name="community_title">Rejoindre la communauté</string>
+    <string name="community_desc">Rejoignez mon canal Telegram pour ne pas manquer les dernières nouvelles et mises à jour de mes projets, ainsi que des aperçus exclusifs !</string>
+    <string name="no_thanks">Non merci</string>
+    <string name="sure_action">Bien sûr !</string>
+    <string name="see_source_code">Voir le code source</string>
+    <string name="check_updates_action">Rechercher des mises à jour</string>
+    <string name="cancel_action">Annuler</string>
+    <string name="edit_app_icon_title">Choisir l\'icône</string>
+    <string name="edit_app_icons">Icônes d\'application</string>
+    <string name="edit_builtin_icons">Icônes intégrées</string>
+    <string name="edit_gallery">Galerie</string>
+    <string name="edit_restore_icon">Restaurer l\'icône</string>
+    <string name="edit_restore_title">Restaurer le titre</string>
+    <string name="edit_app_name">Nom de l\'application</string>
+    <string name="select_app_title">Sélectionner une application</string>
+    <string name="settings_testing_header">Test</string>
+    <string name="settings_test_telegram_title">Communauté</string>
+    <string name="settings_test_telegram_desc">Rejoignez notre groupe Telegram</string>
+    <string name="settings_test_crash_title">Tester le plantage</string>
+    <string name="settings_test_crash_desc">Forcer un plantage pour tester le rapport d\'erreurs</string>
+    <string name="settings_danger_zone_header">Zone de danger</string>
+    <string name="settings_reset_title">Réinitialisation d\'usine</string>
+    <string name="settings_reset_desc">Supprimer toutes les données et restaurer les paramètres par défaut</string>
+    <string name="settings_reset_confirmation_desc">Êtes-vous sûr de vouloir réinitialiser l\'application ? Tous vos jeux, personnalisations et paramètres seront définitivement supprimés. Cette action est irréversible.</string>
+    <string name="settings_reset_action">Réinitialiser l\'application</string>
+    <string name="uninstall">Désinstaller</string>
+    <string name="settings_grid_columns_title">Colonnes de grille</string>
+    <string name="add_favorite">Ajouter aux favoris</string>
+    <string name="remove_favorite">Supprimer des favoris</string>
+    <string name="favorites">Favoris</string>
+    <string name="feat_order_desc">Appuyez sur le bouton crayon pour passer en mode édition ou maintenez un jeu pour personnaliser son apparence.</string>
+
+    <string name="controller_connected">Manette connectée</string>
+    <string name="action_settings">Paramètres</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Connexion de la manette</string>
+    <string name="settings_test_controller_desc">Afficher une fenêtre contextuelle sur votre téléphone lorsqu\'une manette est connectée</string>
+    <string name="settings_test_controller_simulate_title">Simuler la connexion d\'une manette</string>
+    <string name="settings_test_controller_simulate_desc">Afficher la feuille inférieure de connexion de la manette</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Manette sans fil Xbox</string>
+    <string name="controller_name_playstation">Manette sans fil DualSense</string>
+    <string name="controller_name_joycon">Joy-Con (G/D)</string>
+    <string name="controller_generic">Manette générique</string>
+    <string name="controller_name_generic">Manette inconnue</string>
+    <string name="settings_header_more">Plus</string>
+    <string name="settings_game_bubble_title">Bulle de jeu</string>
+    <string name="settings_game_bubble_desc">Gérer les paramètres de la bulle de jeu</string>
+    <string name="settings_bubble_enable_title">Activer la bulle de jeu</string>
+    <string name="settings_bubble_autohide_title">Masquer automatiquement</string>
+    <string name="settings_bubble_autohide_desc">Réduire sur le bord de l\'écran après 3 secondes</string>
+    <string name="settings_bubble_tools_title">Outils de la bulle de jeu</string>
+    <string name="tool_fps">Compteur FPS</string>
+    <string name="tool_dnd">Ne pas déranger</string>
+    <string name="tool_brightness">Luminosité max</string>
+    <string name="tool_screenshot">Capture d\'écran</string>
+    <string name="tool_ping">Moniteur de ping</string>
+    <string name="tool_boost">Boost RAM</string>
+    <string name="open_in_store">Ouvrir dans le Store</string>
+    <string name="move_up">Déplacer vers le haut</string>
+    <string name="move_down">Déplacer vers le bas</string>
+    <string name="stats">Statistiques</string>
+    <string name="perm_bluetooth_title">Accès Bluetooth</string>
+    <string name="perm_bluetooth_desc">Nécessaire pour connecter et gérer vos manettes.</string>
+    <string name="bubble_perm_title">Bulle de jeu</string>
+    <string name="bubble_perm_subtitle">Autorisations</string>
+    <string name="bubble_perm_intro">Accordez ces autorisations pour activer les fonctionnalités avancées de la bulle de jeu.</string>
+    <string name="perm_overlay_title">Afficher sur d\'autres applications</string>
+    <string name="perm_overlay_desc">Nécessaire pour afficher la bulle de jeu pendant que vous jouez.</string>
+    <string name="perm_dnd_title">Ne pas déranger</string>
+    <string name="perm_dnd_desc">Activer/Désactiver le mode Ne pas déranger depuis la bulle de jeu.</string>
+    <string name="perm_write_settings_title">Modifier les paramètres système</string>
+    <string name="perm_write_settings_desc">Ajuster la luminosité de l\'écran depuis la bulle de jeu.</string>
+    <string name="perm_accessibility_title">Service d\'accessibilité</string>
+    <string name="perm_accessibility_desc">Prendre des captures d\'écran directement depuis la bulle de jeu.</string>
+
+</resources>

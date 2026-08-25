@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">spill klare</string>
+    <string name="add_game">Legg til spill</string>
+    <string name="search_apps">Søk etter apper…</string>
+    <string name="cancel">Avbryt</string>
+    <string name="remove">Fjern</string>
+    <string name="play">Spill</string>
+    <string name="later">Senere</string>
+    <string name="save">Lagre</string>
+    <string name="discard">Avbryt</string>
+
+    <string name="next">Neste</string>
+    <string name="back">Tilbake</string>
+    <string name="get_started">Kom i gang</string>
+
+    <string name="welcome_to">Velkommen til</string>
+    <string name="welcome_preparing_subtitle">La oss gjøre alt klart for deg.</string>
+
+    <string name="perm_required">Anbefalt</string>
+    <string name="perm_permissions">Tillatelser</string>
+    <string name="perm_intro_text">Disse tillatelsene er valgfrie, men anbefales på det sterkeste for å holde Game Hub i gang på en smidig måte.</string>
+
+    <string name="perm_notif_title">Varsler</string>
+    <string name="perm_notif_desc">Få vite med en gang når en ny oppdatering er ute.</string>
+
+    <string name="perm_install_title">App-installasjon</string>
+    <string name="perm_install_desc">Påkrevd for å laste ned og installere oppdateringer.</string>
+
+    <string name="perm_usage_desc">Påkrevd for å spore spilletid og startstatistikk.</string>
+
+    <string name="feat_discover">Oppdag</string>
+    <string name="feat_features">Funksjoner</string>
+    <string name="feat_intro">Her er hva du kan gjøre med din nye Game Hub.</string>
+
+    <string name="feat_order_title">Full kontroll</string>
+
+    <string name="feat_layout_title">Endre form</string>
+    <string name="feat_layout_desc">Gå til Innstillinger for å endre kortstilen: Standard, Horisontal eller Rutenett. Gjør den til din egen.</string>
+
+    <string name="feat_name_title">Personlig preg</string>
+    <string name="feat_name_desc">Vis navnet ditt i overskriften. Tilpass det eller skjul det i Innstillinger.</string>
+
+    <string name="feat_manage_title">Enkel administrasjon</string>
+    <string name="feat_manage_desc">Trykk på + for å legge til spill. Sveip til høyre for å fjerne, sveip til venstre for å se statistikk for spilletid.</string>
+
+    <string name="feat_update_title">Hold deg oppdatert</string>
+    <string name="feat_update_desc">Sjekk etter oppdateringer for Game Hub direkte i Innstillinger. Gå aldri glipp av en funksjon.</string>
+
+    <string name="feat_store_title">Oppdag spill</string>
+    <string name="feat_store_desc">Finn nye titler via Google Play Butikk. Du kan deaktivere dette i Innstillinger.</string>
+
+    <string name="feat_history_title">Spillehistorikk</string>
+    <string name="feat_history_desc">Spor hvor mange ganger du har startet hvert spill. Denne telleren kan skjules i Innstillinger.</string>
+
+    <string name="no_games_title">Ingen spill funnet</string>
+    <string name="no_games_subtitle">Trykk på + for å legge til et</string>
+    <string name="download_games">Hent nye spill</string>
+    <string name="add_to_library">Legg til i biblioteket</string>
+    <string name="remove_game_title">Fjerne spill?</string>
+    <string name="remove_game_desc">Dette vil fjerne %1$s fra Game Hub.</string>
+
+    <string name="edit_mode_title">Rediger</string>
+
+    <string name="settings_title">Innstillinger</string>
+    <string name="settings_header_appearance">Utseende</string>
+    <string name="settings_header_preferences">Preferanser</string>
+    <string name="settings_header_info">Informasjon</string>
+
+    <string name="settings_theme_system">Systemstandard</string>
+    <string name="settings_theme_light">Lys</string>
+    <string name="settings_theme_dark">Mørk</string>
+    <string name="settings_card_style_title">Kortstil</string>
+    <string name="settings_card_style_default">Standard</string>
+    <string name="settings_card_style_horizontal">Horisontal</string>
+    <string name="settings_card_style_grid">Rutenett</string>
+
+    <string name="settings_show_name_title">Vis brukernavn</string>
+    <string name="settings_show_name_desc">Vis navnet ditt i overskriften</string>
+    <string name="settings_edit_name_title">Ditt navn</string>
+    <string name="dialog_edit_name_title">Skriv inn navnet ditt</string>
+    <string name="dialog_edit_name_hint">Navn</string>
+
+    <string name="settings_sort_title">Spillrekkefølge</string>
+    <string name="sort_alphabetical">Alfabetisk</string>
+    <string name="sort_playtime">Spilletid</string>
+    <string name="sort_custom">Egendefinert</string>
+
+    <string name="settings_show_launch_count_title">Vis antall oppstarter</string>
+    <string name="settings_show_launch_count_desc">Vis hvor mange ganger du har spilt</string>
+
+    <string name="settings_show_playtime_title">Vis spilletid</string>
+    <string name="settings_show_playtime_desc">Vis bruksstatistikk</string>
+
+    <string name="settings_stats_interval_title">Statistikkintervall</string>
+    <string name="interval_daily">Daglig</string>
+    <string name="interval_weekly">Ukentlig</string>
+    <string name="interval_monthly">Månedlig</string>
+    <string name="interval_yearly">Årlig</string>
+
+    <string name="settings_show_get_more_title">Vis Få flere spill</string>
+    <string name="settings_show_get_more_desc">Vis lenke til butikk</string>
+
+    <string name="settings_advanced_title">Avansert</string>
+    <string name="settings_advanced_desc">Eksperimentelle funksjoner og oppdateringer</string>
+
+    <string name="settings_version_title">Appversjon</string>
+    <string name="settings_developer_title">Utvikler</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Rapporter feil / funksjon</string>
+    <string name="settings_report_desc">Chat med utvikler på Telegram</string>
+
+    <string name="settings_check_updates_title">Se etter oppdateringer</string>
+    <string name="settings_check_updates_desc">Finn den nyeste versjonen</string>
+    <string name="settings_auto_updates_title">Automatiske oppdateringer</string>
+    <string name="settings_auto_updates_desc">Se etter oppdateringer ved oppstart</string>
+
+    <string name="update_latest_version_msg">Ingen oppdateringer tilgjengelig for øyeblikket.</string>
+    <string name="update_available">Versjon %1$s er tilgjengelig!</string>
+    <string name="update_action">Oppdater</string>
+    <string name="update_error_msg">Kunne ikke sjekke eller laste ned oppdatering.</string>
+    <string name="unknown">Ukjent</string>
+
+    <string name="settings_setup_title">Førstegangsoppsett</string>
+    <string name="settings_setup_desc">Kjør velkomstveiviseren på nytt</string>
+    <string name="settings_backup_header">Sikkerhetskopiering og gjenoppretting</string>
+    <string name="settings_export_title">Eksporter innstillinger</string>
+    <string name="settings_export_desc">Lagre konfigurasjon og spilliste</string>
+    <string name="settings_import_title">Importer innstillinger</string>
+    <string name="settings_import_desc">Gjenopprett fra en sikkerhetskopifil</string>
+    <string name="dialog_restart_title">Omstart kreves</string>
+    <string name="dialog_restart_desc">Innstillinger er importert. Start appen på nytt for å bruke endringene.</string>
+    <string name="restart_now">Start på nytt nå</string>
+    <string name="export_success">Innstillinger eksportert</string>
+    <string name="export_error">Feil ved eksport av innstillinger</string>
+    <string name="import_error">Feil ved import av innstillinger</string>
+
+    <string name="community_title">Bli med i fellesskapet</string>
+    <string name="community_desc">Bli med i Telegram-kanalen min for ikke å gå glipp av de siste nyhetene om prosjektene mine!</string>
+    <string name="no_thanks">Nei, takk</string>
+    <string name="sure_action">Gjerne!</string>
+    <string name="see_source_code">Se kildekode</string>
+    <string name="check_updates_action">Se etter oppdateringer</string>
+    <string name="cancel_action">Avbryt</string>
+    <string name="edit_app_icon_title">Velg ikon</string>
+    <string name="edit_app_icons">App-ikoner</string>
+    <string name="edit_builtin_icons">Innebygde ikoner</string>
+    <string name="edit_gallery">Galleri</string>
+    <string name="edit_restore_icon">Gjenopprett ikon</string>
+    <string name="edit_restore_title">Gjenopprett tittel</string>
+    <string name="edit_app_name">Appnavn</string>
+    <string name="select_app_title">Velg app</string>
+    <string name="settings_testing_header">Testing</string>
+    <string name="settings_test_telegram_title">Fellesskap</string>
+    <string name="settings_test_telegram_desc">Bli med i Telegram-gruppen vår</string>
+    <string name="settings_test_crash_title">Test krasj</string>
+    <string name="settings_test_crash_desc">Fremtving et krasj for å teste feilrapportering</string>
+    <string name="settings_danger_zone_header">Faresone</string>
+    <string name="settings_reset_title">Tilbakestill til fabrikkinnstillinger</string>
+    <string name="settings_reset_desc">Slett alle data og gjenopprett standardinnstillinger</string>
+    <string name="settings_reset_confirmation_desc">Er du sikker på at du vil tilbakestille appen? Alle lagrede spill, tilpasninger og innstillinger blir slettet permanent. Denne handlingen kan ikke angres.</string>
+    <string name="settings_reset_action">Tilbakestill app</string>
+    <string name="uninstall">Avinstaller</string>
+    <string name="settings_grid_columns_title">Rutenettkolonner</string>
+    <string name="add_favorite">Legg til i favoritter</string>
+    <string name="remove_favorite">Fjern fra favoritter</string>
+    <string name="favorites">Favoritter</string>
+    <string name="feat_order_desc">Trykk på blyantknappen for å gå inn i redigeringsmodus, eller hold inne et spill for å tilpasse utseendet.</string>
+
+    <string name="controller_connected">Kontroller tilkoblet</string>
+    <string name="action_settings">Innstillinger</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Kontrollertilkobling</string>
+    <string name="settings_test_controller_desc">Vis en popup på telefonen din når en kontroller er koblet til</string>
+    <string name="settings_test_controller_simulate_title">Simuler kontrollertilkobling</string>
+    <string name="settings_test_controller_simulate_desc">Vis meny for kontrollertilkobling</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Trådløs Xbox-kontroller</string>
+    <string name="controller_name_playstation">Trådløs DualSense-kontroller</string>
+    <string name="controller_name_joycon">Joy-Con (V/H)</string>
+    <string name="controller_generic">Generisk kontroller</string>
+    <string name="controller_name_generic">Ukjent kontroller</string>
+    <string name="settings_header_more">Mer</string>
+    <string name="settings_game_bubble_title">Spillboble</string>
+    <string name="settings_game_bubble_desc">Administrer innstillinger for spillboble</string>
+    <string name="settings_bubble_enable_title">Aktiver spillboble</string>
+    <string name="settings_bubble_autohide_title">Skjul automatisk</string>
+    <string name="settings_bubble_autohide_desc">Minimer til skjermkanten etter 3 sekunder</string>
+    <string name="settings_bubble_tools_title">Spillboble-verktøy</string>
+    <string name="tool_fps">FPS-teller</string>
+    <string name="tool_dnd">Ikke forstyrr</string>
+    <string name="tool_brightness">Maks lysstyrke</string>
+    <string name="tool_screenshot">Skjermbilde</string>
+    <string name="tool_ping">Ping-monitor</string>
+    <string name="tool_boost">RAM-boost</string>
+    <string name="open_in_store">Åpne i butikk</string>
+    <string name="move_up">Flytt opp</string>
+    <string name="move_down">Flytt ned</string>
+    <string name="stats">Statistikk</string>
+    <string name="perm_bluetooth_title">Bluetooth-tilgang</string>
+    <string name="perm_bluetooth_desc">Påkrevd for å koble til og administrere kontrollerne dine.</string>
+    <string name="bubble_perm_title">Spillboble</string>
+    <string name="bubble_perm_subtitle">Tillatelser</string>
+    <string name="bubble_perm_intro">Gi disse tillatelsene for å aktivere avanserte spillboble-funksjoner.</string>
+    <string name="perm_overlay_title">Vis over andre apper</string>
+    <string name="perm_overlay_desc">Påkrevd for å vise spillboblen mens du spiller.</string>
+    <string name="perm_dnd_title">Ikke forstyrr</string>
+    <string name="perm_dnd_desc">Slå Ikke forstyrr-modus av og på fra spillboblen.</string>
+    <string name="perm_write_settings_title">Endre systeminnstillinger</string>
+    <string name="perm_write_settings_desc">Juster skjermlysstyrken fra spillboblen.</string>
+    <string name="perm_accessibility_title">Tilgjengelighetstjeneste</string>
+    <string name="perm_accessibility_desc">Ta skjermbilder direkte fra spillboblen.</string>
+
+</resources>

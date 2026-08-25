@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">เกมพร้อมแล้ว</string>
+    <string name="add_game">เพิ่มเกม</string>
+    <string name="search_apps">ค้นหาแอป…</string>
+    <string name="cancel">ยกเลิก</string>
+    <string name="remove">นำออก</string>
+    <string name="play">เล่น</string>
+    <string name="later">ภายหลัง</string>
+    <string name="save">บันทึก</string>
+    <string name="discard">ยกเลิก</string>
+
+    <string name="next">ถัดไป</string>
+    <string name="back">กลับ</string>
+    <string name="get_started">เริ่มต้นใช้งาน</string>
+
+    <string name="welcome_to">ยินดีต้อนรับสู่</string>
+    <string name="welcome_preparing_subtitle">เรามาเตรียมทุกอย่างให้คุณกันเถอะ</string>
+
+    <string name="perm_required">แนะนำ</string>
+    <string name="perm_permissions">สิทธิ์</string>
+    <string name="perm_intro_text">สิทธิ์เหล่านี้เป็นทางเลือก แต่ขอแนะนำอย่างยิ่งเพื่อให้ Game Hub ทำงานได้อย่างราบรื่น</string>
+
+    <string name="perm_notif_title">การแจ้งเตือน</string>
+    <string name="perm_notif_desc">รับทราบทันทีเมื่อมีการอัปเดตใหม่</string>
+
+    <string name="perm_install_title">การติดตั้งแอป</string>
+    <string name="perm_install_desc">จำเป็นสำหรับการดาวน์โหลดและติดตั้งการอัปเดต</string>
+
+    <string name="perm_usage_desc">จำเป็นสำหรับการติดตามเวลาเล่นเกมและสถิติการเปิดตัว</string>
+
+    <string name="feat_discover">ค้นพบ</string>
+    <string name="feat_features">คุณสมบัติ</string>
+    <string name="feat_intro">นี่คือสิ่งที่คุณสามารถทำได้ด้วย Game Hub ใหม่ของคุณ</string>
+
+    <string name="feat_order_title">ควบคุมเต็มรูปแบบ</string>
+
+    <string name="feat_layout_title">เปลี่ยนรูปแบบ</string>
+    <string name="feat_layout_desc">ไปที่การตั้งค่าเพื่อเปลี่ยนรูปแบบการ์ด: ค่าเริ่มต้น แนวนอน หรือตาราง ทำให้เป็นของคุณเอง</string>
+
+    <string name="feat_name_title">สัมผัสส่วนตัว</string>
+    <string name="feat_name_desc">แสดงชื่อของคุณในส่วนหัว ปรับแต่งหรือซ่อนไว้ในการตั้งค่า</string>
+
+    <string name="feat_manage_title">จัดการง่าย</string>
+    <string name="feat_manage_desc">แตะ + เพื่อเพิ่มเกม ปัดไปทางขวาเพื่อนำออก ปัดไปทางซ้ายเพื่อดูสถิติเวลาเล่น</string>
+
+    <string name="feat_update_title">อัปเดตอยู่เสมอ</string>
+    <string name="feat_update_desc">ตรวจสอบการอัปเดต Game Hub ได้โดยตรงในการตั้งค่าแอป ไม่พลาดทุกฟีเจอร์</string>
+
+    <string name="feat_store_title">ค้นพบเกม</string>
+    <string name="feat_store_desc">ค้นหาเกมใหม่ผ่าน Google Play Store คุณสามารถปิดใช้งานสิ่งนี้ได้ในการตั้งค่า</string>
+
+    <string name="feat_history_title">ประวัติการเล่น</string>
+    <string name="feat_history_desc">ติดตามจำนวนครั้งที่คุณเปิดแต่ละเกม ตัวนับนี้สามารถซ่อนได้ในการตั้งค่า</string>
+
+    <string name="no_games_title">ไม่พบเกม</string>
+    <string name="no_games_subtitle">กด + เพื่อเพิ่ม</string>
+    <string name="download_games">รับเกมใหม่</string>
+    <string name="add_to_library">เพิ่มลงในคลัง</string>
+    <string name="remove_game_title">นำเกมออกหรือไม่</string>
+    <string name="remove_game_desc">สิ่งนี้จะนำ %1$s ออกจาก Game Hub</string>
+
+    <string name="edit_mode_title">แก้ไข</string>
+
+    <string name="settings_title">การตั้งค่า</string>
+    <string name="settings_header_appearance">ลักษณะที่ปรากฏ</string>
+    <string name="settings_header_preferences">การตั้งค่า</string>
+    <string name="settings_header_info">ข้อมูล</string>
+
+    <string name="settings_theme_system">ค่าเริ่มต้นของระบบ</string>
+    <string name="settings_theme_light">สว่าง</string>
+    <string name="settings_theme_dark">มืด</string>
+    <string name="settings_card_style_title">รูปแบบการ์ด</string>
+    <string name="settings_card_style_default">ค่าเริ่มต้น</string>
+    <string name="settings_card_style_horizontal">แนวนอน</string>
+    <string name="settings_card_style_grid">ตาราง</string>
+
+    <string name="settings_show_name_title">แสดงชื่อผู้ใช้</string>
+    <string name="settings_show_name_desc">แสดงชื่อของคุณในส่วนหัว</string>
+    <string name="settings_edit_name_title">ชื่อของคุณ</string>
+    <string name="dialog_edit_name_title">ใส่ชื่อของคุณ</string>
+    <string name="dialog_edit_name_hint">ชื่อ</string>
+
+    <string name="settings_sort_title">ลำดับเกม</string>
+    <string name="sort_alphabetical">ตามตัวอักษร</string>
+    <string name="sort_playtime">เวลาเล่น</string>
+    <string name="sort_custom">กำหนดเอง</string>
+
+    <string name="settings_show_launch_count_title">แสดงจำนวนครั้งที่เปิด</string>
+    <string name="settings_show_launch_count_desc">แสดงจำนวนครั้งที่คุณเล่น</string>
+
+    <string name="settings_show_playtime_title">แสดงเวลาเล่น</string>
+    <string name="settings_show_playtime_desc">แสดงสถิติการใช้งาน</string>
+
+    <string name="settings_stats_interval_title">ช่วงเวลาสถิติ</string>
+    <string name="interval_daily">รายวัน</string>
+    <string name="interval_weekly">รายสัปดาห์</string>
+    <string name="interval_monthly">รายเดือน</string>
+    <string name="interval_yearly">รายปี</string>
+
+    <string name="settings_show_get_more_title">แสดงรับเกมเพิ่มเติม</string>
+    <string name="settings_show_get_more_desc">แสดงลิงก์ไปยังร้านค้า</string>
+
+    <string name="settings_advanced_title">ขั้นสูง</string>
+    <string name="settings_advanced_desc">คุณสมบัติทดลองและการอัปเดต</string>
+
+    <string name="settings_version_title">เวอร์ชันแอป</string>
+    <string name="settings_developer_title">นักพัฒนา</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">รายงานข้อบกพร่อง / คุณสมบัติ</string>
+    <string name="settings_report_desc">แชทกับนักพัฒนาทาง Telegram</string>
+
+    <string name="settings_check_updates_title">ตรวจสอบการอัปเดต</string>
+    <string name="settings_check_updates_desc">ค้นหาเวอร์ชันล่าสุด</string>
+    <string name="settings_auto_updates_title">การอัปเดตอัตโนมัติ</string>
+    <string name="settings_auto_updates_desc">ตรวจสอบการอัปเดตเมื่อเริ่มต้น</string>
+
+    <string name="update_latest_version_msg">ไม่มีการอัปเดตในขณะนี้</string>
+    <string name="update_available">เวอร์ชัน %1$s พร้อมใช้งาน!</string>
+    <string name="update_action">อัปเดต</string>
+    <string name="update_error_msg">ไม่สามารถตรวจสอบหรือดาวน์โหลดการอัปเดตได้</string>
+    <string name="unknown">ไม่ทราบ</string>
+
+    <string name="settings_setup_title">การตั้งค่าเริ่มต้น</string>
+    <string name="settings_setup_desc">เรียกใช้วิซาร์ดต้อนรับอีกครั้ง</string>
+    <string name="settings_backup_header">สำรองและกู้คืน</string>
+    <string name="settings_export_title">ส่งออกการตั้งค่า</string>
+    <string name="settings_export_desc">บันทึกการกำหนดค่าและรายชื่อเกม</string>
+    <string name="settings_import_title">นำเข้าการตั้งค่า</string>
+    <string name="settings_import_desc">กู้คืนจากไฟล์สำรอง</string>
+    <string name="dialog_restart_title">จำเป็นต้องรีสตาร์ท</string>
+    <string name="dialog_restart_desc">นำเข้าการตั้งค่าแล้ว รีสตาร์ทแอปเพื่อใช้การเปลี่ยนแปลง</string>
+    <string name="restart_now">รีสตาร์ทเดี๋ยวนี้</string>
+    <string name="export_success">ส่งออกการตั้งค่าสำเร็จแล้ว</string>
+    <string name="export_error">เกิดข้อผิดพลาดในการส่งออกการตั้งค่า</string>
+    <string name="import_error">เกิดข้อผิดพลาดในการนำเข้าการตั้งค่า</string>
+
+    <string name="community_title">เข้าร่วมชุมชน</string>
+    <string name="community_desc">เข้าร่วมช่อง Telegram ของฉันเพื่อไม่พลาดข่าวสารล่าสุดและการอัปเดตเกี่ยวกับโครงการของฉัน พร้อมดูตัวอย่างสุดพิเศษ!</string>
+    <string name="no_thanks">ไม่ ขอบคุณ</string>
+    <string name="sure_action">แน่นอน!</string>
+    <string name="see_source_code">ดูซอร์สโค้ด</string>
+    <string name="check_updates_action">ตรวจสอบการอัปเดต</string>
+    <string name="cancel_action">ยกเลิก</string>
+    <string name="edit_app_icon_title">เลือกไอคอน</string>
+    <string name="edit_app_icons">ไอคอนแอป</string>
+    <string name="edit_builtin_icons">ไอคอนในตัว</string>
+    <string name="edit_gallery">คลังภาพ</string>
+    <string name="edit_restore_icon">กู้คืนไอคอน</string>
+    <string name="edit_restore_title">กู้คืนชื่อ</string>
+    <string name="edit_app_name">ชื่อแอป</string>
+    <string name="select_app_title">เลือกแอป</string>
+    <string name="settings_testing_header">การทดสอบ</string>
+    <string name="settings_test_telegram_title">ชุมชน</string>
+    <string name="settings_test_telegram_desc">เข้าร่วมกลุ่ม Telegram ของเรา</string>
+    <string name="settings_test_crash_title">ทดสอบการขัดข้อง</string>
+    <string name="settings_test_crash_desc">บังคับให้ขัดข้องเพื่อทดสอบการรายงานข้อผิดพลาด</string>
+    <string name="settings_danger_zone_header">โซนอันตราย</string>
+    <string name="settings_reset_title">รีเซ็ตเป็นค่าเริ่มต้นจากโรงงาน</string>
+    <string name="settings_reset_desc">ลบข้อมูลทั้งหมดและกู้คืนการตั้งค่าเริ่มต้น</string>
+    <string name="settings_reset_confirmation_desc">คุณแน่ใจหรือไม่ว่าต้องการรีเซ็ตแอป เกมที่บันทึกไว้ การปรับแต่ง และการตั้งค่าทั้งหมดของคุณจะถูกลบอย่างถาวร การกระทำนี้ไม่สามารถยกเลิกได้</string>
+    <string name="settings_reset_action">รีเซ็ตแอป</string>
+    <string name="uninstall">ถอนการติดตั้ง</string>
+    <string name="settings_grid_columns_title">คอลัมน์ตาราง</string>
+    <string name="add_favorite">เพิ่มในรายการโปรด</string>
+    <string name="remove_favorite">นำออกจากรายการโปรด</string>
+    <string name="favorites">รายการโปรด</string>
+    <string name="feat_order_desc">แตะปุ่มดินสอเพื่อเข้าสู่โหมดแก้ไขหรือกดเกมค้างไว้เพื่อปรับแต่งรูปลักษณ์</string>
+
+    <string name="controller_connected">เชื่อมต่อคอนโทรลเลอร์แล้ว</string>
+    <string name="action_settings">การตั้งค่า</string>
+    <string name="action_ok">ตกลง</string>
+    <string name="settings_test_controller_title">การเชื่อมต่อคอนโทรลเลอร์</string>
+    <string name="settings_test_controller_desc">แสดงป๊อปอัปบนโทรศัพท์ของคุณเมื่อเชื่อมต่อคอนโทรลเลอร์แล้ว</string>
+    <string name="settings_test_controller_simulate_title">จำลองการเชื่อมต่อคอนโทรลเลอร์</string>
+    <string name="settings_test_controller_simulate_desc">แสดงแผ่นด้านล่างการเชื่อมต่อคอนโทรลเลอร์</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">คอนโทรลเลอร์ไร้สาย Xbox</string>
+    <string name="controller_name_playstation">คอนโทรลเลอร์ไร้สาย DualSense</string>
+    <string name="controller_name_joycon">Joy-Con (ซ้าย/ขวา)</string>
+    <string name="controller_generic">คอนโทรลเลอร์ทั่วไป</string>
+    <string name="controller_name_generic">คอนโทรลเลอร์ที่ไม่รู้จัก</string>
+    <string name="settings_header_more">เพิ่มเติม</string>
+    <string name="settings_game_bubble_title">ฟองเกม</string>
+    <string name="settings_game_bubble_desc">จัดการการตั้งค่าฟองเกม</string>
+    <string name="settings_bubble_enable_title">เปิดใช้งานฟองเกม</string>
+    <string name="settings_bubble_autohide_title">ซ่อนอัตโนมัติ</string>
+    <string name="settings_bubble_autohide_desc">ย่อไปที่ขอบหน้าจอหลังจาก 3 วินาที</string>
+    <string name="settings_bubble_tools_title">เครื่องมือฟองเกม</string>
+    <string name="tool_fps">ตัวนับ FPS</string>
+    <string name="tool_dnd">ห้ามรบกวน</string>
+    <string name="tool_brightness">ความสว่างสูงสุด</string>
+    <string name="tool_screenshot">ภาพหน้าจอ</string>
+    <string name="tool_ping">ตรวจสอบ Ping</string>
+    <string name="tool_boost">เพิ่ม RAM</string>
+    <string name="open_in_store">เปิดในร้านค้า</string>
+    <string name="move_up">เลื่อนขึ้น</string>
+    <string name="move_down">เลื่อนลง</string>
+    <string name="stats">สถิติ</string>
+    <string name="perm_bluetooth_title">การเข้าถึงบลูทูธ</string>
+    <string name="perm_bluetooth_desc">จำเป็นสำหรับการเชื่อมต่อและจัดการคอนโทรลเลอร์ของคุณ</string>
+    <string name="bubble_perm_title">ฟองเกม</string>
+    <string name="bubble_perm_subtitle">สิทธิ์</string>
+    <string name="bubble_perm_intro">ให้สิทธิ์เหล่านี้เพื่อเปิดใช้งานคุณสมบัติฟองเกมขั้นสูง</string>
+    <string name="perm_overlay_title">แสดงทับแอปอื่น</string>
+    <string name="perm_overlay_desc">จำเป็นสำหรับการแสดงฟองเกมขณะเล่น</string>
+    <string name="perm_dnd_title">ห้ามรบกวน</string>
+    <string name="perm_dnd_desc">เปิด/ปิดโหมดห้ามรบกวนจากฟองเกม</string>
+    <string name="perm_write_settings_title">แก้ไขการตั้งค่าระบบ</string>
+    <string name="perm_write_settings_desc">ปรับความสว่างของหน้าจอจากฟองเกม</string>
+    <string name="perm_accessibility_title">บริการการเข้าถึง</string>
+    <string name="perm_accessibility_desc">ถ่ายภาพหน้าจอโดยตรงจากฟองเกม</string>
+
+</resources>

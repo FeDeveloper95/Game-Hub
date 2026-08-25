@@ -1,14 +1,13 @@
 package com.fedeveloper95.games.elements.MainActivity
 
-import androidx.compose.animation.core.animateDpAsState
-import androidx.compose.animation.core.tween
+import android.view.KeyEvent
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.border
 import androidx.compose.foundation.combinedClickable
+import androidx.compose.foundation.gestures.awaitFirstDown
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
-import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -30,17 +29,29 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
+import androidx.compose.ui.input.key.KeyEventType
+import androidx.compose.ui.input.key.key
+import androidx.compose.ui.input.key.nativeKeyCode
+import androidx.compose.ui.input.key.onPreviewKeyEvent
+import androidx.compose.ui.input.key.type
+import androidx.compose.ui.input.pointer.PointerEventPass
+import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -97,19 +108,32 @@ fun HorizontalGamePager(
 fun HorizontalGameCard(
     game: GameApp,
     onLaunch: () -> Unit,
-    onLongClick: () -> Unit
+    onLongClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
+
     val borderModifier = if (isFocused) Modifier.border(4.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(32.dp)) else Modifier
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .fillMaxHeight(0.72f)
             .clip(RoundedCornerShape(32.dp))
             .then(borderModifier)
+            .onPreviewKeyEvent { event ->
+                if (event.key.nativeKeyCode == KeyEvent.KEYCODE_BUTTON_START || event.key.nativeKeyCode == KeyEvent.KEYCODE_MENU) {
+                    if (event.type == KeyEventType.KeyUp) {
+                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        onLongClick()
+                    }
+                    true
+                } else {
+                    false
+                }
+            }
             .combinedClickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
@@ -171,19 +195,32 @@ fun GridGameCard(
     game: GameApp,
     columns: Int,
     onLaunch: () -> Unit,
-    onLongClick: () -> Unit
+    onLongClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val haptic = LocalHapticFeedback.current
     val interactionSource = remember { MutableInteractionSource() }
     val isFocused by interactionSource.collectIsFocusedAsState()
+
     val borderModifier = if (isFocused) Modifier.border(4.dp, MaterialTheme.colorScheme.primary, RoundedCornerShape(24.dp)) else Modifier
 
     Card(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxWidth()
             .aspectRatio(1f)
             .clip(RoundedCornerShape(24.dp))
             .then(borderModifier)
+            .onPreviewKeyEvent { event ->
+                if (event.key.nativeKeyCode == KeyEvent.KEYCODE_BUTTON_START || event.key.nativeKeyCode == KeyEvent.KEYCODE_MENU) {
+                    if (event.type == KeyEventType.KeyUp) {
+                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        onLongClick()
+                    }
+                    true
+                } else {
+                    false
+                }
+            }
             .combinedClickable(
                 interactionSource = interactionSource,
                 indication = LocalIndication.current,
@@ -234,7 +271,7 @@ fun GridGameCard(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun GameListItem(
     game: GameApp,
@@ -242,68 +279,96 @@ fun GameListItem(
     isFirst: Boolean = false,
     isLast: Boolean = false,
     onLaunch: () -> Unit,
-    onLongClick: () -> Unit
+    onLongClick: () -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val haptic = LocalHapticFeedback.current
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val isFocused by interactionSource.collectIsFocusedAsState()
 
-    val topRound = if (isSingle || isFirst) 28.dp else 4.dp
-    val bottomRound = if (isSingle || isLast) 28.dp else 4.dp
+    val count = if (isSingle) 1 else if (isFirst || isLast) 2 else 3
+    val index = if (isSingle) 0 else if (isFirst) 0 else if (isLast) count - 1 else 1
 
-    val topStart by animateDpAsState(targetValue = if (isPressed) 28.dp else topRound, animationSpec = tween(200), label = "")
-    val topEnd by animateDpAsState(targetValue = if (isPressed) 28.dp else topRound, animationSpec = tween(200), label = "")
-    val bottomStart by animateDpAsState(targetValue = if (isPressed) 28.dp else bottomRound, animationSpec = tween(200), label = "")
-    val bottomEnd by animateDpAsState(targetValue = if (isPressed) 28.dp else bottomRound, animationSpec = tween(200), label = "")
+    var isLongPress by remember { mutableStateOf(false) }
+    var baseModifier = modifier
+        .then(if (count == 1) Modifier.clip(RoundedCornerShape(20.dp)) else Modifier)
 
-    val shape = RoundedCornerShape(topStart, topEnd, bottomStart, bottomEnd)
-    val borderModifier = if (isFocused) Modifier.border(3.dp, MaterialTheme.colorScheme.primary, shape) else Modifier
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .then(borderModifier)
-            .combinedClickable(
-                interactionSource = interactionSource,
-                indication = LocalIndication.current,
-                onClick = onLaunch,
-                onLongClick = {
+    baseModifier = baseModifier
+        .onPreviewKeyEvent { event ->
+            if (event.key.nativeKeyCode == KeyEvent.KEYCODE_BUTTON_START || event.key.nativeKeyCode == KeyEvent.KEYCODE_MENU) {
+                if (event.type == KeyEventType.KeyUp) {
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                     onLongClick()
                 }
-            ),
-        shape = shape,
-        colors = CardDefaults.cardColors(
+                true
+            } else {
+                false
+            }
+        }
+        .pointerInput(Unit) {
+            awaitPointerEventScope {
+                while (true) {
+                    val down = awaitFirstDown(requireUnconsumed = false, pass = PointerEventPass.Initial)
+                    isLongPress = false
+                    val upOrCancel = withTimeoutOrNull(viewConfiguration.longPressTimeoutMillis) {
+                        var event = awaitPointerEvent(PointerEventPass.Initial)
+                        while (event.changes.any { it.pressed }) {
+                            event = awaitPointerEvent(PointerEventPass.Initial)
+                        }
+                        event
+                    }
+                    if (upOrCancel == null) {
+                        isLongPress = true
+                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                        onLongClick()
+                    }
+                }
+            }
+        }
+
+    SegmentedListItem(
+        selected = false,
+        onClick = {
+            if (!isLongPress) {
+                onLaunch()
+            }
+        },
+        modifier = baseModifier,
+        colors = ListItemDefaults.colors(
             containerColor = MaterialTheme.colorScheme.surfaceContainer
         ),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        Row(
-            modifier = Modifier.fillMaxWidth().defaultMinSize(minHeight = 104.dp).padding(horizontal = 20.dp),
-            verticalAlignment = Alignment.CenterVertically
-        ) {
-            GameIconDisplay(
-                game = game,
+        shapes = ListItemDefaults.segmentedShapes(index = index, count = count),
+        content = {
+            Row(
                 modifier = Modifier
-                    .size(68.dp)
-                    .clip(CircleShape)
-            )
-
-            Spacer(modifier = Modifier.width(24.dp))
-
-            Column(modifier = Modifier.weight(1f)) {
-                Text(
-                    text = game.name,
-                    style = MaterialTheme.typography.titleMedium,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    fontFamily = GoogleSansFlex
+                    .fillMaxWidth()
+                    .defaultMinSize(minHeight = 72.dp)
+                    .padding(start = 8.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                GameIconDisplay(
+                    game = game,
+                    modifier = Modifier
+                        .size(56.dp)
+                        .clip(CircleShape)
                 )
+                Spacer(modifier = Modifier.width(12.dp))
+                Column(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.Center
+                ) {
+                    Text(
+                        text = game.name,
+                        style = MaterialTheme.typography.titleMedium,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis,
+                        fontFamily = GoogleSansFlex
+                    )
+                }
+                AnimatedPlayButton(onClick = {
+                    if (!isLongPress) {
+                        onLaunch()
+                    }
+                })
             }
-
-            AnimatedPlayButton(onClick = onLaunch)
         }
-    }
+    )
 }

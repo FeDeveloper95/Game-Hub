@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">permainan sedia</string>
+    <string name="add_game">Tambah Permainan</string>
+    <string name="search_apps">Cari apl…</string>
+    <string name="cancel">Batal</string>
+    <string name="remove">Alih Keluar</string>
+    <string name="play">Main</string>
+    <string name="later">Nanti</string>
+    <string name="save">Simpan</string>
+    <string name="discard">Batal</string>
+
+    <string name="next">Seterusnya</string>
+    <string name="back">Kembali</string>
+    <string name="get_started">Mula</string>
+
+    <string name="welcome_to">Selamat datang ke</string>
+    <string name="welcome_preparing_subtitle">Mari siapkan semuanya untuk anda.</string>
+
+    <string name="perm_required">Dicadangkan</string>
+    <string name="perm_permissions">Keizinan</string>
+    <string name="perm_intro_text">Keizinan ini adalah pilihan tetapi amat disyorkan agar Game Hub berjalan lancar.</string>
+
+    <string name="perm_notif_title">Pemberitahuan</string>
+    <string name="perm_notif_desc">Ketahui segera apabila kemas kini baharu dikeluarkan.</string>
+
+    <string name="perm_install_title">Pemasangan Apl</string>
+    <string name="perm_install_desc">Diperlukan untuk memuat turun dan memasang kemas kini.</string>
+
+    <string name="perm_usage_desc">Diperlukan untuk menjejaki masa bermain dan statistik pelancaran.</string>
+
+    <string name="feat_discover">Temui</string>
+    <string name="feat_features">Ciri-ciri</string>
+    <string name="feat_intro">Berikut ialah perkara yang boleh anda lakukan dengan Game Hub baharu anda.</string>
+
+    <string name="feat_order_title">Kawalan Penuh</string>
+
+    <string name="feat_layout_title">Ubah Bentuk</string>
+    <string name="feat_layout_desc">Pergi ke Tetapan untuk menukar gaya kad: Lalai, Mendatar, atau Grid. Jadikan ia milik anda.</string>
+
+    <string name="feat_name_title">Sentuhan Peribadi</string>
+    <string name="feat_name_desc">Paparkan nama anda dalam pengepala. Sesuaikan atau sembunyikan dalam Tetapan.</string>
+
+    <string name="feat_manage_title">Pengurusan Mudah</string>
+    <string name="feat_manage_desc">Ketik + untuk menambah permainan. Leret ke kanan untuk mengalih keluar, leret ke kiri untuk melihat statistik masa bermain.</string>
+
+    <string name="feat_update_title">Kekal Kemas Kini</string>
+    <string name="feat_update_desc">Semak kemas kini Game Hub terus dalam Tetapan apl. Jangan sekali-kali terlepas ciri.</string>
+
+    <string name="feat_store_title">Temui Permainan</string>
+    <string name="feat_store_desc">Cari tajuk baharu melalui Gedung Google Play. Anda boleh melumpuhkan ini dalam Tetapan.</string>
+
+    <string name="feat_history_title">Sejarah Bermain</string>
+    <string name="feat_history_desc">Jejak berapa kali anda telah melancarkan setiap permainan. Pembilang ini boleh disembunyikan dalam Tetapan.</string>
+
+    <string name="no_games_title">Tiada permainan ditemui</string>
+    <string name="no_games_subtitle">Tekan + untuk menambah satu</string>
+    <string name="download_games">Dapatkan permainan baharu</string>
+    <string name="add_to_library">Tambah ke pustaka</string>
+    <string name="remove_game_title">Alih Keluar Permainan?</string>
+    <string name="remove_game_desc">Ini akan mengalih keluar %1$s daripada Game Hub.</string>
+
+    <string name="edit_mode_title">Edit</string>
+
+    <string name="settings_title">Tetapan</string>
+    <string name="settings_header_appearance">Penampilan</string>
+    <string name="settings_header_preferences">Keutamaan</string>
+    <string name="settings_header_info">Maklumat</string>
+
+    <string name="settings_theme_system">Lalai sistem</string>
+    <string name="settings_theme_light">Terang</string>
+    <string name="settings_theme_dark">Gelap</string>
+    <string name="settings_card_style_title">Gaya Kad</string>
+    <string name="settings_card_style_default">Lalai</string>
+    <string name="settings_card_style_horizontal">Mendatar</string>
+    <string name="settings_card_style_grid">Grid</string>
+
+    <string name="settings_show_name_title">Tunjukkan Nama Pengguna</string>
+    <string name="settings_show_name_desc">Paparkan nama anda dalam pengepala</string>
+    <string name="settings_edit_name_title">Nama Anda</string>
+    <string name="dialog_edit_name_title">Masukkan nama anda</string>
+    <string name="dialog_edit_name_hint">Nama</string>
+
+    <string name="settings_sort_title">Susunan Permainan</string>
+    <string name="sort_alphabetical">Abjad</string>
+    <string name="sort_playtime">Masa Bermain</string>
+    <string name="sort_custom">Tersuai</string>
+
+    <string name="settings_show_launch_count_title">Tunjuk Kiraan Pelancaran</string>
+    <string name="settings_show_launch_count_desc">Tunjukkan berapa kali anda bermain</string>
+
+    <string name="settings_show_playtime_title">Tunjuk Masa Bermain</string>
+    <string name="settings_show_playtime_desc">Paparkan statistik penggunaan</string>
+
+    <string name="settings_stats_interval_title">Selang Statistik</string>
+    <string name="interval_daily">Harian</string>
+    <string name="interval_weekly">Mingguan</string>
+    <string name="interval_monthly">Bulanan</string>
+    <string name="interval_yearly">Tahunan</string>
+
+    <string name="settings_show_get_more_title">Tunjuk Dapatkan Lebih Banyak Permainan</string>
+    <string name="settings_show_get_more_desc">Tunjukkan pautan ke kedai</string>
+
+    <string name="settings_advanced_title">Lanjutan</string>
+    <string name="settings_advanced_desc">Ciri eksperimen dan kemas kini</string>
+
+    <string name="settings_version_title">Versi Apl</string>
+    <string name="settings_developer_title">Pembangun</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Laporkan Pepijat / Ciri</string>
+    <string name="settings_report_desc">Sembang dengan pembangun di Telegram</string>
+
+    <string name="settings_check_updates_title">Semak kemas kini</string>
+    <string name="settings_check_updates_desc">Cari versi terkini</string>
+    <string name="settings_auto_updates_title">Kemas kini automatik</string>
+    <string name="settings_auto_updates_desc">Semak kemas kini semasa permulaan</string>
+
+    <string name="update_latest_version_msg">Tiada kemas kini tersedia pada masa ini.</string>
+    <string name="update_available">Versi %1$s Tersedia!</string>
+    <string name="update_action">Kemas kini</string>
+    <string name="update_error_msg">Tidak dapat menyemak atau memuat turun kemas kini.</string>
+    <string name="unknown">Tidak diketahui</string>
+
+    <string name="settings_setup_title">Persediaan Awal</string>
+    <string name="settings_setup_desc">Jalankan ahli sihir alu-aluan sekali lagi</string>
+    <string name="settings_backup_header">Sandaran &amp; Pulihkan</string>
+    <string name="settings_export_title">Eksport Tetapan</string>
+    <string name="settings_export_desc">Simpan konfigurasi dan senarai permainan</string>
+    <string name="settings_import_title">Import Tetapan</string>
+    <string name="settings_import_desc">Pulihkan daripada fail sandaran</string>
+    <string name="dialog_restart_title">Mula Semula Diperlukan</string>
+    <string name="dialog_restart_desc">Tetapan telah diimport. Mula semula apl untuk menggunakan perubahan.</string>
+    <string name="restart_now">Mula Semula Sekarang</string>
+    <string name="export_success">Tetapan berjaya dieksport</string>
+    <string name="export_error">Ralat mengeksport tetapan</string>
+    <string name="import_error">Ralat mengimport tetapan</string>
+
+    <string name="community_title">Sertai komuniti</string>
+    <string name="community_desc">Sertai saluran Telegram saya untuk tidak terlepas berita dan kemas kini terkini tentang projek saya, bersama dengan beberapa pandangan eksklusif!</string>
+    <string name="no_thanks">Tidak, terima kasih</string>
+    <string name="sure_action">Pasti!</string>
+    <string name="see_source_code">Lihat kod sumber</string>
+    <string name="check_updates_action">Semak kemas kini</string>
+    <string name="cancel_action">Batal</string>
+    <string name="edit_app_icon_title">Pilih Ikon</string>
+    <string name="edit_app_icons">Ikon apl</string>
+    <string name="edit_builtin_icons">Ikon terbina dalam</string>
+    <string name="edit_gallery">Galeri</string>
+    <string name="edit_restore_icon">Pulihkan ikon</string>
+    <string name="edit_restore_title">Pulihkan tajuk</string>
+    <string name="edit_app_name">Nama apl</string>
+    <string name="select_app_title">Pilih Apl</string>
+    <string name="settings_testing_header">Pengujian</string>
+    <string name="settings_test_telegram_title">Komuniti</string>
+    <string name="settings_test_telegram_desc">Sertai kumpulan Telegram kami</string>
+    <string name="settings_test_crash_title">Uji Ranap</string>
+    <string name="settings_test_crash_desc">Paksa ranap sistem untuk menguji pelaporan ralat</string>
+    <string name="settings_danger_zone_header">Zon Bahaya</string>
+    <string name="settings_reset_title">Tetapan Semula Kilang</string>
+    <string name="settings_reset_desc">Padam semua data dan pulihkan tetapan lalai</string>
+    <string name="settings_reset_confirmation_desc">Adakah anda pasti mahu menetapkan semula apl? Semua permainan, penyesuaian, dan tetapan anda yang disimpan akan dipadamkan secara kekal. Tindakan ini tidak boleh dibuat asal.</string>
+    <string name="settings_reset_action">Tetapkan Semula Apl</string>
+    <string name="uninstall">Nyahpasang</string>
+    <string name="settings_grid_columns_title">Lajur grid</string>
+    <string name="add_favorite">Tambah ke kegemaran</string>
+    <string name="remove_favorite">Alih keluar dari kegemaran</string>
+    <string name="favorites">Kegemaran</string>
+    <string name="feat_order_desc">Ketik butang pensel untuk memasuki Mod Edit atau tahan permainan untuk menyesuaikan penampilannya.</string>
+
+    <string name="controller_connected">Pengawal Terhubung</string>
+    <string name="action_settings">Tetapan</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Sambungan pengawal</string>
+    <string name="settings_test_controller_desc">Tunjukkan tetingkap timbul pada telefon anda apabila pengawal disambungkan</string>
+    <string name="settings_test_controller_simulate_title">Simulasikan sambungan pengawal</string>
+    <string name="settings_test_controller_simulate_desc">Tunjukkan helaian bawah sambungan pengawal</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Pengawal Wayarles Xbox</string>
+    <string name="controller_name_playstation">Pengawal Wayarles DualSense</string>
+    <string name="controller_name_joycon">Joy-Con (Kiri/Kanan)</string>
+    <string name="controller_generic">Pengawal Generik</string>
+    <string name="controller_name_generic">Pengawal tidak diketahui</string>
+    <string name="settings_header_more">Lain-lain</string>
+    <string name="settings_game_bubble_title">Buih Permainan</string>
+    <string name="settings_game_bubble_desc">Urus tetapan Buih Permainan</string>
+    <string name="settings_bubble_enable_title">Dayakan Buih Permainan</string>
+    <string name="settings_bubble_autohide_title">Sembunyi automatik</string>
+    <string name="settings_bubble_autohide_desc">Minimumkan ke tepi skrin selepas 3 saat</string>
+    <string name="settings_bubble_tools_title">Alatan Buih Permainan</string>
+    <string name="tool_fps">Kaunter FPS</string>
+    <string name="tool_dnd">Jangan Ganggu</string>
+    <string name="tool_brightness">Kecerahan Maks</string>
+    <string name="tool_screenshot">Tangkapan Skrin</string>
+    <string name="tool_ping">Pemantau Ping</string>
+    <string name="tool_boost">Peningkatan RAM</string>
+    <string name="open_in_store">Buka di kedai</string>
+    <string name="move_up">Gerak ke atas</string>
+    <string name="move_down">Gerak ke bawah</string>
+    <string name="stats">Statistik</string>
+    <string name="perm_bluetooth_title">Akses Bluetooth</string>
+    <string name="perm_bluetooth_desc">Diperlukan untuk menyambung dan mengurus pengawal anda.</string>
+    <string name="bubble_perm_title">Buih Permainan</string>
+    <string name="bubble_perm_subtitle">Keizinan</string>
+    <string name="bubble_perm_intro">Berikan keizinan ini untuk mendayakan ciri Buih Permainan lanjutan.</string>
+    <string name="perm_overlay_title">Paparan di atas apl lain</string>
+    <string name="perm_overlay_desc">Diperlukan untuk menunjukkan Buih Permainan semasa bermain.</string>
+    <string name="perm_dnd_title">Jangan Ganggu</string>
+    <string name="perm_dnd_desc">Togol mod Jangan Ganggu daripada Buih Permainan.</string>
+    <string name="perm_write_settings_title">Ubah suai tetapan sistem</string>
+    <string name="perm_write_settings_desc">Laraskan kecerahan skrin daripada Buih Permainan.</string>
+    <string name="perm_accessibility_title">Perkhidmatan kebolehaksesan</string>
+    <string name="perm_accessibility_desc">Ambil tangkapan skrin terus daripada Buih Permainan.</string>
+
+</resources>

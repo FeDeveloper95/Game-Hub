@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">παιχνίδια έτοιμα</string>
+    <string name="add_game">Προσθήκη παιχνιδιού</string>
+    <string name="search_apps">Αναζήτηση εφαρμογών…</string>
+    <string name="cancel">Ακύρωση</string>
+    <string name="remove">Αφαίρεση</string>
+    <string name="play">Παίξτε</string>
+    <string name="later">Αργότερα</string>
+    <string name="save">Αποθήκευση</string>
+    <string name="discard">Ακύρωση</string>
+
+    <string name="next">Επόμενο</string>
+    <string name="back">Πίσω</string>
+    <string name="get_started">Ξεκινήστε</string>
+
+    <string name="welcome_to">Καλώς ορίσατε στο</string>
+    <string name="welcome_preparing_subtitle">Ας τα ετοιμάσουμε όλα για εσάς.</string>
+
+    <string name="perm_required">Προτείνεται</string>
+    <string name="perm_permissions">Άδειες</string>
+    <string name="perm_intro_text">Αυτά τα δικαιώματα είναι προαιρετικά αλλά συνιστώνται ανεπιφύλακτα για την ομαλή λειτουργία του Game Hub.</string>
+
+    <string name="perm_notif_title">Ειδοποιήσεις</string>
+    <string name="perm_notif_desc">Μάθετε αμέσως πότε κυκλοφορεί μια νέα ενημέρωση.</string>
+
+    <string name="perm_install_title">Εγκατάσταση εφαρμογής</string>
+    <string name="perm_install_desc">Απαιτείται για τη λήψη και την εγκατάσταση ενημερώσεων.</string>
+
+    <string name="perm_usage_desc">Απαιτείται για την παρακολούθηση του χρόνου παιχνιδιού και των στατιστικών εκκίνησης.</string>
+
+    <string name="feat_discover">Ανακαλύψτε</string>
+    <string name="feat_features">Λειτουργίες</string>
+    <string name="feat_intro">Δείτε τι μπορείτε να κάνετε με το νέο σας Game Hub.</string>
+
+    <string name="feat_order_title">Απόλυτος Έλεγχος</string>
+
+    <string name="feat_layout_title">Αλλαγή σχήματος</string>
+    <string name="feat_layout_desc">Μεταβείτε στις Ρυθμίσεις για να αλλάξετε το στυλ της κάρτας: Προεπιλογή, Οριζόντια ή Πλέγμα. Κάντε το δικό σας.</string>
+
+    <string name="feat_name_title">Προσωπική πινελιά</string>
+    <string name="feat_name_desc">Εμφανίστε το όνομά σας στην κεφαλίδα. Προσαρμόστε το ή κρύψτε το στις Ρυθμίσεις.</string>
+
+    <string name="feat_manage_title">Εύκολη Διαχείριση</string>
+    <string name="feat_manage_desc">Πατήστε + για προσθήκη παιχνιδιών. Σύρετε προς τα δεξιά για αφαίρεση, σύρετε προς τα αριστερά για προβολή στατιστικών χρόνου παιχνιδιού.</string>
+
+    <string name="feat_update_title">Μείνετε Ενημερωμένοι</string>
+    <string name="feat_update_desc">Ελέγξτε για ενημερώσεις του Game Hub απευθείας στις Ρυθμίσεις της εφαρμογής. Μην χάσετε ποτέ καμία λειτουργία.</string>
+
+    <string name="feat_store_title">Ανακαλύψτε Παιχνίδια</string>
+    <string name="feat_store_desc">Βρείτε νέους τίτλους μέσω του Google Play Store. Μπορείτε να το απενεργοποιήσετε στις Ρυθμίσεις.</string>
+
+    <string name="feat_history_title">Ιστορικό Παιχνιδιού</string>
+    <string name="feat_history_desc">Παρακολουθήστε πόσες φορές έχετε εκκινήσει κάθε παιχνίδι. Αυτός ο μετρητής μπορεί να κρυφτεί στις Ρυθμίσεις.</string>
+
+    <string name="no_games_title">Δεν βρέθηκαν παιχνίδια</string>
+    <string name="no_games_subtitle">Πατήστε + για να προσθέσετε ένα</string>
+    <string name="download_games">Αποκτήστε νέα παιχνίδια</string>
+    <string name="add_to_library">Προσθήκη στη βιβλιοθήκη</string>
+    <string name="remove_game_title">Αφαίρεση Παιχνιδιού;</string>
+    <string name="remove_game_desc">Αυτό θα αφαιρέσει το %1$s από το Game Hub.</string>
+
+    <string name="edit_mode_title">Επεξεργασία</string>
+
+    <string name="settings_title">Ρυθμίσεις</string>
+    <string name="settings_header_appearance">Εμφάνιση</string>
+    <string name="settings_header_preferences">Προτιμήσεις</string>
+    <string name="settings_header_info">Πληροφορίες</string>
+
+    <string name="settings_theme_system">Προεπιλογή συστήματος</string>
+    <string name="settings_theme_light">Φωτεινό</string>
+    <string name="settings_theme_dark">Σκοτεινό</string>
+    <string name="settings_card_style_title">Στυλ κάρτας</string>
+    <string name="settings_card_style_default">Προεπιλογή</string>
+    <string name="settings_card_style_horizontal">Οριζόντια</string>
+    <string name="settings_card_style_grid">Πλέγμα</string>
+
+    <string name="settings_show_name_title">Εμφάνιση Ονόματος Χρήστη</string>
+    <string name="settings_show_name_desc">Εμφανίστε το όνομά σας στην κεφαλίδα</string>
+    <string name="settings_edit_name_title">Το Όνομά Σας</string>
+    <string name="dialog_edit_name_title">Εισάγετε το όνομά σας</string>
+    <string name="dialog_edit_name_hint">Όνομα</string>
+
+    <string name="settings_sort_title">Σειρά Παιχνιδιών</string>
+    <string name="sort_alphabetical">Αλφαβητικά</string>
+    <string name="sort_playtime">Χρόνος Παιχνιδιού</string>
+    <string name="sort_custom">Προσαρμοσμένο</string>
+
+    <string name="settings_show_launch_count_title">Εμφάνιση Αριθμού Εκκινήσεων</string>
+    <string name="settings_show_launch_count_desc">Δείτε πόσες φορές παίξατε</string>
+
+    <string name="settings_show_playtime_title">Εμφάνιση Χρόνου Παιχνιδιού</string>
+    <string name="settings_show_playtime_desc">Εμφάνιση στατιστικών χρήσης</string>
+
+    <string name="settings_stats_interval_title">Διάστημα Στατιστικών</string>
+    <string name="interval_daily">Ημερησίως</string>
+    <string name="interval_weekly">Εβδομαδιαίως</string>
+    <string name="interval_monthly">Μηνιαίως</string>
+    <string name="interval_yearly">Ετησίως</string>
+
+    <string name="settings_show_get_more_title">Εμφάνιση Λήψης Περισσότερων Παιχνιδιών</string>
+    <string name="settings_show_get_more_desc">Εμφάνιση συνδέσμου προς το κατάστημα</string>
+
+    <string name="settings_advanced_title">Για προχωρημένους</string>
+    <string name="settings_advanced_desc">Πειραματικές λειτουργίες και ενημερώσεις</string>
+
+    <string name="settings_version_title">Έκδοση Εφαρμογής</string>
+    <string name="settings_developer_title">Προγραμματιστής</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Αναφορά Σφάλματος / Λειτουργίας</string>
+    <string name="settings_report_desc">Συνομιλήστε με τον προγραμματιστή στο Telegram</string>
+
+    <string name="settings_check_updates_title">Έλεγχος για ενημερώσεις</string>
+    <string name="settings_check_updates_desc">Βρείτε την πιο πρόσφατη έκδοση</string>
+    <string name="settings_auto_updates_title">Αυτόματες ενημερώσεις</string>
+    <string name="settings_auto_updates_desc">Έλεγχος για ενημερώσεις κατά την εκκίνηση</string>
+
+    <string name="update_latest_version_msg">Δεν υπάρχουν διαθέσιμες ενημερώσεις αυτήν τη στιγμή.</string>
+    <string name="update_available">Η έκδοση %1$s είναι διαθέσιμη!</string>
+    <string name="update_action">Ενημέρωση</string>
+    <string name="update_error_msg">Δεν ήταν δυνατός ο έλεγχος ή η λήψη της ενημέρωσης.</string>
+    <string name="unknown">Άγνωστο</string>
+
+    <string name="settings_setup_title">Αρχική Ρύθμιση</string>
+    <string name="settings_setup_desc">Εκτελέστε ξανά τον οδηγό υποδοχής</string>
+    <string name="settings_backup_header">Αντίγραφα ασφαλείας &amp; Επαναφορά</string>
+    <string name="settings_export_title">Εξαγωγή Ρυθμίσεων</string>
+    <string name="settings_export_desc">Αποθήκευση διαμόρφωσης και λίστας παιχνιδιών</string>
+    <string name="settings_import_title">Εισαγωγή Ρυθμίσεων</string>
+    <string name="settings_import_desc">Επαναφορά από αρχείο αντιγράφου ασφαλείας</string>
+    <string name="dialog_restart_title">Απαιτείται Επανεκκίνηση</string>
+    <string name="dialog_restart_desc">Οι ρυθμίσεις έχουν εισαχθεί. Επανεκκινήστε την εφαρμογή για να εφαρμόσετε τις αλλαγές.</string>
+    <string name="restart_now">Επανεκκίνηση Τώρα</string>
+    <string name="export_success">Οι ρυθμίσεις εξήχθησαν επιτυχώς</string>
+    <string name="export_error">Σφάλμα κατά την εξαγωγή ρυθμίσεων</string>
+    <string name="import_error">Σφάλμα κατά την εισαγωγή ρυθμίσεων</string>
+
+    <string name="community_title">Γίνετε μέλος της κοινότητας</string>
+    <string name="community_desc">Εγγραφείτε στο κανάλι μου στο Telegram για να μην χάσετε τα τελευταία νέα και ενημερώσεις για τα έργα μου, μαζί με μερικές αποκλειστικές ματιές!</string>
+    <string name="no_thanks">Όχι, ευχαριστώ</string>
+    <string name="sure_action">Σίγουρα!</string>
+    <string name="see_source_code">Δείτε τον πηγαίο κώδικα</string>
+    <string name="check_updates_action">Έλεγχος για ενημερώσεις</string>
+    <string name="cancel_action">Ακύρωση</string>
+    <string name="edit_app_icon_title">Επιλογή Εικονιδίου</string>
+    <string name="edit_app_icons">Εικονίδια εφαρμογών</string>
+    <string name="edit_builtin_icons">Ενσωματωμένα εικονίδια</string>
+    <string name="edit_gallery">Συλλογή</string>
+    <string name="edit_restore_icon">Επαναφορά εικονιδίου</string>
+    <string name="edit_restore_title">Επαναφορά τίτλου</string>
+    <string name="edit_app_name">Όνομα εφαρμογής</string>
+    <string name="select_app_title">Επιλογή Εφαρμογής</string>
+    <string name="settings_testing_header">Δοκιμές</string>
+    <string name="settings_test_telegram_title">Κοινότητα</string>
+    <string name="settings_test_telegram_desc">Γίνετε μέλος της ομάδας μας στο Telegram</string>
+    <string name="settings_test_crash_title">Δοκιμή Σφάλματος</string>
+    <string name="settings_test_crash_desc">Εξαναγκασμός σφάλματος για δοκιμή αναφοράς σφαλμάτων</string>
+    <string name="settings_danger_zone_header">Επικίνδυνη Ζώνη</string>
+    <string name="settings_reset_title">Επαναφορά Εργοστασιακών Ρυθμίσεων</string>
+    <string name="settings_reset_desc">Διαγραφή όλων των δεδομένων και επαναφορά προεπιλεγμένων ρυθμίσεων</string>
+    <string name="settings_reset_confirmation_desc">Είστε σίγουροι ότι θέλετε να επαναφέρετε την εφαρμογή; Όλα τα αποθηκευμένα παιχνίδια, οι προσαρμογές και οι ρυθμίσεις σας θα διαγραφούν οριστικά. Αυτή η ενέργεια δεν μπορεί να αναιρεθεί.</string>
+    <string name="settings_reset_action">Επαναφορά Εφαρμογής</string>
+    <string name="uninstall">Απεγκατάσταση</string>
+    <string name="settings_grid_columns_title">Στήλες πλέγματος</string>
+    <string name="add_favorite">Προσθήκη στα αγαπημένα</string>
+    <string name="remove_favorite">Αφαίρεση από τα αγαπημένα</string>
+    <string name="favorites">Αγαπημένα</string>
+    <string name="feat_order_desc">Πατήστε το κουμπί με το μολύβι για να μπείτε στη Λειτουργία Επεξεργασίας ή κρατήστε πατημένο ένα παιχνίδι για να προσαρμόσετε την εμφάνισή του.</string>
+
+    <string name="controller_connected">Το Χειριστήριο Συνδέθηκε</string>
+    <string name="action_settings">Ρυθμίσεις</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Σύνδεση χειριστηρίου</string>
+    <string name="settings_test_controller_desc">Εμφάνιση αναδυόμενου παραθύρου στο τηλέφωνό σας όταν συνδέεται ένα χειριστήριο</string>
+    <string name="settings_test_controller_simulate_title">Προσομοίωση σύνδεσης χειριστηρίου</string>
+    <string name="settings_test_controller_simulate_desc">Εμφάνιση του κάτω φύλλου σύνδεσης χειριστηρίου</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Ασύρματο Χειριστήριο Xbox</string>
+    <string name="controller_name_playstation">Ασύρματο Χειριστήριο DualSense</string>
+    <string name="controller_name_joycon">Joy-Con (A/Δ)</string>
+    <string name="controller_generic">Γενικό Χειριστήριο</string>
+    <string name="controller_name_generic">Άγνωστο χειριστήριο</string>
+    <string name="settings_header_more">Περισσότερα</string>
+    <string name="settings_game_bubble_title">Φούσκα Παιχνιδιού</string>
+    <string name="settings_game_bubble_desc">Διαχείριση ρυθμίσεων Φούσκας Παιχνιδιού</string>
+    <string name="settings_bubble_enable_title">Ενεργοποίηση Φούσκας Παιχνιδιού</string>
+    <string name="settings_bubble_autohide_title">Αυτόματη απόκρυψη</string>
+    <string name="settings_bubble_autohide_desc">Ελαχιστοποίηση στην άκρη της οθόνης μετά από 3 δευτερόλεπτα</string>
+    <string name="settings_bubble_tools_title">Εργαλεία Φούσκας Παιχνιδιού</string>
+    <string name="tool_fps">Μετρητής FPS</string>
+    <string name="tool_dnd">Μην Ενοχλείτε</string>
+    <string name="tool_brightness">Μέγιστη Φωτεινότητα</string>
+    <string name="tool_screenshot">Στιγμιότυπο οθόνης</string>
+    <string name="tool_ping">Παρακολούθηση Ping</string>
+    <string name="tool_boost">Ενίσχυση RAM</string>
+    <string name="open_in_store">Άνοιγμα στο κατάστημα</string>
+    <string name="move_up">Μετακίνηση πάνω</string>
+    <string name="move_down">Μετακίνηση κάτω</string>
+    <string name="stats">Στατιστικά</string>
+    <string name="perm_bluetooth_title">Πρόσβαση Bluetooth</string>
+    <string name="perm_bluetooth_desc">Απαιτείται για τη σύνδεση και τη διαχείριση των χειριστηρίων σας.</string>
+    <string name="bubble_perm_title">Φούσκα Παιχνιδιού</string>
+    <string name="bubble_perm_subtitle">Άδειες</string>
+    <string name="bubble_perm_intro">Εκχωρήστε αυτά τα δικαιώματα για να ενεργοποιήσετε τις προηγμένες λειτουργίες της Φούσκας Παιχνιδιού.</string>
+    <string name="perm_overlay_title">Εμφάνιση πάνω από άλλες εφαρμογές</string>
+    <string name="perm_overlay_desc">Απαιτείται για την εμφάνιση της Φούσκας Παιχνιδιού ενώ παίζετε.</string>
+    <string name="perm_dnd_title">Μην Ενοχλείτε</string>
+    <string name="perm_dnd_desc">Εναλλαγή της λειτουργίας Μην Ενοχλείτε από τη Φούσκα Παιχνιδιού.</string>
+    <string name="perm_write_settings_title">Τροποποίηση ρυθμίσεων συστήματος</string>
+    <string name="perm_write_settings_desc">Προσαρμόστε τη φωτεινότητα της οθόνης από τη Φούσκα Παιχνιδιού.</string>
+    <string name="perm_accessibility_title">Υπηρεσία προσβασιμότητας</string>
+    <string name="perm_accessibility_desc">Τραβήξτε στιγμιότυπα οθόνης απευθείας από τη Φούσκα Παιχνιδιού.</string>
+</resources>

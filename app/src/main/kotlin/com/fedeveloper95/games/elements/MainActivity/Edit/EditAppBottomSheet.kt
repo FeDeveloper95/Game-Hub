@@ -97,7 +97,6 @@ fun EditAppBottomSheet(
     var customName by remember { mutableStateOf(game.customName ?: game.name) }
     var customIconUri by remember { mutableStateOf<String?>(game.customIconUri) }
     var isFavorite by remember { mutableStateOf(game.isFavorite) }
-
     var showAppIconSelector by remember { mutableStateOf(false) }
     var showBuiltInIconSelector by remember { mutableStateOf(false) }
 
@@ -172,7 +171,6 @@ fun EditAppBottomSheet(
             )
 
             val isBuiltIn = customIconUri?.startsWith("builtin://") == true
-
             if (isBuiltIn) {
                 val uriStr = customIconUri!!
                 val name = uriStr.substringAfter("builtin://").substringBefore("#")
@@ -226,7 +224,6 @@ fun EditAppBottomSheet(
                 stringResource(R.string.edit_builtin_icons),
                 stringResource(R.string.edit_gallery)
             )
-
             val icons = listOf(Icons.Outlined.Apps, Icons.Outlined.Category, Icons.Outlined.Image)
 
             Row(
@@ -234,12 +231,11 @@ fun EditAppBottomSheet(
                 horizontalArrangement = Arrangement.spacedBy(ButtonGroupDefaults.ConnectedSpaceBetween, Alignment.CenterHorizontally),
             ) {
                 options.forEachIndexed { index, label ->
-                    val shape = when (index) {
-                        0 -> ButtonGroupDefaults.connectedLeadingButtonShapes().shape
-                        options.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes().shape
-                        else -> ButtonGroupDefaults.connectedMiddleButtonShapes().shape
+                    val buttonShapes = when (index) {
+                        0 -> ButtonGroupDefaults.connectedLeadingButtonShapes()
+                        options.lastIndex -> ButtonGroupDefaults.connectedTrailingButtonShapes()
+                        else -> ButtonGroupDefaults.connectedMiddleButtonShapes()
                     }
-
                     ToggleButton(
                         checked = selectedOption == index,
                         onCheckedChange = {
@@ -250,7 +246,7 @@ fun EditAppBottomSheet(
                                 2 -> imagePickerLauncher.launch("image/*")
                             }
                         },
-                        shapes = ToggleButtonDefaults.shapes(shape = shape),
+                        shapes = buttonShapes,
                         modifier = Modifier
                             .weight(1f)
                             .semantics { role = Role.RadioButton }
@@ -424,13 +420,11 @@ fun EditAppBottomSheet(
         } else {
             "default"
         }
-
         val currentColor = if (customIconUri?.startsWith("builtin://") == true) {
             customIconUri!!.substringAfter("#").toIntOrNull() ?: 0
         } else {
             0
         }
-
         IconSelector(
             currentIcon = currentIconName,
             currentColor = currentColor,

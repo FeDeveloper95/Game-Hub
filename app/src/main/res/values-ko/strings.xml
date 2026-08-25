@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">개의 게임 준비됨</string>
+    <string name="add_game">게임 추가</string>
+    <string name="search_apps">앱 검색…</string>
+    <string name="cancel">취소</string>
+    <string name="remove">삭제</string>
+    <string name="play">플레이</string>
+    <string name="later">나중에</string>
+    <string name="save">저장</string>
+    <string name="discard">취소</string>
+
+    <string name="next">다음</string>
+    <string name="back">뒤로</string>
+    <string name="get_started">시작하기</string>
+
+    <string name="welcome_to">환영합니다</string>
+    <string name="welcome_preparing_subtitle">모든 준비를 마치겠습니다.</string>
+
+    <string name="perm_required">권장됨</string>
+    <string name="perm_permissions">권한</string>
+    <string name="perm_intro_text">이러한 권한은 선택 사항이지만 Game Hub를 원활하게 실행하기 위해 적극 권장됩니다.</string>
+
+    <string name="perm_notif_title">알림</string>
+    <string name="perm_notif_desc">새 업데이트가 출시되면 즉시 알림을 받습니다.</string>
+
+    <string name="perm_install_title">앱 설치</string>
+    <string name="perm_install_desc">업데이트를 다운로드하고 설치하는 데 필요합니다.</string>
+
+    <string name="perm_usage_desc">게임 플레이 시간 및 실행 통계를 추적하는 데 필요합니다.</string>
+
+    <string name="feat_discover">탐색</string>
+    <string name="feat_features">기능</string>
+    <string name="feat_intro">새로운 Game Hub로 할 수 있는 작업은 다음과 같습니다.</string>
+
+    <string name="feat_order_title">완벽한 제어</string>
+
+    <string name="feat_layout_title">모양 변경</string>
+    <string name="feat_layout_desc">설정으로 이동하여 카드 스타일을 변경하세요: 기본, 가로 또는 그리드. 나만의 스타일로 꾸며보세요.</string>
+
+    <string name="feat_name_title">개인 맞춤 설정</string>
+    <string name="feat_name_desc">헤더에 이름을 표시합니다. 설정에서 맞춤설정하거나 숨길 수 있습니다.</string>
+
+    <string name="feat_manage_title">쉬운 관리</string>
+    <string name="feat_manage_desc">+를 탭하여 게임을 추가합니다. 오른쪽으로 스와이프하여 제거하고, 왼쪽으로 스와이프하여 플레이 시간 통계를 봅니다.</string>
+
+    <string name="feat_update_title">최신 상태 유지</string>
+    <string name="feat_update_desc">앱 설정에서 직접 Game Hub 업데이트를 확인하세요. 새로운 기능을 놓치지 마세요.</string>
+
+    <string name="feat_store_title">게임 탐색</string>
+    <string name="feat_store_desc">Google Play 스토어를 통해 새로운 타이틀을 찾으세요. 이 기능은 설정에서 비활성화할 수 있습니다.</string>
+
+    <string name="feat_history_title">플레이 기록</string>
+    <string name="feat_history_desc">각 게임을 몇 번이나 실행했는지 추적하세요. 이 카운터는 설정에서 숨길 수 있습니다.</string>
+
+    <string name="no_games_title">게임을 찾을 수 없음</string>
+    <string name="no_games_subtitle">+를 눌러 추가하세요</string>
+    <string name="download_games">새 게임 받기</string>
+    <string name="add_to_library">라이브러리에 추가</string>
+    <string name="remove_game_title">게임을 삭제하시겠습니까?</string>
+    <string name="remove_game_desc">%1$s을(를) Game Hub에서 삭제합니다.</string>
+
+    <string name="edit_mode_title">편집</string>
+
+    <string name="settings_title">설정</string>
+    <string name="settings_header_appearance">모양</string>
+    <string name="settings_header_preferences">환경설정</string>
+    <string name="settings_header_info">정보</string>
+
+    <string name="settings_theme_system">시스템 기본값</string>
+    <string name="settings_theme_light">밝게</string>
+    <string name="settings_theme_dark">어둡게</string>
+    <string name="settings_card_style_title">카드 스타일</string>
+    <string name="settings_card_style_default">기본</string>
+    <string name="settings_card_style_horizontal">가로</string>
+    <string name="settings_card_style_grid">그리드</string>
+
+    <string name="settings_show_name_title">사용자 이름 표시</string>
+    <string name="settings_show_name_desc">헤더에 이름을 표시합니다</string>
+    <string name="settings_edit_name_title">내 이름</string>
+    <string name="dialog_edit_name_title">이름을 입력하세요</string>
+    <string name="dialog_edit_name_hint">이름</string>
+
+    <string name="settings_sort_title">게임 순서</string>
+    <string name="sort_alphabetical">알파벳순</string>
+    <string name="sort_playtime">플레이 시간</string>
+    <string name="sort_custom">맞춤</string>
+
+    <string name="settings_show_launch_count_title">실행 횟수 표시</string>
+    <string name="settings_show_launch_count_desc">플레이한 횟수를 보여줍니다</string>
+
+    <string name="settings_show_playtime_title">플레이 시간 표시</string>
+    <string name="settings_show_playtime_desc">사용 통계를 표시합니다</string>
+
+    <string name="settings_stats_interval_title">통계 간격</string>
+    <string name="interval_daily">매일</string>
+    <string name="interval_weekly">매주</string>
+    <string name="interval_monthly">매월</string>
+    <string name="interval_yearly">매년</string>
+
+    <string name="settings_show_get_more_title">\'더 많은 게임 받기\' 표시</string>
+    <string name="settings_show_get_more_desc">스토어 링크 표시</string>
+
+    <string name="settings_advanced_title">고급</string>
+    <string name="settings_advanced_desc">실험적인 기능 및 업데이트</string>
+
+    <string name="settings_version_title">앱 버전</string>
+    <string name="settings_developer_title">개발자</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">버그 / 기능 보고</string>
+    <string name="settings_report_desc">Telegram에서 개발자와 채팅</string>
+
+    <string name="settings_check_updates_title">업데이트 확인</string>
+    <string name="settings_check_updates_desc">최신 버전을 찾습니다</string>
+    <string name="settings_auto_updates_title">자동 업데이트</string>
+    <string name="settings_auto_updates_desc">시작 시 업데이트를 확인합니다</string>
+
+    <string name="update_latest_version_msg">현재 사용 가능한 업데이트가 없습니다.</string>
+    <string name="update_available">버전 %1$s 사용 가능!</string>
+    <string name="update_action">업데이트</string>
+    <string name="update_error_msg">업데이트를 확인하거나 다운로드할 수 없습니다.</string>
+    <string name="unknown">알 수 없음</string>
+
+    <string name="settings_setup_title">초기 설정</string>
+    <string name="settings_setup_desc">환영 마법사를 다시 실행합니다</string>
+    <string name="settings_backup_header">백업 및 복원</string>
+    <string name="settings_export_title">설정 내보내기</string>
+    <string name="settings_export_desc">구성 및 게임 목록을 저장합니다</string>
+    <string name="settings_import_title">설정 가져오기</string>
+    <string name="settings_import_desc">백업 파일에서 복원합니다</string>
+    <string name="dialog_restart_title">다시 시작해야 함</string>
+    <string name="dialog_restart_desc">설정을 가져왔습니다. 변경 사항을 적용하려면 앱을 다시 시작하세요.</string>
+    <string name="restart_now">지금 다시 시작</string>
+    <string name="export_success">설정을 성공적으로 내보냈습니다</string>
+    <string name="export_error">설정을 내보내는 중 오류가 발생했습니다</string>
+    <string name="import_error">설정을 가져오는 중 오류가 발생했습니다</string>
+
+    <string name="community_title">커뮤니티 가입</string>
+    <string name="community_desc">Telegram 채널에 가입하여 프로젝트에 대한 최신 뉴스와 업데이트, 독점 정보를 놓치지 마세요!</string>
+    <string name="no_thanks">아니요, 괜찮습니다</string>
+    <string name="sure_action">물론이죠!</string>
+    <string name="see_source_code">소스 코드 보기</string>
+    <string name="check_updates_action">업데이트 확인</string>
+    <string name="cancel_action">취소</string>
+    <string name="edit_app_icon_title">아이콘 선택</string>
+    <string name="edit_app_icons">앱 아이콘</string>
+    <string name="edit_builtin_icons">기본 아이콘</string>
+    <string name="edit_gallery">갤러리</string>
+    <string name="edit_restore_icon">아이콘 복원</string>
+    <string name="edit_restore_title">제목 복원</string>
+    <string name="edit_app_name">앱 이름</string>
+    <string name="select_app_title">앱 선택</string>
+    <string name="settings_testing_header">테스트</string>
+    <string name="settings_test_telegram_title">커뮤니티</string>
+    <string name="settings_test_telegram_desc">Telegram 그룹에 가입하세요</string>
+    <string name="settings_test_crash_title">충돌 테스트</string>
+    <string name="settings_test_crash_desc">오류 보고를 테스트하기 위해 강제로 충돌을 발생시킵니다</string>
+    <string name="settings_danger_zone_header">위험 구역</string>
+    <string name="settings_reset_title">초기화</string>
+    <string name="settings_reset_desc">모든 데이터를 삭제하고 기본 설정을 복원합니다</string>
+    <string name="settings_reset_confirmation_desc">정말로 앱을 재설정하시겠습니까? 저장된 모든 게임, 맞춤 설정, 설정이 영구적으로 삭제됩니다. 이 작업은 실행 취소할 수 없습니다.</string>
+    <string name="settings_reset_action">앱 재설정</string>
+    <string name="uninstall">제거</string>
+    <string name="settings_grid_columns_title">그리드 열</string>
+    <string name="add_favorite">즐겨찾기에 추가</string>
+    <string name="remove_favorite">즐겨찾기에서 제거</string>
+    <string name="favorites">즐겨찾기</string>
+    <string name="feat_order_desc">연필 버튼을 탭하여 편집 모드로 들어가거나 게임을 길게 눌러 모양을 맞춤 설정하세요.</string>
+
+    <string name="controller_connected">컨트롤러 연결됨</string>
+    <string name="action_settings">설정</string>
+    <string name="action_ok">확인</string>
+    <string name="settings_test_controller_title">컨트롤러 연결</string>
+    <string name="settings_test_controller_desc">컨트롤러가 연결되면 휴대전화에 팝업을 표시합니다</string>
+    <string name="settings_test_controller_simulate_title">컨트롤러 연결 시뮬레이션</string>
+    <string name="settings_test_controller_simulate_desc">컨트롤러 연결 하단 시트를 표시합니다</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Xbox 무선 컨트롤러</string>
+    <string name="controller_name_playstation">DualSense 무선 컨트롤러</string>
+    <string name="controller_name_joycon">Joy-Con (L/R)</string>
+    <string name="controller_generic">일반 컨트롤러</string>
+    <string name="controller_name_generic">알 수 없는 컨트롤러</string>
+    <string name="settings_header_more">더보기</string>
+    <string name="settings_game_bubble_title">게임 버블</string>
+    <string name="settings_game_bubble_desc">게임 버블 설정 관리</string>
+    <string name="settings_bubble_enable_title">게임 버블 사용 설정</string>
+    <string name="settings_bubble_autohide_title">자동 숨기기</string>
+    <string name="settings_bubble_autohide_desc">3초 후 화면 가장자리로 최소화</string>
+    <string name="settings_bubble_tools_title">게임 버블 도구</string>
+    <string name="tool_fps">FPS 카운터</string>
+    <string name="tool_dnd">방해 금지 모드</string>
+    <string name="tool_brightness">최대 밝기</string>
+    <string name="tool_screenshot">스크린샷</string>
+    <string name="tool_ping">Ping 모니터</string>
+    <string name="tool_boost">RAM 부스트</string>
+    <string name="open_in_store">스토어에서 열기</string>
+    <string name="move_up">위로 이동</string>
+    <string name="move_down">아래로 이동</string>
+    <string name="stats">통계</string>
+    <string name="perm_bluetooth_title">Bluetooth 액세스</string>
+    <string name="perm_bluetooth_desc">컨트롤러를 연결하고 관리하는 데 필요합니다.</string>
+    <string name="bubble_perm_title">게임 버블</string>
+    <string name="bubble_perm_subtitle">권한</string>
+    <string name="bubble_perm_intro">고급 게임 버블 기능을 사용하려면 다음 권한을 부여하세요.</string>
+    <string name="perm_overlay_title">다른 앱 위에 표시</string>
+    <string name="perm_overlay_desc">플레이하는 동안 게임 버블을 표시하는 데 필요합니다.</string>
+    <string name="perm_dnd_title">방해 금지 모드</string>
+    <string name="perm_dnd_desc">게임 버블에서 방해 금지 모드를 켜거나 끕니다.</string>
+    <string name="perm_write_settings_title">시스템 설정 수정</string>
+    <string name="perm_write_settings_desc">게임 버블에서 화면 밝기를 조정합니다.</string>
+    <string name="perm_accessibility_title">접근성 서비스</string>
+    <string name="perm_accessibility_desc">게임 버블에서 직접 스린샷을 찍습니다.</string>
+
+</resources>

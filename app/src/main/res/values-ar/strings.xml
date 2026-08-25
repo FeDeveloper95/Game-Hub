@@ -1,119 +1,105 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Game Hub</string>
-    <string name="games_count_suffix">لعبة جاهزة</string>
-    <string name="refresh">تحديث</string>
+    <string name="games_count_suffix">ألعاب جاهزة</string>
     <string name="add_game">إضافة لعبة</string>
-    <string name="search_apps">البحث عن تطبيقات…</string>
+    <string name="search_apps">البحث في التطبيقات…</string>
     <string name="cancel">إلغاء</string>
     <string name="remove">إزالة</string>
-    <string name="play">تشغيل</string>
-    <string name="close">إغلاق</string>
-    <string name="later">لاحقًا</string>
+    <string name="play">لعب</string>
+    <string name="later">لاحقاً</string>
     <string name="save">حفظ</string>
     <string name="discard">إلغاء</string>
 
-    <string name="welcome_subtitle">مدير مجموعة الألعاب البسيط الخاص بك.</string>
     <string name="next">التالي</string>
     <string name="back">رجوع</string>
-    <string name="get_started">ابدأ الآن</string>
+    <string name="get_started">البدء</string>
 
-    <string name="welcome_to">مرحبًا بك في</string>
+    <string name="welcome_to">مرحباً بك في</string>
     <string name="welcome_preparing_subtitle">دعنا نجهز كل شيء من أجلك.</string>
 
-    <string name="perm_required">مطلوب</string>
+    <string name="perm_required">مقترح</string>
     <string name="perm_permissions">الأذونات</string>
-    <string name="perm_intro_text">هذه الأذونات اختيارية لكنها موصى بها بشدة لضمان عمل Game Hub بسلاسة.</string>
+    <string name="perm_intro_text">هذه الأذونات اختيارية ولكن يوصى بها بشدة للحفاظ على تشغيل Game Hub بسلاسة.</string>
 
     <string name="perm_notif_title">الإشعارات</string>
-    <string name="perm_notif_desc">اعرف فورًا عند صدور تحديث جديد.</string>
+    <string name="perm_notif_desc">تعرف فوراً عند صدور تحديث جديد.</string>
 
-    <string name="perm_install_title">تثبيت التطبيقات</string>
-    <string name="perm_install_desc">مطلوب لتنزيل وتثبيت التحديثات.</string>
-
-    <string name="perm_dashboard_title">لوحة تحكم الألعاب</string>
-    <string name="perm_dashboard_desc">فعّل النافذة العائمة للحصول على أداء أفضل وأدوات إضافية.</string>
+    <string name="perm_install_title">تثبيت التطبيق</string>
+    <string name="perm_install_desc">مطلوب لتنزيل التحديثات وتثبيتها.</string>
 
     <string name="perm_usage_desc">مطلوب لتتبع وقت اللعب وإحصائيات التشغيل.</string>
 
-    <string name="feat_discover">اكتشف</string>
-    <string name="feat_features">المميزات</string>
-    <string name="feat_intro">إليك ما يمكنك فعله مع Game Hub الجديد.</string>
+    <string name="feat_discover">استكشف</string>
+    <string name="feat_features">الميزات</string>
+    <string name="feat_intro">إليك ما يمكنك فعله باستخدام Game Hub الجديد.</string>
 
     <string name="feat_order_title">تحكم كامل</string>
 
     <string name="feat_layout_title">تغيير الشكل</string>
-    <string name="feat_layout_desc">اذهب إلى الإعدادات لتغيير نمط البطاقات: افتراضي، أفقي، أو شبكي. اجعله يناسبك.</string>
+    <string name="feat_layout_desc">انتقل إلى الإعدادات لتغيير نمط البطاقة: افتراضي، أفقي، أو شبكة. اجعلها تناسبك.</string>
 
     <string name="feat_name_title">لمسة شخصية</string>
-    <string name="feat_name_desc">اعرض اسمك في الأعلى. يمكنك تخصيصه أو إخفاؤه من الإعدادات.</string>
+    <string name="feat_name_desc">عرض اسمك في العنوان. يمكنك تخصيصه أو إخفاؤه في الإعدادات.</string>
 
     <string name="feat_manage_title">إدارة سهلة</string>
-    <string name="feat_manage_desc">اضغط على + لإضافة الألعاب. اسحب لليمين لإزالة لعبة، واسحب لليسار لعرض إحصائيات وقت اللعب.</string>
+    <string name="feat_manage_desc">اضغط على + لإضافة ألعاب. اسحب لليمين للإزالة، واسحب لليسار لعرض إحصائيات وقت اللعب.</string>
 
-    <string name="feat_update_title">ابقَ محدثًا</string>
-    <string name="feat_update_desc">تحقق من تحديثات Game Hub مباشرة من إعدادات التطبيق. لا تفوّت أي ميزة جديدة.</string>
+    <string name="feat_update_title">ابق محدثاً</string>
+    <string name="feat_update_desc">تحقق من تحديثات Game Hub مباشرة من إعدادات التطبيق. لا تفوت أي ميزة.</string>
 
-    <string name="feat_store_title">اكتشف ألعاب جديدة</string>
-    <string name="feat_store_desc">ابحث عن ألعاب جديدة عبر رابط متجر Google Play. يمكنك تعطيل هذا من الإعدادات.</string>
+    <string name="feat_store_title">اكتشف الألعاب</string>
+    <string name="feat_store_desc">ابحث عن عناوين جديدة عبر متجر Google Play. يمكنك تعطيل هذا في الإعدادات.</string>
 
     <string name="feat_history_title">سجل اللعب</string>
-    <string name="feat_history_desc">تتبع عدد مرات تشغيلك لكل لعبة. يمكن إخفاء هذا العداد من الإعدادات.</string>
+    <string name="feat_history_desc">تتبع عدد المرات التي قمت فيها بتشغيل كل لعبة. يمكن إخفاء هذا العداد في الإعدادات.</string>
 
-    <string name="no_games_title">لا توجد ألعاب</string>
-    <string name="no_games_subtitle">اضغط على + لإضافة لعبة</string>
+    <string name="no_games_title">لم يتم العثور على ألعاب</string>
+    <string name="no_games_subtitle">اضغط على + لإضافة واحدة</string>
     <string name="download_games">احصل على ألعاب جديدة</string>
     <string name="add_to_library">إضافة إلى المكتبة</string>
     <string name="remove_game_title">إزالة اللعبة؟</string>
-    <string name="remove_game_desc">سيتم إزالة %1$s من Game Hub.</string>
-    <string name="remove_action">إزالة</string>
+    <string name="remove_game_desc">سيؤدي هذا إلى إزالة %1$s من Game Hub.</string>
 
-    <string name="edit_mode_title">تعديل الترتيب</string>
-    <string name="edit_mode_description">اسحب لتغيير الموضع</string>
-    <string name="save_order_title">حفظ الترتيب؟</string>
-    <string name="save_order_description">هل تريد حفظ الترتيب الجديد؟</string>
+    <string name="edit_mode_title">تعديل</string>
 
     <string name="settings_title">الإعدادات</string>
     <string name="settings_header_appearance">المظهر</string>
     <string name="settings_header_preferences">التفضيلات</string>
     <string name="settings_header_info">معلومات</string>
 
-    <string name="settings_theme_title">السمة</string>
-    <string name="settings_theme_system">افتراضي النظام</string>
+    <string name="settings_theme_system">النظام الافتراضي</string>
     <string name="settings_theme_light">فاتح</string>
     <string name="settings_theme_dark">داكن</string>
     <string name="settings_card_style_title">نمط البطاقة</string>
     <string name="settings_card_style_default">افتراضي</string>
     <string name="settings_card_style_horizontal">أفقي</string>
-    <string name="settings_card_style_grid">شبكي</string>
+    <string name="settings_card_style_grid">شبكة</string>
 
     <string name="settings_show_name_title">إظهار اسم المستخدم</string>
-    <string name="settings_show_name_desc">عرض اسمك في الأعلى</string>
+    <string name="settings_show_name_desc">عرض اسمك في العنوان</string>
     <string name="settings_edit_name_title">اسمك</string>
-    <string name="settings_edit_name_desc">اضغط لتعديل الاسم المعروض</string>
     <string name="dialog_edit_name_title">أدخل اسمك</string>
     <string name="dialog_edit_name_hint">الاسم</string>
 
     <string name="settings_sort_title">ترتيب الألعاب</string>
-    <string name="sort_alphabetical">أبجديًا</string>
+    <string name="sort_alphabetical">أبجدي</string>
     <string name="sort_playtime">وقت اللعب</string>
     <string name="sort_custom">مخصص</string>
 
     <string name="settings_show_launch_count_title">إظهار عدد مرات التشغيل</string>
-    <string name="settings_show_launch_count_desc">إظهار عدد مرات تشغيل اللعبة</string>
+    <string name="settings_show_launch_count_desc">إظهار عدد المرات التي لعبت فيها</string>
 
     <string name="settings_show_playtime_title">إظهار وقت اللعب</string>
     <string name="settings_show_playtime_desc">عرض إحصائيات الاستخدام</string>
 
     <string name="settings_stats_interval_title">فترة الإحصائيات</string>
-    <string name="interval_daily">يوميًا</string>
-    <string name="interval_weekly">أسبوعيًا</string>
-    <string name="interval_monthly">شهريًا</string>
-    <string name="interval_yearly">سنويًا</string>
+    <string name="interval_daily">يومياً</string>
+    <string name="interval_weekly">أسبوعياً</string>
+    <string name="interval_monthly">شهرياً</string>
+    <string name="interval_yearly">سنوياً</string>
 
-    <string name="settings_show_get_more_title">إظهار خيار \"احصل على ألعاب جديدة\"</string>
+    <string name="settings_show_get_more_title">إظهار الحصول على المزيد من الألعاب</string>
     <string name="settings_show_get_more_desc">إظهار رابط المتجر</string>
-    <string name="settings_google_play_title">لوحة تحكم الألعاب</string>
-    <string name="settings_google_play_desc">إدارة من إعدادات GMS</string>
 
     <string name="settings_advanced_title">متقدم</string>
     <string name="settings_advanced_desc">ميزات تجريبية وتحديثات</string>
@@ -121,29 +107,25 @@
     <string name="settings_version_title">إصدار التطبيق</string>
     <string name="settings_developer_title">المطور</string>
     <string name="settings_developer_name">FeDeveloper95</string>
-    <string name="settings_report_title">الإبلاغ عن خطأ / اقتراح ميزة</string>
-    <string name="settings_report_desc">تواصل مع المطور عبر تيليجرام</string>
+    <string name="settings_report_title">الإبلاغ عن خطأ / ميزة</string>
+    <string name="settings_report_desc">تحدث مع المطور على تيليجرام</string>
 
-    <string name="settings_check_updates_title">التحقق من التحديثات</string>
-    <string name="settings_check_updates_desc">البحث عن أحدث إصدار</string>
-    <string name="settings_auto_updates_title">التحديثات التلقائية</string>
+    <string name="settings_check_updates_title">التحقق من وجود تحديثات</string>
+    <string name="settings_check_updates_desc">ابحث عن أحدث إصدار</string>
+    <string name="settings_auto_updates_title">تحديثات تلقائية</string>
     <string name="settings_auto_updates_desc">التحقق من التحديثات عند بدء التشغيل</string>
 
-    <string name="update_checking">جارٍ التحقق…</string>
-    <string name="update_no_update">لديك أحدث إصدار</string>
-    <string name="update_latest_version_msg">لا توجد تحديثات متاحة حاليًا.</string>
+    <string name="update_latest_version_msg">لا توجد تحديثات متاحة في الوقت الحالي.</string>
     <string name="update_available">الإصدار %1$s متاح!</string>
     <string name="update_action">تحديث</string>
-    <string name="update_downloading">جارٍ التنزيل…</string>
-    <string name="update_error">خطأ</string>
-    <string name="update_error_msg">تعذّر التحقق من التحديث أو تنزيله.</string>
+    <string name="update_error_msg">تعذر التحقق من التحديث أو تنزيله.</string>
     <string name="unknown">غير معروف</string>
 
     <string name="settings_setup_title">الإعداد الأولي</string>
-    <string name="settings_setup_desc">إعادة تشغيل معالج الترحيب</string>
+    <string name="settings_setup_desc">تشغيل معالج الترحيب مرة أخرى</string>
     <string name="settings_backup_header">النسخ الاحتياطي والاستعادة</string>
     <string name="settings_export_title">تصدير الإعدادات</string>
-    <string name="settings_export_desc">حفظ الإعدادات وقائمة الألعاب</string>
+    <string name="settings_export_desc">حفظ التكوين وقائمة الألعاب</string>
     <string name="settings_import_title">استيراد الإعدادات</string>
     <string name="settings_import_desc">الاستعادة من ملف نسخ احتياطي</string>
     <string name="dialog_restart_title">مطلوب إعادة التشغيل</string>
@@ -154,56 +136,81 @@
     <string name="import_error">حدث خطأ أثناء استيراد الإعدادات</string>
 
     <string name="community_title">انضم إلى المجتمع</string>
-    <string name="community_desc">انضم إلى قناتي على تيليجرام لمتابعة آخر الأخبار وتحديثات مشاريعي، بالإضافة إلى لمحات حصرية!</string>
-    <string name="no_thanks">لا، شكرًا</string>
-    <string name="sure_action">تمام!</string>
+    <string name="community_desc">انضم إلى قناتي على تيليجرام حتى لا تفوتك آخر الأخبار والتحديثات حول مشاريعي، بالإضافة إلى بعض النظرات الحصرية!</string>
+    <string name="no_thanks">لا، شكراً</string>
+    <string name="sure_action">بالتأكيد!</string>
     <string name="see_source_code">عرض الكود المصدري</string>
-    <string name="check_updates_action">التحقق من التحديثات</string>
-    <string name="update_error_check">تعذّر التحقق من التحديثات</string>
+    <string name="check_updates_action">التحقق من وجود تحديثات</string>
     <string name="cancel_action">إلغاء</string>
-    <string name="edit_app_icon_title">اختيار الأيقونة</string>
+    <string name="edit_app_icon_title">اختر الأيقونة</string>
     <string name="edit_app_icons">أيقونات التطبيقات</string>
-    <string name="edit_builtin_icons">أيقونات مدمجة</string>
+    <string name="edit_builtin_icons">الأيقونات المدمجة</string>
     <string name="edit_gallery">المعرض</string>
     <string name="edit_restore_icon">استعادة الأيقونة</string>
     <string name="edit_restore_title">استعادة العنوان</string>
     <string name="edit_app_name">اسم التطبيق</string>
-    <string name="select_app_title">اختر تطبيقًا</string>
-    <string name="settings_testing_header">الاختبار</string>
+    <string name="select_app_title">حدد التطبيق</string>
+    <string name="settings_testing_header">اختبار</string>
     <string name="settings_test_telegram_title">المجتمع</string>
-    <string name="settings_test_telegram_desc">انضم لمجموعتنا على تيليجرام</string>
+    <string name="settings_test_telegram_desc">انضم إلى مجموعة تيليجرام الخاصة بنا</string>
     <string name="settings_test_crash_title">اختبار الانهيار</string>
-    <string name="settings_test_crash_desc">فرض انهيار لاختبار الإبلاغ عن الأخطاء</string>
+    <string name="settings_test_crash_desc">فرض الانهيار لاختبار الإبلاغ عن الأخطاء</string>
     <string name="settings_danger_zone_header">منطقة الخطر</string>
-    <string name="settings_reset_title">إعادة الضبط الكامل</string>
-    <string name="settings_reset_desc">حذف كل البيانات واستعادة الإعدادات الافتراضية</string>
-    <string name="settings_reset_confirmation_desc">هل أنت متأكد من إعادة ضبط التطبيق؟ سيتم حذف جميع الألعاب المحفوظة والتخصيصات والإعدادات بشكل نهائي. لا يمكن التراجع عن هذا الإجراء.</string>
+    <string name="settings_reset_title">إعادة ضبط المصنع</string>
+    <string name="settings_reset_desc">حذف كافة البيانات واستعادة الإعدادات الافتراضية</string>
+    <string name="settings_reset_confirmation_desc">هل أنت متأكد أنك تريد إعادة ضبط التطبيق؟ سيتم حذف جميع الألعاب المحفوظة والتخصيصات والإعدادات بشكل دائم. لا يمكن التراجع عن هذا الإجراء.</string>
     <string name="settings_reset_action">إعادة ضبط التطبيق</string>
     <string name="uninstall">إلغاء التثبيت</string>
     <string name="settings_grid_columns_title">أعمدة الشبكة</string>
     <string name="add_favorite">إضافة إلى المفضلة</string>
     <string name="remove_favorite">إزالة من المفضلة</string>
     <string name="favorites">المفضلة</string>
-    <string name="settings_app_icon_title">أيقونة التطبيق</string>
-    <string name="settings_app_icon_expressive">تعبيرية</string>
-    <string name="settings_app_icon_flat">مسطحة</string>
-    <string name="dialog_app_icon_title">اختر أيقونة التطبيق</string>
-    <string name="feat_order_desc">اضغط على زر القلم للدخول إلى وضع التعديل، أو اضغط مطولاً على لعبة لتخصيص مظهرها.</string>
+    <string name="feat_order_desc">اضغط على زر القلم للدخول في وضع التعديل أو استمر بالضغط على اللعبة لتخصيص مظهرها.</string>
 
-    <string name="controller_connected" tools:ignore="MissingTranslation">تم توصيل يد التحكم</string>
-    <string name="action_settings" tools:ignore="MissingTranslation">الإعدادات</string>
-    <string name="action_ok" tools:ignore="MissingTranslation">حسنًا</string>
-    <string name="settings_test_controller_title" tools:ignore="MissingTranslation">اختبار ميزات إضافية ليدات التحكم اللاسلكية</string>
-    <string name="settings_test_controller_desc" tools:ignore="MissingTranslation">تفعيل الميزات التجريبية ليدات التحكم</string>
-    <string name="settings_test_controller_simulate_title" tools:ignore="MissingTranslation">محاكاة اتصال يد التحكم</string>
-    <string name="settings_test_controller_simulate_desc" tools:ignore="MissingTranslation">إظهار نافذة اتصال يد التحكم</string>
-    <string name="controller_xbox" tools:ignore="MissingTranslation">Xbox</string>
-    <string name="controller_playstation" tools:ignore="MissingTranslation">PlayStation</string>
-    <string name="controller_joycon" tools:ignore="MissingTranslation">Joy-Con</string>
-    <string name="controller_name_xbox" tools:ignore="MissingTranslation">يد تحكم Xbox اللاسلكية</string>
-    <string name="controller_name_playstation" tools:ignore="MissingTranslation">يد تحكم DualSense اللاسلكية</string>
-    <string name="controller_name_joycon" tools:ignore="MissingTranslation">Joy-Con (يمين/يسار)</string>
-    <string name="controller_generic" tools:ignore="MissingTranslation">يد تحكم عامة</string>
-    <string name="controller_name_generic" tools:ignore="MissingTranslation">يد تحكم غير معروفة</string>
+    <string name="controller_connected">تم توصيل وحدة التحكم</string>
+    <string name="action_settings">الإعدادات</string>
+    <string name="action_ok">موافق</string>
+    <string name="settings_test_controller_title">اتصال وحدة التحكم</string>
+    <string name="settings_test_controller_desc">إظهار نافذة منبثقة على هاتفك عند توصيل وحدة تحكم</string>
+    <string name="settings_test_controller_simulate_title">محاكاة اتصال وحدة التحكم</string>
+    <string name="settings_test_controller_simulate_desc">إظهار القائمة السفلية لاتصال وحدة التحكم</string>
+    <string name="controller_xbox">إكس بوكس</string>
+    <string name="controller_playstation">بلاي ستيشن</string>
+    <string name="controller_joycon">جوي كون</string>
+    <string name="controller_name_xbox">وحدة تحكم لاسلكية إكس بوكس</string>
+    <string name="controller_name_playstation">وحدة تحكم لاسلكية DualSense</string>
+    <string name="controller_name_joycon">جوي كون (L/R)</string>
+    <string name="controller_generic">وحدة تحكم عامة</string>
+    <string name="controller_name_generic">وحدة تحكم غير معروفة</string>
+    <string name="settings_header_more">المزيد</string>
+    <string name="settings_game_bubble_title">فقاعة اللعبة</string>
+    <string name="settings_game_bubble_desc">إدارة إعدادات فقاعة اللعبة</string>
+    <string name="settings_bubble_enable_title">تفعيل فقاعة اللعبة</string>
+    <string name="settings_bubble_autohide_title">إخفاء تلقائي</string>
+    <string name="settings_bubble_autohide_desc">تصغير إلى حافة الشاشة بعد 3 ثوانٍ</string>
+    <string name="settings_bubble_tools_title">أدوات فقاعة اللعبة</string>
+    <string name="tool_fps">عداد الإطارات (FPS)</string>
+    <string name="tool_dnd">عدم الإزعاج</string>
+    <string name="tool_brightness">أقصى سطوع</string>
+    <string name="tool_screenshot">لقطة شاشة</string>
+    <string name="tool_ping">مراقبة البينج (Ping)</string>
+    <string name="tool_boost">تعزيز الذاكرة (RAM)</string>
+    <string name="open_in_store">فتح في المتجر</string>
+    <string name="move_up">تحريك للأعلى</string>
+    <string name="move_down">تحريك للأسفل</string>
+    <string name="stats">إحصائيات</string>
+    <string name="perm_bluetooth_title">وصول البلوتوث</string>
+    <string name="perm_bluetooth_desc">مطلوب لتوصيل وإدارة وحدات التحكم الخاصة بك.</string>
+    <string name="bubble_perm_title">فقاعة اللعبة</string>
+    <string name="bubble_perm_subtitle">الأذونات</string>
+    <string name="bubble_perm_intro">امنح هذه الأذونات لتفعيل الميزات المتقدمة لفقاعة اللعبة.</string>
+    <string name="perm_overlay_title">الظهور فوق التطبيقات</string>
+    <string name="perm_overlay_desc">مطلوب لإظهار فقاعة اللعبة أثناء اللعب.</string>
+    <string name="perm_dnd_title">عدم الإزعاج</string>
+    <string name="perm_dnd_desc">تشغيل وإيقاف وضع عدم الإزعاج من فقاعة اللعبة.</string>
+    <string name="perm_write_settings_title">تعديل إعدادات النظام</string>
+    <string name="perm_write_settings_desc">ضبط سطوع الشاشة من فقاعة اللعبة.</string>
+    <string name="perm_accessibility_title">خدمة إمكانية الوصول</string>
+    <string name="perm_accessibility_desc">التقاط لقطات شاشة مباشرة من فقاعة اللعبة.</string>
 
 </resources>

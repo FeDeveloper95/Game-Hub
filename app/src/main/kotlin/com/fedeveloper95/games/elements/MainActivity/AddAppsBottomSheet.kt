@@ -1,6 +1,5 @@
 package com.fedeveloper95.games.elements.MainActivity
 
-import android.content.Context
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -63,8 +62,8 @@ import androidx.compose.ui.unit.dp
 import com.fedeveloper95.games.R
 import com.fedeveloper95.games.elements.ui.AppIcon
 import com.fedeveloper95.games.elements.ui.GoogleSansFlex
-import com.fedeveloper95.games.services.mainactivity.GameApp
 import com.fedeveloper95.games.services.mainactivity.AllAppsCacheManager
+import com.fedeveloper95.games.services.mainactivity.GameApp
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 

@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">oyun hazır</string>
+    <string name="add_game">Oyun Ekle</string>
+    <string name="search_apps">Uygulama ara…</string>
+    <string name="cancel">İptal</string>
+    <string name="remove">Kaldır</string>
+    <string name="play">Oyna</string>
+    <string name="later">Daha Sonra</string>
+    <string name="save">Kaydet</string>
+    <string name="discard">İptal</string>
+
+    <string name="next">İleri</string>
+    <string name="back">Geri</string>
+    <string name="get_started">Başla</string>
+
+    <string name="welcome_to">Hoş geldiniz</string>
+    <string name="welcome_preparing_subtitle">Sizin için her şeyi hazırlayalım.</string>
+
+    <string name="perm_required">Önerilen</string>
+    <string name="perm_permissions">İzinler</string>
+    <string name="perm_intro_text">Bu izinler isteğe bağlıdır ancak Game Hub\'ın sorunsuz çalışması için şiddetle tavsiye edilir.</string>
+
+    <string name="perm_notif_title">Bildirimler</string>
+    <string name="perm_notif_desc">Yeni bir güncelleme çıktığında anında haberdar olun.</string>
+
+    <string name="perm_install_title">Uygulama Yükleme</string>
+    <string name="perm_install_desc">Güncellemeleri indirmek ve yüklemek için gereklidir.</string>
+
+    <string name="perm_usage_desc">Oyun oynama süresini ve başlatma istatistiklerini izlemek için gereklidir.</string>
+
+    <string name="feat_discover">Keşfet</string>
+    <string name="feat_features">Özellikler</string>
+    <string name="feat_intro">İşte yeni Game Hub\'ınızla yapabilecekleriniz.</string>
+
+    <string name="feat_order_title">Tam Kontrol</string>
+
+    <string name="feat_layout_title">Şekil değiştirme</string>
+    <string name="feat_layout_desc">Kart stilini değiştirmek için Ayarlar\'a gidin: Varsayılan, Yatay veya Izgara. Kendinize göre özelleştirin.</string>
+
+    <string name="feat_name_title">Kişisel Dokunuş</string>
+    <string name="feat_name_desc">Adınızı başlıkta gösterin. Ayarlar\'dan özelleştirin veya gizleyin.</string>
+
+    <string name="feat_manage_title">Kolay Yönetim</string>
+    <string name="feat_manage_desc">Oyun eklemek için + simgesine dokunun. Kaldırmak için sağa kaydırın, oynama süresi istatistiklerini görüntülemek için sola kaydırın.</string>
+
+    <string name="feat_update_title">Güncel Kalın</string>
+    <string name="feat_update_desc">Uygulama Ayarlarından Game Hub güncellemelerini doğrudan kontrol edin. Hiçbir özelliği kaçırmayın.</string>
+
+    <string name="feat_store_title">Oyun Keşfet</string>
+    <string name="feat_store_desc">Google Play Store üzerinden yeni oyunlar bulun. Bunu Ayarlar\'dan devre dışı bırakabilirsiniz.</string>
+
+    <string name="feat_history_title">Oyun Geçmişi</string>
+    <string name="feat_history_desc">Her bir oyunu kaç kez başlattığınızı takip edin. Bu sayaç Ayarlar\'da gizlenebilir.</string>
+
+    <string name="no_games_title">Oyun bulunamadı</string>
+    <string name="no_games_subtitle">Eklemek için + tuşuna basın</string>
+    <string name="download_games">Yeni oyunlar edin</string>
+    <string name="add_to_library">Kitaplığa ekle</string>
+    <string name="remove_game_title">Oyun Kaldırılsın Mı?</string>
+    <string name="remove_game_desc">Bu işlem %1$s oyununu Game Hub\'dan kaldıracak.</string>
+
+    <string name="edit_mode_title">Düzenle</string>
+
+    <string name="settings_title">Ayarlar</string>
+    <string name="settings_header_appearance">Görünüm</string>
+    <string name="settings_header_preferences">Tercihler</string>
+    <string name="settings_header_info">Bilgi</string>
+
+    <string name="settings_theme_system">Sistem varsayılanı</string>
+    <string name="settings_theme_light">Açık</string>
+    <string name="settings_theme_dark">Koyu</string>
+    <string name="settings_card_style_title">Kart Stili</string>
+    <string name="settings_card_style_default">Varsayılan</string>
+    <string name="settings_card_style_horizontal">Yatay</string>
+    <string name="settings_card_style_grid">Izgara</string>
+
+    <string name="settings_show_name_title">Kullanıcı Adını Göster</string>
+    <string name="settings_show_name_desc">Adınızı başlıkta gösterin</string>
+    <string name="settings_edit_name_title">Adınız</string>
+    <string name="dialog_edit_name_title">Adınızı girin</string>
+    <string name="dialog_edit_name_hint">Ad</string>
+
+    <string name="settings_sort_title">Oyun Sıralaması</string>
+    <string name="sort_alphabetical">Alfabetik</string>
+    <string name="sort_playtime">Oynama Süresi</string>
+    <string name="sort_custom">Özel</string>
+
+    <string name="settings_show_launch_count_title">Başlatma Sayısını Göster</string>
+    <string name="settings_show_launch_count_desc">Kaç kez oynadığınızı gösterin</string>
+
+    <string name="settings_show_playtime_title">Oynama Süresini Göster</string>
+    <string name="settings_show_playtime_desc">Kullanım istatistiklerini görüntüleyin</string>
+
+    <string name="settings_stats_interval_title">İstatistik Aralığı</string>
+    <string name="interval_daily">Günlük</string>
+    <string name="interval_weekly">Haftalık</string>
+    <string name="interval_monthly">Aylık</string>
+    <string name="interval_yearly">Yıllık</string>
+
+    <string name="settings_show_get_more_title">Daha Fazla Oyun Edini Göster</string>
+    <string name="settings_show_get_more_desc">Mağaza bağlantısını göster</string>
+
+    <string name="settings_advanced_title">Gelişmiş</string>
+    <string name="settings_advanced_desc">Deneysel özellikler ve güncellemeler</string>
+
+    <string name="settings_version_title">Uygulama Sürümü</string>
+    <string name="settings_developer_title">Geliştirici</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Hata / Özellik Bildir</string>
+    <string name="settings_report_desc">Telegram\'da geliştiriciyle sohbet et</string>
+
+    <string name="settings_check_updates_title">Güncellemeleri kontrol et</string>
+    <string name="settings_check_updates_desc">En son sürümü bul</string>
+    <string name="settings_auto_updates_title">Otomatik güncellemeler</string>
+    <string name="settings_auto_updates_desc">Başlangıçta güncellemeleri kontrol et</string>
+
+    <string name="update_latest_version_msg">Şu anda kullanılabilir güncelleme yok.</string>
+    <string name="update_available">%1$s Sürümü Kullanılabilir!</string>
+    <string name="update_action">Güncelle</string>
+    <string name="update_error_msg">Güncelleme kontrol edilemedi veya indirilemedi.</string>
+    <string name="unknown">Bilinmeyen</string>
+
+    <string name="settings_setup_title">İlk Kurulum</string>
+    <string name="settings_setup_desc">Hoş geldiniz sihirbazını tekrar çalıştır</string>
+    <string name="settings_backup_header">Yedekle ve Geri Yükle</string>
+    <string name="settings_export_title">Ayarları Dışa Aktar</string>
+    <string name="settings_export_desc">Yapılandırmayı ve oyun listesini kaydet</string>
+    <string name="settings_import_title">Ayarları İçe Aktar</string>
+    <string name="settings_import_desc">Bir yedekleme dosyasından geri yükle</string>
+    <string name="dialog_restart_title">Yeniden Başlatma Gerekli</string>
+    <string name="dialog_restart_desc">Ayarlar içe aktarıldı. Değişiklikleri uygulamak için uygulamayı yeniden başlatın.</string>
+    <string name="restart_now">Şimdi Yeniden Başlat</string>
+    <string name="export_success">Ayarlar başarıyla dışa aktarıldı</string>
+    <string name="export_error">Ayarlar dışa aktarılırken hata oluştu</string>
+    <string name="import_error">Ayarlar içe aktarılırken hata oluştu</string>
+
+    <string name="community_title">Topluluğa katılın</string>
+    <string name="community_desc">Projelerimle ilgili son haberleri ve güncellemeleri, ayrıca bazı özel ön izlemeleri kaçırmamak için Telegram kanalıma katılın!</string>
+    <string name="no_thanks">Hayır, teşekkürler</string>
+    <string name="sure_action">Tabii ki!</string>
+    <string name="see_source_code">Kaynak kodunu gör</string>
+    <string name="check_updates_action">Güncellemeleri kontrol et</string>
+    <string name="cancel_action">İptal</string>
+    <string name="edit_app_icon_title">Simge Seç</string>
+    <string name="edit_app_icons">Uygulama simgeleri</string>
+    <string name="edit_builtin_icons">Yerleşik simgeler</string>
+    <string name="edit_gallery">Galeri</string>
+    <string name="edit_restore_icon">Simgeyi geri yükle</string>
+    <string name="edit_restore_title">Başlığı geri yükle</string>
+    <string name="edit_app_name">Uygulama adı</string>
+    <string name="select_app_title">Uygulama Seç</string>
+    <string name="settings_testing_header">Test</string>
+    <string name="settings_test_telegram_title">Topluluk</string>
+    <string name="settings_test_telegram_desc">Telegram grubumuza katılın</string>
+    <string name="settings_test_crash_title">Çökmeyi Test Et</string>
+    <string name="settings_test_crash_desc">Hata raporlamayı test etmek için çökmeye zorla</string>
+    <string name="settings_danger_zone_header">Tehlike Bölgesi</string>
+    <string name="settings_reset_title">Fabrika Ayarlarına Dön</string>
+    <string name="settings_reset_desc">Tüm verileri sil ve varsayılan ayarları geri yükle</string>
+    <string name="settings_reset_confirmation_desc">Uygulamayı sıfırlamak istediğinizden emin misiniz? Kaydedilmiş tüm oyunlarınız, özelleştirmeleriniz ve ayarlarınız kalıcı olarak silinecektir. Bu işlem geri alınamaz.</string>
+    <string name="settings_reset_action">Uygulamayı Sıfırla</string>
+    <string name="uninstall">Kaldır</string>
+    <string name="settings_grid_columns_title">Izgara sütunları</string>
+    <string name="add_favorite">Favorilere ekle</string>
+    <string name="remove_favorite">Favorilerden çıkar</string>
+    <string name="favorites">Favoriler</string>
+    <string name="feat_order_desc">Düzenleme Moduna girmek için kalem düğmesine dokunun veya görünümünü özelleştirmek için bir oyunu basılı tutun.</string>
+
+    <string name="controller_connected">Oyun Kumandası Bağlandı</string>
+    <string name="action_settings">Ayarlar</string>
+    <string name="action_ok">Tamam</string>
+    <string name="settings_test_controller_title">Oyun kumandası bağlantısı</string>
+    <string name="settings_test_controller_desc">Bir oyun kumandası bağlandığında telefonunuzda bir açılır pencere göster</string>
+    <string name="settings_test_controller_simulate_title">Oyun kumandası bağlantısını simüle et</string>
+    <string name="settings_test_controller_simulate_desc">Oyun kumandası bağlantısı alt sayfasını göster</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Xbox Kablosuz Oyun Kumandası</string>
+    <string name="controller_name_playstation">DualSense Kablosuz Oyun Kumandası</string>
+    <string name="controller_name_joycon">Joy-Con (S/S)</string>
+    <string name="controller_generic">Genel Oyun Kumandası</string>
+    <string name="controller_name_generic">Bilinmeyen oyun kumandası</string>
+    <string name="settings_header_more">Diğer</string>
+    <string name="settings_game_bubble_title">Oyun Balonu</string>
+    <string name="settings_game_bubble_desc">Oyun Balonu ayarlarını yönetin</string>
+    <string name="settings_bubble_enable_title">Oyun Balonunu Etkinleştir</string>
+    <string name="settings_bubble_autohide_title">Otomatik gizle</string>
+    <string name="settings_bubble_autohide_desc">3 saniye sonra ekran kenarına küçült</string>
+    <string name="settings_bubble_tools_title">Oyun Balonu araçları</string>
+    <string name="tool_fps">FPS Sayacı</string>
+    <string name="tool_dnd">Rahatsız Etmeyin</string>
+    <string name="tool_brightness">Maksimum Parlaklık</string>
+    <string name="tool_screenshot">Ekran Görüntüsü</string>
+    <string name="tool_ping">Ping Monitörü</string>
+    <string name="tool_boost">RAM Hızlandırıcı</string>
+    <string name="open_in_store">Mağazada aç</string>
+    <string name="move_up">Yukarı taşı</string>
+    <string name="move_down">Aşağı taşı</string>
+    <string name="stats">İstatistikler</string>
+    <string name="perm_bluetooth_title">Bluetooth erişimi</string>
+    <string name="perm_bluetooth_desc">Oyun kumandalarınızı bağlamak ve yönetmek için gereklidir.</string>
+    <string name="bubble_perm_title">Oyun Balonu</string>
+    <string name="bubble_perm_subtitle">İzinler</string>
+    <string name="bubble_perm_intro">Gelişmiş Oyun Balonu özelliklerini etkinleştirmek için bu izinleri verin.</string>
+    <string name="perm_overlay_title">Diğer uygulamaların üzerinde göster</string>
+    <string name="perm_overlay_desc">Oynarken Oyun Balonunu göstermek için gereklidir.</string>
+    <string name="perm_dnd_title">Rahatsız Etmeyin</string>
+    <string name="perm_dnd_desc">Oyun Balonundan Rahatsız Etmeyin modunu açın/kapatın.</string>
+    <string name="perm_write_settings_title">Sistem ayarlarını değiştir</string>
+    <string name="perm_write_settings_desc">Oyun Balonundan ekran parlaklığını ayarlayın.</string>
+    <string name="perm_accessibility_title">Erişilebilirlik hizmeti</string>
+    <string name="perm_accessibility_desc">Doğrudan Oyun Balonundan ekran görüntüleri alın.</string>
+
+</resources>

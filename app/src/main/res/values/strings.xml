@@ -1,8 +1,8 @@
-<resources xmlns:tools="http://schemas.android.com/tools">
+<resources>
     <string name="app_name">Game Hub</string>
     <string name="games_count_suffix">games ready</string>
     <string name="add_game">Add Game</string>
-    <string name="search_apps">Search apps…</string>
+    <string name="search_apps">Search games…</string>
     <string name="cancel">Cancel</string>
     <string name="remove">Remove</string>
     <string name="play">Play</string>
@@ -17,7 +17,7 @@
     <string name="welcome_to">Welcome to</string>
     <string name="welcome_preparing_subtitle">Let\'s get everything ready for you.</string>
 
-    <string name="perm_required">Required</string>
+    <string name="perm_required">Suggested</string>
     <string name="perm_permissions">Permissions</string>
     <string name="perm_intro_text">These permissions are optional but highly recommended to keep Game Hub running smoothly.</string>
 
@@ -26,9 +26,6 @@
 
     <string name="perm_install_title">App Installation</string>
     <string name="perm_install_desc">Required to download and install updates.</string>
-
-    <string name="perm_dashboard_title">Game Dashboard</string>
-    <string name="perm_dashboard_desc">Enable the system overlay for better performance and tools.</string>
 
     <string name="perm_usage_desc">Required to track game playtime and launch stats.</string>
 
@@ -45,7 +42,7 @@
     <string name="feat_name_desc">Display your name in the header. Customize it or hide it in Settings.</string>
 
     <string name="feat_manage_title">Easy Management</string>
-    <string name="feat_manage_desc">Tap + to add games. Swipe right to remove, swipe left to view playtime stats.</string>
+    <string name="feat_manage_desc">Tap + to add games. Press and hold to see stats, edit or remove game.</string>
 
     <string name="feat_update_title">Stay Updated</string>
     <string name="feat_update_desc">Check for Game Hub updates directly in the app Settings. Never miss a feature.</string>
@@ -202,5 +199,18 @@
     <string name="move_up">Move up</string>
     <string name="move_down">Move down</string>
     <string name="stats">Stats</string>
+    <string name="perm_bluetooth_title">Bluetooth access</string>
+    <string name="perm_bluetooth_desc">Required to connect and manage your controllers.</string>
+    <string name="bubble_perm_title">Game Bubble</string>
+    <string name="bubble_perm_subtitle">Permissions</string>
+    <string name="bubble_perm_intro">Grant these permissions to enable advanced Game Bubble features.</string>
+    <string name="perm_overlay_title">Display over apps</string>
+    <string name="perm_overlay_desc">Required to show Game Bubble while playing.</string>
+    <string name="perm_dnd_title">Do Not Disturb</string>
+    <string name="perm_dnd_desc">Toggle Do Not Disturb mode from Game Bubble.</string>
+    <string name="perm_write_settings_title">Modify system settings</string>
+    <string name="perm_write_settings_desc">Adjust screen brightness from Game Bubble.</string>
+    <string name="perm_accessibility_title">Accessibility service</string>
+    <string name="perm_accessibility_desc">Take screenshots directly from Game Bubble.</string>
 
 </resources>

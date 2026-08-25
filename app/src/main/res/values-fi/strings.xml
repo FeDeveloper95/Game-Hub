@@ -1,0 +1,215 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">peliä valmiina</string>
+    <string name="add_game">Lisää peli</string>
+    <string name="search_apps">Etsi sovelluksia…</string>
+    <string name="cancel">Peruuta</string>
+    <string name="remove">Poista</string>
+    <string name="play">Pelaa</string>
+    <string name="later">Myöhemmin</string>
+    <string name="save">Tallenna</string>
+    <string name="discard">Peruuta</string>
+
+    <string name="next">Seuraava</string>
+    <string name="back">Takaisin</string>
+    <string name="get_started">Aloita</string>
+
+    <string name="welcome_to">Tervetuloa</string>
+    <string name="welcome_preparing_subtitle">Laitetaan kaikki valmiiksi sinua varten.</string>
+
+    <string name="perm_required">Suositeltu</string>
+    <string name="perm_permissions">Luvat</string>
+    <string name="perm_intro_text">Nämä käyttöoikeudet ovat valinnaisia, mutta erittäin suositeltavia Game Hubin sujuvan toiminnan takaamiseksi.</string>
+
+    <string name="perm_notif_title">Ilmoitukset</string>
+    <string name="perm_notif_desc">Tiedä heti, kun uusi päivitys julkaistaan.</string>
+
+    <string name="perm_install_title">Sovellusten asennus</string>
+    <string name="perm_install_desc">Vaaditaan päivitysten lataamiseen ja asentamiseen.</string>
+
+    <string name="perm_usage_desc">Vaaditaan peliajan ja käynnistystilastojen seuraamiseen.</string>
+
+    <string name="feat_discover">Löydä</string>
+    <string name="feat_features">Ominaisuudet</string>
+    <string name="feat_intro">Tässä on mitä voit tehdä uudella Game Hubillasi.</string>
+
+    <string name="feat_order_title">Täysi hallinta</string>
+
+    <string name="feat_layout_title">Muodonmuutos</string>
+    <string name="feat_layout_desc">Siirry Asetuksiin muuttaaksesi kortin tyyliä: Oletus, Vaakasuora tai Ruudukko. Tee siitä omasi.</string>
+
+    <string name="feat_name_title">Henkilökohtainen kosketus</string>
+    <string name="feat_name_desc">Näytä nimesi otsikossa. Mukauta tai piilota se Asetuksissa.</string>
+
+    <string name="feat_manage_title">Helppo hallinta</string>
+    <string name="feat_manage_desc">Napauta + lisätäksesi pelejä. Pyyhkäise oikealle poistaaksesi, pyyhkäise vasemmalle nähdäksesi peliaikatilastot.</string>
+
+    <string name="feat_update_title">Pysy ajan tasalla</string>
+    <string name="feat_update_desc">Tarkista Game Hub -päivitykset suoraan sovelluksen Asetuksista. Älä koskaan missaa uutta ominaisuutta.</string>
+
+    <string name="feat_store_title">Löydä pelejä</string>
+    <string name="feat_store_desc">Löydä uusia nimikkeitä Google Play Kaupan kautta. Voit poistaa tämän käytöstä Asetuksissa.</string>
+
+    <string name="feat_history_title">Pelihistoria</string>
+    <string name="feat_history_desc">Seuraa, kuinka monta kertaa olet käynnistänyt kunkin pelin. Tämä laskuri voidaan piilottaa Asetuksissa.</string>
+
+    <string name="no_games_title">Pelejä ei löytynyt</string>
+    <string name="no_games_subtitle">Paina + lisätäksesi uuden</string>
+    <string name="download_games">Hanki uusia pelejä</string>
+    <string name="add_to_library">Lisää kirjastoon</string>
+    <string name="remove_game_title">Poistetaanko peli?</string>
+    <string name="remove_game_desc">Tämä poistaa pelin %1$s Game Hubista.</string>
+
+    <string name="edit_mode_title">Muokkaa</string>
+
+    <string name="settings_title">Asetukset</string>
+    <string name="settings_header_appearance">Ulkoasu</string>
+    <string name="settings_header_preferences">Asetukset</string>
+    <string name="settings_header_info">Tiedot</string>
+
+    <string name="settings_theme_system">Järjestelmän oletus</string>
+    <string name="settings_theme_light">Vaalea</string>
+    <string name="settings_theme_dark">Tumma</string>
+    <string name="settings_card_style_title">Kortin tyyli</string>
+    <string name="settings_card_style_default">Oletus</string>
+    <string name="settings_card_style_horizontal">Vaakasuora</string>
+    <string name="settings_card_style_grid">Ruudukko</string>
+
+    <string name="settings_show_name_title">Näytä käyttäjänimi</string>
+    <string name="settings_show_name_desc">Näytä nimesi otsikossa</string>
+    <string name="settings_edit_name_title">Sinun nimesi</string>
+    <string name="dialog_edit_name_title">Syötä nimesi</string>
+    <string name="dialog_edit_name_hint">Nimi</string>
+
+    <string name="settings_sort_title">Pelien järjestys</string>
+    <string name="sort_alphabetical">Aakkosjärjestys</string>
+    <string name="sort_playtime">Peliaika</string>
+    <string name="sort_custom">Mukautettu</string>
+
+    <string name="settings_show_launch_count_title">Näytä käynnistyskertojen määrä</string>
+    <string name="settings_show_launch_count_desc">Näytä, kuinka monta kertaa olet pelannut</string>
+
+    <string name="settings_show_playtime_title">Näytä peliaika</string>
+    <string name="settings_show_playtime_desc">Näytä käyttötilastot</string>
+
+    <string name="settings_stats_interval_title">Tilastoväli</string>
+    <string name="interval_daily">Päivittäin</string>
+    <string name="interval_weekly">Viikoittain</string>
+    <string name="interval_monthly">Kuukausittain</string>
+    <string name="interval_yearly">Vuosittain</string>
+
+    <string name="settings_show_get_more_title">Näytä Hae lisää pelejä</string>
+    <string name="settings_show_get_more_desc">Näytä linkki kauppaan</string>
+
+    <string name="settings_advanced_title">Lisäasetukset</string>
+    <string name="settings_advanced_desc">Kokeelliset ominaisuudet ja päivitykset</string>
+
+    <string name="settings_version_title">Sovelluksen versio</string>
+    <string name="settings_developer_title">Kehittäjä</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Ilmoita bugista / ehdota ominaisuutta</string>
+    <string name="settings_report_desc">Keskustele kehittäjän kanssa Telegramissa</string>
+
+    <string name="settings_check_updates_title">Tarkista päivitykset</string>
+    <string name="settings_check_updates_desc">Etsi uusin versio</string>
+    <string name="settings_auto_updates_title">Automaattiset päivitykset</string>
+    <string name="settings_auto_updates_desc">Tarkista päivitykset käynnistyksen yhteydessä</string>
+
+    <string name="update_latest_version_msg">Ei päivityksiä saatavilla tällä hetkellä.</string>
+    <string name="update_available">Versio %1$s on saatavilla!</string>
+    <string name="update_action">Päivitä</string>
+    <string name="update_error_msg">Päivitystä ei voitu tarkistaa tai ladata.</string>
+    <string name="unknown">Tuntematon</string>
+
+    <string name="settings_setup_title">Alkuasetukset</string>
+    <string name="settings_setup_desc">Suorita ohjattu aloitustoiminto uudelleen</string>
+    <string name="settings_backup_header">Varmuuskopiointi ja palautus</string>
+    <string name="settings_export_title">Vie asetukset</string>
+    <string name="settings_export_desc">Tallenna määritykset ja peliluettelo</string>
+    <string name="settings_import_title">Tuo asetukset</string>
+    <string name="settings_import_desc">Palauta varmuuskopiotiedostosta</string>
+    <string name="dialog_restart_title">Uudelleenkäynnistys vaaditaan</string>
+    <string name="dialog_restart_desc">Asetukset on tuotu. Käynnistä sovellus uudelleen ottaaksesi muutokset käyttöön.</string>
+    <string name="restart_now">Käynnistä nyt</string>
+    <string name="export_success">Asetusten vienti onnistui</string>
+    <string name="export_error">Virhe vietiessä asetuksia</string>
+    <string name="import_error">Virhe tuotaessa asetuksia</string>
+
+    <string name="community_title">Liity yhteisöön</string>
+    <string name="community_desc">Liity Telegram-kanavalleni, jotta et missaa viimeisimpiä uutisia ja päivityksiä projekteistani, sekä eksklusiivisia maistiaisia!</string>
+    <string name="no_thanks">Ei kiitos</string>
+    <string name="sure_action">Totta kai!</string>
+    <string name="see_source_code">Katso lähdekoodi</string>
+    <string name="check_updates_action">Tarkista päivitykset</string>
+    <string name="cancel_action">Peruuta</string>
+    <string name="edit_app_icon_title">Valitse kuvake</string>
+    <string name="edit_app_icons">Sovelluskuvakkeet</string>
+    <string name="edit_builtin_icons">Sisäänrakennetut kuvakkeet</string>
+    <string name="edit_gallery">Galleria</string>
+    <string name="edit_restore_icon">Palauta kuvake</string>
+    <string name="edit_restore_title">Palauta otsikko</string>
+    <string name="edit_app_name">Sovelluksen nimi</string>
+    <string name="select_app_title">Valitse sovellus</string>
+    <string name="settings_testing_header">Testaus</string>
+    <string name="settings_test_telegram_title">Yhteisö</string>
+    <string name="settings_test_telegram_desc">Liity Telegram-ryhmäämme</string>
+    <string name="settings_test_crash_title">Testaa kaatumista</string>
+    <string name="settings_test_crash_desc">Pakota kaatuminen testataksesi virheraportointia</string>
+    <string name="settings_danger_zone_header">Vaara-alue</string>
+    <string name="settings_reset_title">Tehdasasetusten palautus</string>
+    <string name="settings_reset_desc">Poista kaikki tiedot ja palauta oletusasetukset</string>
+    <string name="settings_reset_confirmation_desc">Oletko varma, että haluat nollata sovelluksen? Kaikki tallennetut pelisi, mukautuksesi ja asetuksesi poistetaan pysyvästi. Tätä toimintoa ei voi kumota.</string>
+    <string name="settings_reset_action">Nollaa sovellus</string>
+    <string name="uninstall">Poista asennus</string>
+    <string name="settings_grid_columns_title">Ruudukon sarakkeet</string>
+    <string name="add_favorite">Lisää suosikkeihin</string>
+    <string name="remove_favorite">Poista suosikeista</string>
+    <string name="favorites">Suosikit</string>
+    <string name="feat_order_desc">Napauta kynäpainiketta siirtyäksesi muokkaustilaan tai pidä peliä painettuna mukauttaaksesi sen ulkoasua.</string>
+
+    <string name="controller_connected">Ohjain yhdistetty</string>
+    <string name="action_settings">Asetukset</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Ohjaimen yhteys</string>
+    <string name="settings_test_controller_desc">Näytä ponnahdusikkuna puhelimessasi, kun ohjain yhdistetään</string>
+    <string name="settings_test_controller_simulate_title">Simuloi ohjaimen yhteyttä</string>
+    <string name="settings_test_controller_simulate_desc">Näytä ohjaimen yhteyden alalokero</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Langaton Xbox-ohjain</string>
+    <string name="controller_name_playstation">Langaton DualSense-ohjain</string>
+    <string name="controller_name_joycon">Joy-Con (V/O)</string>
+    <string name="controller_generic">Yleinen ohjain</string>
+    <string name="controller_name_generic">Tuntematon ohjain</string>
+    <string name="settings_header_more">Lisää</string>
+    <string name="settings_game_bubble_title">Pelikupla</string>
+    <string name="settings_game_bubble_desc">Hallitse Pelikuplan asetuksia</string>
+    <string name="settings_bubble_enable_title">Ota Pelikupla käyttöön</string>
+    <string name="settings_bubble_autohide_title">Piilota automaattisesti</string>
+    <string name="settings_bubble_autohide_desc">Pienennä näytön reunaan 3 sekunnin kuluttua</string>
+    <string name="settings_bubble_tools_title">Pelikuplan työkalut</string>
+    <string name="tool_fps">FPS-laskuri</string>
+    <string name="tool_dnd">Älä häiritse</string>
+    <string name="tool_brightness">Maksimikirkkaus</string>
+    <string name="tool_screenshot">Kuvakaappaus</string>
+    <string name="tool_ping">Ping-seuranta</string>
+    <string name="tool_boost">RAM-tehostus</string>
+    <string name="open_in_store">Avaa kaupassa</string>
+    <string name="move_up">Siirrä ylös</string>
+    <string name="move_down">Siirrä alas</string>
+    <string name="stats">Tilastot</string>
+    <string name="perm_bluetooth_title">Bluetooth-käyttöoikeus</string>
+    <string name="perm_bluetooth_desc">Vaaditaan ohjaimien yhdistämiseen ja hallintaan.</string>
+    <string name="bubble_perm_title">Pelikupla</string>
+    <string name="bubble_perm_subtitle">Luvat</string>
+    <string name="bubble_perm_intro">Myönnä nämä luvat ottaaksesi käyttöön Pelikuplan edistyneet ominaisuudet.</string>
+    <string name="perm_overlay_title">Näytä muiden sovellusten päällä</string>
+    <string name="perm_overlay_desc">Vaaditaan Pelikuplan näyttämiseen pelaamisen aikana.</string>
+    <string name="perm_dnd_title">Älä häiritse</string>
+    <string name="perm_dnd_desc">Ota Älä häiritse -tila käyttöön tai poista se käytöstä Pelikuplasta.</string>
+    <string name="perm_write_settings_title">Muokkaa järjestelmän asetuksia</string>
+    <string name="perm_write_settings_desc">Säädä näytön kirkkautta Pelikuplasta.</string>
+    <string name="perm_accessibility_title">Esteettömyyspalvelu</string>
+    <string name="perm_accessibility_desc">Ota kuvakaappauksia suoraan Pelikuplasta.</string>
+</resources>

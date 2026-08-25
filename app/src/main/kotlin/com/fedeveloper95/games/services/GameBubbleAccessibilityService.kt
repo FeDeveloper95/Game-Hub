@@ -1,7 +1,6 @@
 package com.fedeveloper95.games.services
 
 import android.accessibilityservice.AccessibilityService
-import android.accessibilityservice.AccessibilityServiceInfo
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
@@ -22,21 +21,15 @@ class GameBubbleAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         try {
-            val info = AccessibilityServiceInfo().apply {
-                eventTypes = AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED
-                feedbackType = AccessibilityServiceInfo.FEEDBACK_GENERIC
-                flags = 0
-                notificationTimeout = 250
-            }
-            this.serviceInfo = info
-
             val filter = IntentFilter("com.fedeveloper95.games.TAKE_SCREENSHOT")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                 registerReceiver(receiver, filter, RECEIVER_EXPORTED)
             } else {
                 registerReceiver(receiver, filter)
             }
-        } catch (e: Exception) {}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {
@@ -48,7 +41,9 @@ class GameBubbleAccessibilityService : AccessibilityService() {
                 }
                 sendBroadcast(intent)
             }
-        } catch (e: Exception) {}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     override fun onInterrupt() {}
@@ -57,6 +52,8 @@ class GameBubbleAccessibilityService : AccessibilityService() {
         super.onDestroy()
         try {
             unregisterReceiver(receiver)
-        } catch (e: Exception) {}
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 }

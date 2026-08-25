@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">játék kész</string>
+    <string name="add_game">Játék hozzáadása</string>
+    <string name="search_apps">Alkalmazások keresése…</string>
+    <string name="cancel">Mégse</string>
+    <string name="remove">Eltávolítás</string>
+    <string name="play">Játék</string>
+    <string name="later">Később</string>
+    <string name="save">Mentés</string>
+    <string name="discard">Mégse</string>
+
+    <string name="next">Tovább</string>
+    <string name="back">Vissza</string>
+    <string name="get_started">Kezdés</string>
+
+    <string name="welcome_to">Üdvözli a</string>
+    <string name="welcome_preparing_subtitle">Készítsünk elő mindent az Ön számára.</string>
+
+    <string name="perm_required">Ajánlott</string>
+    <string name="perm_permissions">Engedélyek</string>
+    <string name="perm_intro_text">Ezek az engedélyek opcionálisak, de erősen ajánlottak a Game Hub zökkenőmentes működéséhez.</string>
+
+    <string name="perm_notif_title">Értesítések</string>
+    <string name="perm_notif_desc">Azonnal értesüljön, ha új frissítés jelenik meg.</string>
+
+    <string name="perm_install_title">Alkalmazástelepítés</string>
+    <string name="perm_install_desc">Szükséges a frissítések letöltéséhez és telepítéséhez.</string>
+
+    <string name="perm_usage_desc">Szükséges a játékidő és az indítási statisztikák nyomon követéséhez.</string>
+
+    <string name="feat_discover">Felfedezés</string>
+    <string name="feat_features">Funkciók</string>
+    <string name="feat_intro">Íme, mit tehet az új Game Hubjával.</string>
+
+    <string name="feat_order_title">Teljes irányítás</string>
+
+    <string name="feat_layout_title">Alakváltás</string>
+    <string name="feat_layout_desc">Lépjen a Beállításokba a kártyastílus megváltoztatásához: Alapértelmezett, Vízszintes vagy Rács. Tegye a magáévá.</string>
+
+    <string name="feat_name_title">Személyes érintés</string>
+    <string name="feat_name_desc">Jelenítse meg a nevét a fejlécben. Testreszabhatja vagy elrejtheti a Beállításokban.</string>
+
+    <string name="feat_manage_title">Egyszerű kezelés</string>
+    <string name="feat_manage_desc">Érintse meg a + gombot játékok hozzáadásához. Húzza jobbra az eltávolításhoz, balra a játékidő statisztikák megtekintéséhez.</string>
+
+    <string name="feat_update_title">Maradjon naprakész</string>
+    <string name="feat_update_desc">Ellenőrizze a Game Hub frissítéseit közvetlenül az alkalmazás Beállításaiban. Soha ne maradjon le egy funkcióról sem.</string>
+
+    <string name="feat_store_title">Játékok felfedezése</string>
+    <string name="feat_store_desc">Keressen új címeket a Google Play Áruházon keresztül. Ezt a Beállításokban letilthatja.</string>
+
+    <string name="feat_history_title">Játéktörténet</string>
+    <string name="feat_history_desc">Kövesse nyomon, hányszor indította el az egyes játékokat. Ez a számláló elrejthető a Beállításokban.</string>
+
+    <string name="no_games_title">Nincs találat</string>
+    <string name="no_games_subtitle">Nyomja meg a + gombot egy hozzáadásához</string>
+    <string name="download_games">Új játékok beszerzése</string>
+    <string name="add_to_library">Hozzáadás a könyvtárhoz</string>
+    <string name="remove_game_title">Játék eltávolítása?</string>
+    <string name="remove_game_desc">Ez eltávolítja a(z) %1$s játékot a Game Hubból.</string>
+
+    <string name="edit_mode_title">Szerkesztés</string>
+
+    <string name="settings_title">Beállítások</string>
+    <string name="settings_header_appearance">Megjelenés</string>
+    <string name="settings_header_preferences">Preferenciák</string>
+    <string name="settings_header_info">Információ</string>
+
+    <string name="settings_theme_system">Rendszer alapértelmezett</string>
+    <string name="settings_theme_light">Világos</string>
+    <string name="settings_theme_dark">Sötét</string>
+    <string name="settings_card_style_title">Kártya stílusa</string>
+    <string name="settings_card_style_default">Alapértelmezett</string>
+    <string name="settings_card_style_horizontal">Vízszintes</string>
+    <string name="settings_card_style_grid">Rács</string>
+
+    <string name="settings_show_name_title">Felhasználónév megjelenítése</string>
+    <string name="settings_show_name_desc">Jelenítse meg a nevét a fejlécben</string>
+    <string name="settings_edit_name_title">Az Ön neve</string>
+    <string name="dialog_edit_name_title">Adja meg a nevét</string>
+    <string name="dialog_edit_name_hint">Név</string>
+
+    <string name="settings_sort_title">Játékok sorrendje</string>
+    <string name="sort_alphabetical">Betűrendes</string>
+    <string name="sort_playtime">Játékidő</string>
+    <string name="sort_custom">Egyéni</string>
+
+    <string name="settings_show_launch_count_title">Indítások számának mutatása</string>
+    <string name="settings_show_launch_count_desc">Mutassa meg, hányszor játszott</string>
+
+    <string name="settings_show_playtime_title">Játékidő megjelenítése</string>
+    <string name="settings_show_playtime_desc">Használati statisztikák megjelenítése</string>
+
+    <string name="settings_stats_interval_title">Statisztikák intervalluma</string>
+    <string name="interval_daily">Napi</string>
+    <string name="interval_weekly">Heti</string>
+    <string name="interval_monthly">Havi</string>
+    <string name="interval_yearly">Éves</string>
+
+    <string name="settings_show_get_more_title">\"További játékok beszerzése\" mutatása</string>
+    <string name="settings_show_get_more_desc">Áruház hivatkozásának megjelenítése</string>
+
+    <string name="settings_advanced_title">Speciális</string>
+    <string name="settings_advanced_desc">Kísérleti funkciók és frissítések</string>
+
+    <string name="settings_version_title">Alkalmazás verziója</string>
+    <string name="settings_developer_title">Fejlesztő</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Hiba / Funkció bejelentése</string>
+    <string name="settings_report_desc">Csevegjen a fejlesztővel a Telegramon</string>
+
+    <string name="settings_check_updates_title">Frissítések keresése</string>
+    <string name="settings_check_updates_desc">Keresse meg a legújabb verziót</string>
+    <string name="settings_auto_updates_title">Automatikus frissítések</string>
+    <string name="settings_auto_updates_desc">Frissítések keresése indításkor</string>
+
+    <string name="update_latest_version_msg">Jelenleg nincs elérhető frissítés.</string>
+    <string name="update_available">%1$s verzió elérhető!</string>
+    <string name="update_action">Frissítés</string>
+    <string name="update_error_msg">Nem sikerült ellenőrizni vagy letölteni a frissítést.</string>
+    <string name="unknown">Ismeretlen</string>
+
+    <string name="settings_setup_title">Kezdeti beállítás</string>
+    <string name="settings_setup_desc">Futtassa újra az üdvözlő varázslót</string>
+    <string name="settings_backup_header">Biztonsági mentés és visszaállítás</string>
+    <string name="settings_export_title">Beállítások exportálása</string>
+    <string name="settings_export_desc">Konfiguráció és játéklista mentése</string>
+    <string name="settings_import_title">Beállítások importálása</string>
+    <string name="settings_import_desc">Visszaállítás biztonsági mentés fájlból</string>
+    <string name="dialog_restart_title">Újraindítás szükséges</string>
+    <string name="dialog_restart_desc">A beállítások importálva lettek. Indítsa újra az alkalmazást a változtatások alkalmazásához.</string>
+    <string name="restart_now">Újraindítás most</string>
+    <string name="export_success">Beállítások sikeresen exportálva</string>
+    <string name="export_error">Hiba a beállítások exportálásakor</string>
+    <string name="import_error">Hiba a beállítások importálásakor</string>
+
+    <string name="community_title">Csatlakozzon a közösséghez</string>
+    <string name="community_desc">Csatlakozzon a Telegram csatornámhoz, hogy ne maradjon le a projektjeimmel kapcsolatos legfrissebb hírekről és frissítésekről, valamint néhány exkluzív bepillantásról!</string>
+    <string name="no_thanks">Nem, köszönöm</string>
+    <string name="sure_action">Persze!</string>
+    <string name="see_source_code">Forráskód megtekintése</string>
+    <string name="check_updates_action">Frissítések keresése</string>
+    <string name="cancel_action">Mégse</string>
+    <string name="edit_app_icon_title">Válasszon ikont</string>
+    <string name="edit_app_icons">Alkalmazás ikonok</string>
+    <string name="edit_builtin_icons">Beépített ikonok</string>
+    <string name="edit_gallery">Galéria</string>
+    <string name="edit_restore_icon">Ikon visszaállítása</string>
+    <string name="edit_restore_title">Cím visszaállítása</string>
+    <string name="edit_app_name">Alkalmazás neve</string>
+    <string name="select_app_title">Válasszon alkalmazást</string>
+    <string name="settings_testing_header">Tesztelés</string>
+    <string name="settings_test_telegram_title">Közösség</string>
+    <string name="settings_test_telegram_desc">Csatlakozzon Telegram csoportunkhoz</string>
+    <string name="settings_test_crash_title">Összeomlás tesztelése</string>
+    <string name="settings_test_crash_desc">Kényszerítsen ki egy összeomlást a hibajelentés teszteléséhez</string>
+    <string name="settings_danger_zone_header">Veszélyzóna</string>
+    <string name="settings_reset_title">Gyári visszaállítás</string>
+    <string name="settings_reset_desc">Összes adat törlése és alapértelmezett beállítások visszaállítása</string>
+    <string name="settings_reset_confirmation_desc">Biztosan vissza szeretné állítani az alkalmazást? Minden mentett játéka, testreszabása és beállítása véglegesen törlődik. Ez a művelet nem vonható vissza.</string>
+    <string name="settings_reset_action">Alkalmazás visszaállítása</string>
+    <string name="uninstall">Eltávolítás</string>
+    <string name="settings_grid_columns_title">Rács oszlopok</string>
+    <string name="add_favorite">Hozzáadás a kedvencekhez</string>
+    <string name="remove_favorite">Eltávolítás a kedvencekből</string>
+    <string name="favorites">Kedvencek</string>
+    <string name="feat_order_desc">Érintse meg a ceruza gombot a Szerkesztési módba lépéshez, vagy tartsa lenyomva egy játékot a megjelenésének testreszabásához.</string>
+
+    <string name="controller_connected">Kontroller csatlakoztatva</string>
+    <string name="action_settings">Beállítások</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Kontroller csatlakozása</string>
+    <string name="settings_test_controller_desc">Felugró ablak megjelenítése a telefonon, ha kontroller van csatlakoztatva</string>
+    <string name="settings_test_controller_simulate_title">Kontroller csatlakozásának szimulálása</string>
+    <string name="settings_test_controller_simulate_desc">A kontroller csatlakozási alsó lapjának megjelenítése</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Vezeték nélküli Xbox kontroller</string>
+    <string name="controller_name_playstation">Vezeték nélküli DualSense kontroller</string>
+    <string name="controller_name_joycon">Joy-Con (B/J)</string>
+    <string name="controller_generic">Általános kontroller</string>
+    <string name="controller_name_generic">Ismeretlen kontroller</string>
+    <string name="settings_header_more">Több</string>
+    <string name="settings_game_bubble_title">Játékbuborék</string>
+    <string name="settings_game_bubble_desc">Játékbuborék beállításainak kezelése</string>
+    <string name="settings_bubble_enable_title">Játékbuborék engedélyezése</string>
+    <string name="settings_bubble_autohide_title">Automatikus elrejtés</string>
+    <string name="settings_bubble_autohide_desc">Kicsinyítés a képernyő szélére 3 másodperc után</string>
+    <string name="settings_bubble_tools_title">Játékbuborék eszközei</string>
+    <string name="tool_fps">FPS számláló</string>
+    <string name="tool_dnd">Ne zavarjanak</string>
+    <string name="tool_brightness">Maximális fényerő</string>
+    <string name="tool_screenshot">Képernyőkép</string>
+    <string name="tool_ping">Ping figyelő</string>
+    <string name="tool_boost">RAM gyorsítás</string>
+    <string name="open_in_store">Megnyitás az áruházban</string>
+    <string name="move_up">Mozgatás fel</string>
+    <string name="move_down">Mozgatás le</string>
+    <string name="stats">Statisztikák</string>
+    <string name="perm_bluetooth_title">Bluetooth hozzáférés</string>
+    <string name="perm_bluetooth_desc">Szükséges a kontrollerek csatlakoztatásához és kezeléséhez.</string>
+    <string name="bubble_perm_title">Játékbuborék</string>
+    <string name="bubble_perm_subtitle">Engedélyek</string>
+    <string name="bubble_perm_intro">Adja meg ezeket az engedélyeket a Játékbuborék speciális funkcióinak engedélyezéséhez.</string>
+    <string name="perm_overlay_title">Megjelenítés más alkalmazások felett</string>
+    <string name="perm_overlay_desc">Szükséges a Játékbuborék megjelenítéséhez játék közben.</string>
+    <string name="perm_dnd_title">Ne zavarjanak</string>
+    <string name="perm_dnd_desc">A Ne zavarjanak mód be- és kikapcsolása a Játékbuborékból.</string>
+    <string name="perm_write_settings_title">Rendszerbeállítások módosítása</string>
+    <string name="perm_write_settings_desc">A képernyő fényerejének beállítása a Játékbuborékból.</string>
+    <string name="perm_accessibility_title">Kisegítő lehetőségek szolgáltatás</string>
+    <string name="perm_accessibility_desc">Képernyőképek készítése közvetlenül a Játékbuborékból.</string>
+
+</resources>

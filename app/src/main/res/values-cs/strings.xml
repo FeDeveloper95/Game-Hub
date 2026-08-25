@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">her připraveno</string>
+    <string name="add_game">Přidat hru</string>
+    <string name="search_apps">Hledat aplikace…</string>
+    <string name="cancel">Zrušit</string>
+    <string name="remove">Odstranit</string>
+    <string name="play">Hrát</string>
+    <string name="later">Později</string>
+    <string name="save">Uložit</string>
+    <string name="discard">Zrušit</string>
+
+    <string name="next">Další</string>
+    <string name="back">Zpět</string>
+    <string name="get_started">Začít</string>
+
+    <string name="welcome_to">Vítejte v</string>
+    <string name="welcome_preparing_subtitle">Vše pro vás připravíme.</string>
+
+    <string name="perm_required">Doporučeno</string>
+    <string name="perm_permissions">Oprávnění</string>
+    <string name="perm_intro_text">Tato oprávnění jsou volitelná, ale důrazně doporučená pro zajištění plynulého chodu aplikace Game Hub.</string>
+
+    <string name="perm_notif_title">Oznámení</string>
+    <string name="perm_notif_desc">Zjistěte okamžitě, když vyjde nová aktualizace.</string>
+
+    <string name="perm_install_title">Instalace aplikací</string>
+    <string name="perm_install_desc">Vyžadováno ke stažení a instalaci aktualizací.</string>
+
+    <string name="perm_usage_desc">Vyžadováno ke sledování doby hraní a statistik spouštění.</string>
+
+    <string name="feat_discover">Objevit</string>
+    <string name="feat_features">Funkce</string>
+    <string name="feat_intro">Zde je to, co můžete dělat se svým novým Game Hubem.</string>
+
+    <string name="feat_order_title">Úplná kontrola</string>
+
+    <string name="feat_layout_title">Změna tvaru</string>
+    <string name="feat_layout_desc">Přejděte do Nastavení a změňte styl karty: Výchozí, Horizontální nebo Mřížka. Udělejte si to podle sebe.</string>
+
+    <string name="feat_name_title">Osobní dotek</string>
+    <string name="feat_name_desc">Zobrazte své jméno v záhlaví. Přizpůsobte si ho nebo ho skryjte v Nastavení.</string>
+
+    <string name="feat_manage_title">Snadná správa</string>
+    <string name="feat_manage_desc">Klepnutím na + přidáte hry. Přejetím doprava odstraníte, přejetím doleva zobrazíte statistiky doby hraní.</string>
+
+    <string name="feat_update_title">Zůstaňte v obraze</string>
+    <string name="feat_update_desc">Zkontrolujte aktualizace Game Hubu přímo v Nastavení aplikace. Už nikdy nezmeškáte žádnou funkci.</string>
+
+    <string name="feat_store_title">Objevujte hry</string>
+    <string name="feat_store_desc">Najděte nové tituly prostřednictvím Google Play Store. Toto můžete v Nastavení zakázat.</string>
+
+    <string name="feat_history_title">Historie hraní</string>
+    <string name="feat_history_desc">Sledujte, kolikrát jste každou hru spustili. Toto počítadlo lze v Nastavení skrýt.</string>
+
+    <string name="no_games_title">Nebyly nalezeny žádné hry</string>
+    <string name="no_games_subtitle">Stisknutím + jednu přidáte</string>
+    <string name="download_games">Získat nové hry</string>
+    <string name="add_to_library">Přidat do knihovny</string>
+    <string name="remove_game_title">Odstranit hru?</string>
+    <string name="remove_game_desc">Tímto odstraníte %1$s z Game Hubu.</string>
+
+    <string name="edit_mode_title">Upravit</string>
+
+    <string name="settings_title">Nastavení</string>
+    <string name="settings_header_appearance">Vzhled</string>
+    <string name="settings_header_preferences">Předvolby</string>
+    <string name="settings_header_info">Informace</string>
+
+    <string name="settings_theme_system">Výchozí nastavení systému</string>
+    <string name="settings_theme_light">Světlý</string>
+    <string name="settings_theme_dark">Tmavý</string>
+    <string name="settings_card_style_title">Styl karty</string>
+    <string name="settings_card_style_default">Výchozí</string>
+    <string name="settings_card_style_horizontal">Horizontální</string>
+    <string name="settings_card_style_grid">Mřížka</string>
+
+    <string name="settings_show_name_title">Zobrazit uživatelské jméno</string>
+    <string name="settings_show_name_desc">Zobrazit vaše jméno v záhlaví</string>
+    <string name="settings_edit_name_title">Vaše jméno</string>
+    <string name="dialog_edit_name_title">Zadejte své jméno</string>
+    <string name="dialog_edit_name_hint">Jméno</string>
+
+    <string name="settings_sort_title">Pořadí her</string>
+    <string name="sort_alphabetical">Abecedně</string>
+    <string name="sort_playtime">Doba hraní</string>
+    <string name="sort_custom">Vlastní</string>
+
+    <string name="settings_show_launch_count_title">Zobrazit počet spuštění</string>
+    <string name="settings_show_launch_count_desc">Zobrazit, kolikrát jste hráli</string>
+
+    <string name="settings_show_playtime_title">Zobrazit dobu hraní</string>
+    <string name="settings_show_playtime_desc">Zobrazit statistiky používání</string>
+
+    <string name="settings_stats_interval_title">Interval statistik</string>
+    <string name="interval_daily">Denně</string>
+    <string name="interval_weekly">Týdně</string>
+    <string name="interval_monthly">Měsíčně</string>
+    <string name="interval_yearly">Ročně</string>
+
+    <string name="settings_show_get_more_title">Zobrazit Získat další hry</string>
+    <string name="settings_show_get_more_desc">Zobrazit odkaz do obchodu</string>
+
+    <string name="settings_advanced_title">Pokročilé</string>
+    <string name="settings_advanced_desc">Experimentální funkce a aktualizace</string>
+
+    <string name="settings_version_title">Verze aplikace</string>
+    <string name="settings_developer_title">Vývojář</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Nahlásit chybu / funkci</string>
+    <string name="settings_report_desc">Chat s vývojářem na Telegramu</string>
+
+    <string name="settings_check_updates_title">Zkontrolovat aktualizace</string>
+    <string name="settings_check_updates_desc">Najít nejnovější verzi</string>
+    <string name="settings_auto_updates_title">Automatické aktualizace</string>
+    <string name="settings_auto_updates_desc">Zkontrolovat aktualizace při spuštění</string>
+
+    <string name="update_latest_version_msg">Momentálně nejsou k dispozici žádné aktualizace.</string>
+    <string name="update_available">Verze %1$s je k dispozici!</string>
+    <string name="update_action">Aktualizovat</string>
+    <string name="update_error_msg">Nelze zkontrolovat ani stáhnout aktualizaci.</string>
+    <string name="unknown">Neznámý</string>
+
+    <string name="settings_setup_title">Počáteční nastavení</string>
+    <string name="settings_setup_desc">Spustit uvítacího průvodce znovu</string>
+    <string name="settings_backup_header">Zálohování a obnova</string>
+    <string name="settings_export_title">Exportovat nastavení</string>
+    <string name="settings_export_desc">Uložit konfiguraci a seznam her</string>
+    <string name="settings_import_title">Importovat nastavení</string>
+    <string name="settings_import_desc">Obnovit ze souboru zálohy</string>
+    <string name="dialog_restart_title">Je vyžadován restart</string>
+    <string name="dialog_restart_desc">Nastavení byla importována. Chcete-li použít změny, restartujte aplikaci.</string>
+    <string name="restart_now">Restartovat nyní</string>
+    <string name="export_success">Nastavení úspěšně exportována</string>
+    <string name="export_error">Chyba při exportu nastavení</string>
+    <string name="import_error">Chyba při importu nastavení</string>
+
+    <string name="community_title">Připojte se ke komunitě</string>
+    <string name="community_desc">Připojte se k mému kanálu na Telegramu, aby vám neunikly nejnovější zprávy a aktualizace o mých projektech, spolu s exkluzivními ukázkami!</string>
+    <string name="no_thanks">Ne, díky</string>
+    <string name="sure_action">Jasně!</string>
+    <string name="see_source_code">Zobrazit zdrojový kód</string>
+    <string name="check_updates_action">Zkontrolovat aktualizace</string>
+    <string name="cancel_action">Zrušit</string>
+    <string name="edit_app_icon_title">Vybrat ikonu</string>
+    <string name="edit_app_icons">Ikony aplikací</string>
+    <string name="edit_builtin_icons">Vestavěné ikony</string>
+    <string name="edit_gallery">Galerie</string>
+    <string name="edit_restore_icon">Obnovit ikonu</string>
+    <string name="edit_restore_title">Obnovit název</string>
+    <string name="edit_app_name">Název aplikace</string>
+    <string name="select_app_title">Vybrat aplikaci</string>
+    <string name="settings_testing_header">Testování</string>
+    <string name="settings_test_telegram_title">Komunita</string>
+    <string name="settings_test_telegram_desc">Připojte se k naší skupině na Telegramu</string>
+    <string name="settings_test_crash_title">Testovat pád</string>
+    <string name="settings_test_crash_desc">Vynutit pád k otestování hlášení chyb</string>
+    <string name="settings_danger_zone_header">Nebezpečná zóna</string>
+    <string name="settings_reset_title">Obnovení továrního nastavení</string>
+    <string name="settings_reset_desc">Smazat všechna data a obnovit výchozí nastavení</string>
+    <string name="settings_reset_confirmation_desc">Jste si jisti, že chcete resetovat aplikaci? Všechny vaše uložené hry, přizpůsobení a nastavení budou trvale smazány. Tuto akci nelze vrátit zpět.</string>
+    <string name="settings_reset_action">Resetovat aplikaci</string>
+    <string name="uninstall">Odinstalovat</string>
+    <string name="settings_grid_columns_title">Sloupce mřížky</string>
+    <string name="add_favorite">Přidat do oblíbených</string>
+    <string name="remove_favorite">Odebrat z oblíbených</string>
+    <string name="favorites">Oblíbené</string>
+    <string name="feat_order_desc">Klepnutím na tlačítko tužky přejdete do režimu úprav nebo podržením hry upravíte její vzhled.</string>
+
+    <string name="controller_connected">Ovladač připojen</string>
+    <string name="action_settings">Nastavení</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Připojení ovladače</string>
+    <string name="settings_test_controller_desc">Zobrazit vyskakovací okno v telefonu, když je připojen ovladač</string>
+    <string name="settings_test_controller_simulate_title">Simulovat připojení ovladače</string>
+    <string name="settings_test_controller_simulate_desc">Zobrazit spodní lištu připojení ovladače</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Bezdrátový ovladač Xbox</string>
+    <string name="controller_name_playstation">Bezdrátový ovladač DualSense</string>
+    <string name="controller_name_joycon">Joy-Con (L/R)</string>
+    <string name="controller_generic">Obecný ovladač</string>
+    <string name="controller_name_generic">Neznámý ovladač</string>
+    <string name="settings_header_more">Více</string>
+    <string name="settings_game_bubble_title">Herní bublina</string>
+    <string name="settings_game_bubble_desc">Spravovat nastavení Herní bubliny</string>
+    <string name="settings_bubble_enable_title">Povolit Herní bublinu</string>
+    <string name="settings_bubble_autohide_title">Automatické skrývání</string>
+    <string name="settings_bubble_autohide_desc">Minimalizovat na okraj obrazovky po 3 sekundách</string>
+    <string name="settings_bubble_tools_title">Nástroje Herní bubliny</string>
+    <string name="tool_fps">Počítadlo FPS</string>
+    <string name="tool_dnd">Nerušit</string>
+    <string name="tool_brightness">Maximální jas</string>
+    <string name="tool_screenshot">Snímek obrazovky</string>
+    <string name="tool_ping">Sledování pingu</string>
+    <string name="tool_boost">Zvýšení RAM</string>
+    <string name="open_in_store">Otevřít v obchodě</string>
+    <string name="move_up">Posunout nahoru</string>
+    <string name="move_down">Posunout dolů</string>
+    <string name="stats">Statistiky</string>
+    <string name="perm_bluetooth_title">Přístup k Bluetooth</string>
+    <string name="perm_bluetooth_desc">Vyžadováno k připojení a správě vašich ovladačů.</string>
+    <string name="bubble_perm_title">Herní bublina</string>
+    <string name="bubble_perm_subtitle">Oprávnění</string>
+    <string name="bubble_perm_intro">Udělte tato oprávnění k povolení pokročilých funkcí Herní bubliny.</string>
+    <string name="perm_overlay_title">Zobrazení přes ostatní aplikace</string>
+    <string name="perm_overlay_desc">Vyžadováno pro zobrazení Herní bubliny během hraní.</string>
+    <string name="perm_dnd_title">Nerušit</string>
+    <string name="perm_dnd_desc">Přepnout režim Nerušit z Herní bubliny.</string>
+    <string name="perm_write_settings_title">Úprava systémového nastavení</string>
+    <string name="perm_write_settings_desc">Upravit jas obrazovky z Herní bubliny.</string>
+    <string name="perm_accessibility_title">Služba usnadnění</string>
+    <string name="perm_accessibility_desc">Pořizovat snímky obrazovky přímo z Herní bubliny.</string>
+
+</resources>

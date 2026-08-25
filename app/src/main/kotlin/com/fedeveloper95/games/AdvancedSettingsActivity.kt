@@ -13,26 +13,25 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.spring
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.expandVertically
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
-import androidx.compose.animation.shrinkVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
@@ -54,12 +53,14 @@ import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
@@ -72,7 +73,9 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -112,7 +115,7 @@ class AdvancedSettingsActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AdvancedSettingsScreen(onBack: () -> Unit) {
     val context = LocalContext.current
@@ -123,7 +126,6 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
     val haptic = LocalHapticFeedback.current
 
     var autoUpdates by remember { mutableStateOf(prefs.getBoolean("pref_auto_updates", true)) }
-
     var showRestartDialog by remember { mutableStateOf(false) }
     var showCommunitySheet by remember { mutableStateOf(false) }
     var showResetPopup by remember { mutableStateOf(false) }
@@ -198,6 +200,7 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
                 .padding(horizontal = 16.dp)
                 .padding(top = 8.dp, bottom = padding.calculateBottomPadding() + 48.dp)
         ) {
+
             Column(verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)) {
                 GameSettingsSegmentedItem(
                     icon = Icons.Rounded.Settings,
@@ -249,7 +252,6 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-
             Text(
                 text = stringResource(R.string.settings_backup_header),
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -290,7 +292,6 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-
             Text(
                 text = stringResource(R.string.settings_testing_header),
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -389,7 +390,6 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-
             Text(
                 text = stringResource(R.string.settings_danger_zone_header),
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -401,15 +401,51 @@ fun AdvancedSettingsScreen(onBack: () -> Unit) {
             )
 
             Column(verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)) {
-                GameSettingsSegmentedItem(
-                    icon = Icons.Rounded.DeleteForever,
-                    title = stringResource(R.string.settings_reset_title),
-                    subtitle = stringResource(R.string.settings_reset_desc),
-                    containerColor = MaterialTheme.colorScheme.errorContainer,
-                    iconColor = MaterialTheme.colorScheme.onErrorContainer,
-                    index = 0,
-                    count = 1,
-                    onClick = { showResetPopup = true }
+                SegmentedListItem(
+                    selected = false,
+                    onClick = { showResetPopup = true },
+                    modifier = Modifier.clip(RoundedCornerShape(20.dp)),
+                    colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
+                    shapes = ListItemDefaults.segmentedShapes(index = 0, count = 1),
+                    content = {
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(vertical = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            Box(
+                                modifier = Modifier
+                                    .size(48.dp)
+                                    .clip(CircleShape)
+                                    .background(MaterialTheme.colorScheme.errorContainer),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Rounded.DeleteForever,
+                                    contentDescription = null,
+                                    tint = MaterialTheme.colorScheme.onErrorContainer,
+                                    modifier = Modifier.size(24.dp)
+                                )
+                            }
+                            Spacer(modifier = Modifier.width(16.dp))
+                            Column(modifier = Modifier.weight(1f)) {
+                                Text(
+                                    text = stringResource(R.string.settings_reset_title),
+                                    fontFamily = GoogleSansFlex,
+                                    fontWeight = FontWeight.Normal,
+                                    style = MaterialTheme.typography.titleMedium
+                                )
+                                Text(
+                                    text = stringResource(R.string.settings_reset_desc),
+                                    fontFamily = GoogleSansFlex,
+                                    fontWeight = FontWeight.Normal,
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                                )
+                            }
+                        }
+                    }
                 )
             }
         }

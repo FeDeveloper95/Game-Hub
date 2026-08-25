@@ -11,7 +11,6 @@ import android.os.Build
 import android.os.Bundle
 import android.os.Process
 import android.provider.Settings
-import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -22,11 +21,13 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.RepeatMode
+import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateFloat
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.animateIntAsState
 import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -38,6 +39,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsPressedAsState
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -47,8 +49,10 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.foundation.rememberScrollState
@@ -56,31 +60,36 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.BrightnessHigh
 import androidx.compose.material.icons.rounded.Check
-import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.DoNotDisturbOn
 import androidx.compose.material.icons.rounded.DragHandle
+import androidx.compose.material.icons.rounded.Gamepad
 import androidx.compose.material.icons.rounded.GridView
 import androidx.compose.material.icons.rounded.History
 import androidx.compose.material.icons.rounded.KeyboardArrowDown
+import androidx.compose.material.icons.rounded.Layers
 import androidx.compose.material.icons.rounded.Notifications
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.ShoppingBag
-import androidx.compose.material.icons.rounded.SportsEsports
 import androidx.compose.material.icons.rounded.SwipeRight
 import androidx.compose.material.icons.rounded.Timer
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LargeFloatingActionButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.SegmentedListItem
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
@@ -96,15 +105,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.rotate
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Rect
-import androidx.compose.ui.geometry.RoundRect
-import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Outline
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.hapticfeedback.HapticFeedbackType
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalHapticFeedback
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -115,8 +120,6 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontVariation
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.content.ContextCompat
@@ -131,20 +134,23 @@ data class OnboardingPageInfo(
     val content: @Composable (onUpdateScrollState: (Boolean) -> Unit) -> Unit
 )
 
+fun isAccessibilityServiceEnabled(context: Context, service: Class<*>): Boolean {
+    val enabledServices = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+    val expectedComponentName = ComponentName(context, service).flattenToString()
+    return enabledServices?.contains(expectedComponentName) == true
+}
+
 class WelcomeActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         installSplashScreen()
         super.onCreate(savedInstanceState)
-
         val prefs = getSharedPreferences("game_hub_settings", MODE_PRIVATE)
         val isFirstRun = prefs.getBoolean("is_first_run", true)
         val forceShow = intent.getBooleanExtra("FORCE_SHOW", false)
-
         if (!isFirstRun && !forceShow) {
             finishOnboarding()
             return
         }
-
         enableEdgeToEdge()
         setContent {
             GameHubTheme {
@@ -171,16 +177,13 @@ class WelcomeActivity : ComponentActivity() {
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class, ExperimentalTextApi::class)
+@OptIn(ExperimentalFoundationApi::class, ExperimentalTextApi::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun WelcomePagerScreen(onFinished: () -> Unit) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
+    val prefs = remember { context.getSharedPreferences("game_hub_settings", Context.MODE_PRIVATE) }
     val commonAnimSpec = tween<Float>(durationMillis = 200, easing = FastOutSlowInEasing)
-
-    val topCardShape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 4.dp, bottomEnd = 4.dp)
-    val middleCardShape = RoundedCornerShape(4.dp)
-    val bottomCardShape = RoundedCornerShape(topStart = 4.dp, topEnd = 4.dp, bottomStart = 20.dp, bottomEnd = 20.dp)
 
     val customWelcomeFontFamily = FontFamily(
         Font(
@@ -207,7 +210,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
             } else true
         )
     }
-
     var canInstallPackages by remember {
         mutableStateOf(
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -215,20 +217,32 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
             } else true
         )
     }
-
     var hasUsageStatsPermission by remember {
         mutableStateOf(checkUsageStatsPermission(context))
     }
-
-    val isPixel = remember {
-        val brand = Build.BRAND
-        val manufacturer = Build.MANUFACTURER
-        brand.equals("google", ignoreCase = true) || manufacturer.equals("google", ignoreCase = true)
+    var hasBluetoothPermission by remember {
+        mutableStateOf(
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+            } else true
+        )
+    }
+    var hasOverlayPermission by remember {
+        mutableStateOf(Settings.canDrawOverlays(context))
+    }
+    var hasDndPermission by remember {
+        mutableStateOf((context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager).isNotificationPolicyAccessGranted)
+    }
+    var hasWriteSettingsPermission by remember {
+        mutableStateOf(Settings.System.canWrite(context))
+    }
+    var hasAccessibilityPermission by remember {
+        mutableStateOf(isAccessibilityServiceEnabled(context, com.fedeveloper95.games.services.GameBubbleAccessibilityService::class.java))
     }
 
     var isLastPageScrolledToEnd by remember { mutableStateOf(false) }
-
     val lifecycleOwner = LocalLifecycleOwner.current
+
     DisposableEffect(lifecycleOwner) {
         val observer = LifecycleEventObserver { _, event ->
             if (event == Lifecycle.Event.ON_RESUME) {
@@ -238,7 +252,21 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                     canInstallPackages = context.packageManager.canRequestPackageInstalls()
                 }
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                    hasBluetoothPermission = ContextCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+                }
                 hasUsageStatsPermission = checkUsageStatsPermission(context)
+
+                hasOverlayPermission = Settings.canDrawOverlays(context)
+                hasDndPermission = (context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager).isNotificationPolicyAccessGranted
+                hasWriteSettingsPermission = Settings.System.canWrite(context)
+                hasAccessibilityPermission = isAccessibilityServiceEnabled(context, com.fedeveloper95.games.services.GameBubbleAccessibilityService::class.java)
+
+                prefs.edit().apply {
+                    putBoolean("pref_bubble_tool_dnd", hasDndPermission)
+                    putBoolean("pref_bubble_tool_brightness", hasWriteSettingsPermission)
+                    putBoolean("pref_bubble_tool_screenshot", hasAccessibilityPermission)
+                }.apply()
             }
         }
         lifecycleOwner.lifecycle.addObserver(observer)
@@ -248,6 +276,11 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
     val notificationLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
         onResult = { isGranted -> hasNotificationPermission = isGranted }
+    )
+
+    val bluetoothLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.RequestPermission(),
+        onResult = { isGranted -> hasBluetoothPermission = isGranted }
     )
 
     val installParamsLauncher = rememberLauncherForActivityResult(
@@ -265,8 +298,7 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.Start
                 ) {
-                    Spacer(modifier = Modifier.height(80.dp))
-
+                    Spacer(modifier = Modifier.height(48.dp))
                     Text(
                         text = stringResource(R.string.welcome_to),
                         style = thinHeaderStyle,
@@ -278,11 +310,10 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                         fontWeight = FontWeight.Bold,
                         fontSize = 48.sp,
                         color = MaterialTheme.colorScheme.primary,
-                        lineHeight = 56.sp
+                        lineHeight = 48.sp,
+                        modifier = Modifier.offset(y = (-12).dp)
                     )
-
                     Spacer(modifier = Modifier.weight(1f))
-
                     Column(
                         modifier = Modifier.fillMaxWidth(),
                         horizontalAlignment = Alignment.CenterHorizontally
@@ -290,9 +321,7 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                         RotatingShapeContainer(
                             modifier = Modifier.size(280.dp)
                         )
-
                         Spacer(modifier = Modifier.height(32.dp))
-
                         Text(
                             text = stringResource(R.string.welcome_preparing_subtitle),
                             fontFamily = GoogleSansFlex,
@@ -311,8 +340,7 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.Start
                 ) {
-                    Spacer(modifier = Modifier.height(80.dp))
-
+                    Spacer(modifier = Modifier.height(48.dp))
                     Text(
                         text = stringResource(R.string.perm_required),
                         style = thinHeaderStyle,
@@ -324,11 +352,10 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                         fontWeight = FontWeight.Bold,
                         fontSize = 48.sp,
                         color = MaterialTheme.colorScheme.primary,
-                        lineHeight = 56.sp
+                        lineHeight = 48.sp,
+                        modifier = Modifier.offset(y = (-12).dp)
                     )
-
-                    Spacer(modifier = Modifier.height(16.dp))
-
+                    Spacer(modifier = Modifier.height(4.dp))
                     Text(
                         text = stringResource(R.string.perm_intro_text),
                         style = MaterialTheme.typography.bodyLarge.copy(
@@ -336,21 +363,24 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                         ),
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
-
-                    Spacer(modifier = Modifier.height(32.dp))
-
+                    Spacer(modifier = Modifier.height(16.dp))
                     Column(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .verticalScroll(rememberScrollState())
+                            .verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
                     ) {
-                        PermissionCard(
+                        val permCount = 4
+                        var permIndex = 0
+
+                        WelcomeSegmentedItem(
                             icon = Icons.Rounded.Notifications,
                             iconColor = Color(0xFFffaee4),
                             iconTint = Color(0xFF8d0053),
                             title = stringResource(R.string.perm_notif_title),
                             description = stringResource(R.string.perm_notif_desc),
-                            shape = topCardShape,
+                            index = permIndex++,
+                            count = permCount,
                             control = {
                                 Switch(
                                     checked = hasNotificationPermission,
@@ -363,6 +393,11 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                         } else {
                                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                                                 notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                                            } else {
+                                                val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                                                    putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                                                }
+                                                context.startActivity(intent)
                                             }
                                         }
                                     },
@@ -384,49 +419,70 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                                 } else {
                                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
                                         notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+                                    } else {
+                                        val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).apply {
+                                            putExtra(Settings.EXTRA_APP_PACKAGE, context.packageName)
+                                        }
+                                        context.startActivity(intent)
                                     }
                                 }
                             }
                         )
 
-                        Spacer(modifier = Modifier.height(2.dp))
-
-                        PermissionCard(
+                        WelcomeSegmentedItem(
                             icon = Icons.Rounded.Timer,
                             iconColor = Color(0xFFd8b9fc),
                             iconTint = Color(0xFF5629a4),
                             title = stringResource(R.string.feat_history_title),
                             description = stringResource(R.string.perm_usage_desc),
-                            shape = middleCardShape,
+                            index = permIndex++,
+                            count = permCount,
                             control = {
-                                Icon(
-                                    imageVector = if (hasUsageStatsPermission) Icons.Rounded.Check else Icons.Rounded.ChevronRight,
-                                    contentDescription = null,
-                                    tint = if (hasUsageStatsPermission) MaterialTheme.colorScheme.primary else MaterialTheme.colorScheme.onSurfaceVariant
+                                Switch(
+                                    checked = hasUsageStatsPermission,
+                                    onCheckedChange = {
+                                        context.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
+                                    },
+                                    thumbContent = {
+                                        Icon(
+                                            imageVector = if (hasUsageStatsPermission) Icons.Rounded.Check else Icons.Rounded.Close,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
                                 )
                             },
                             onClick = {
-                                if (!hasUsageStatsPermission) {
-                                    val intent = Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS)
-                                    context.startActivity(intent)
-                                }
+                                context.startActivity(Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS))
                             }
                         )
 
-                        Spacer(modifier = Modifier.height(2.dp))
-
-                        PermissionCard(
+                        WelcomeSegmentedItem(
                             icon = R.drawable.ic_phone_update,
                             iconColor = Color(0xFFffb683),
                             iconTint = Color(0xFF753403),
                             title = stringResource(R.string.perm_install_title),
                             description = stringResource(R.string.perm_install_desc),
-                            shape = if (isPixel) middleCardShape else bottomCardShape,
+                            index = permIndex++,
+                            count = permCount,
                             control = {
-                                Icon(
-                                    imageVector = Icons.Rounded.ChevronRight,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.onSurfaceVariant
+                                Switch(
+                                    checked = canInstallPackages,
+                                    onCheckedChange = {
+                                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                            val intent = Intent(Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
+                                                data = Uri.parse("package:${context.packageName}")
+                                            }
+                                            installParamsLauncher.launch(intent)
+                                        }
+                                    },
+                                    thumbContent = {
+                                        Icon(
+                                            imageVector = if (canInstallPackages) Icons.Rounded.Check else Icons.Rounded.Close,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
                                 )
                             },
                             onClick = {
@@ -439,34 +495,248 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                             }
                         )
 
-                        if (isPixel) {
-                            Spacer(modifier = Modifier.height(2.dp))
-
-                            PermissionCard(
-                                icon = Icons.Rounded.SportsEsports,
-                                iconColor = Color(0xFF67d4ff),
-                                iconTint = Color(0xFF004e5d),
-                                title = stringResource(R.string.perm_dashboard_title),
-                                description = stringResource(R.string.perm_dashboard_desc),
-                                shape = bottomCardShape,
-                                control = {
-                                    Icon(
-                                        imageVector = Icons.Rounded.ChevronRight,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.onSurfaceVariant
-                                    )
-                                },
-                                onClick = {
-                                    try {
-                                        val intent = Intent()
-                                        intent.component = ComponentName("com.google.android.gms", "com.google.android.gms.gp.gameservice.SettingsActivity")
-                                        context.startActivity(intent)
-                                    } catch (e: Exception) {
-                                        Toast.makeText(context, "Google Play Games not found", Toast.LENGTH_SHORT).show()
+                        WelcomeSegmentedItem(
+                            icon = Icons.Rounded.Gamepad,
+                            iconColor = Color(0xFFcba6ff),
+                            iconTint = Color(0xFF320073),
+                            title = stringResource(R.string.perm_bluetooth_title),
+                            description = stringResource(R.string.perm_bluetooth_desc),
+                            index = permIndex++,
+                            count = permCount,
+                            control = {
+                                Switch(
+                                    checked = hasBluetoothPermission,
+                                    onCheckedChange = {
+                                        if (hasBluetoothPermission) {
+                                            val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                                data = Uri.parse("package:${context.packageName}")
+                                            }
+                                            context.startActivity(intent)
+                                        } else {
+                                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                                bluetoothLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT)
+                                            }
+                                        }
+                                    },
+                                    thumbContent = {
+                                        Icon(
+                                            imageVector = if (hasBluetoothPermission) Icons.Rounded.Check else Icons.Rounded.Close,
+                                            contentDescription = null,
+                                            modifier = Modifier.size(16.dp)
+                                        )
+                                    }
+                                )
+                            },
+                            onClick = {
+                                if (hasBluetoothPermission) {
+                                    val intent = Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS).apply {
+                                        data = Uri.parse("package:${context.packageName}")
+                                    }
+                                    context.startActivity(intent)
+                                } else {
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+                                        bluetoothLauncher.launch(Manifest.permission.BLUETOOTH_CONNECT)
                                     }
                                 }
+                            }
+                        )
+
+                        Spacer(modifier = Modifier.height(100.dp))
+                    }
+                }
+            }
+        ),
+        OnboardingPageInfo(
+            content = { _ ->
+                Column(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalAlignment = Alignment.Start
+                ) {
+                    Spacer(modifier = Modifier.height(48.dp))
+                    Text(
+                        text = stringResource(R.string.bubble_perm_title),
+                        style = thinHeaderStyle,
+                        color = MaterialTheme.colorScheme.onBackground
+                    )
+                    Text(
+                        text = stringResource(R.string.bubble_perm_subtitle),
+                        fontFamily = GoogleSansFlex,
+                        fontWeight = FontWeight.Bold,
+                        fontSize = 48.sp,
+                        color = MaterialTheme.colorScheme.primary,
+                        lineHeight = 48.sp,
+                        modifier = Modifier.offset(y = (-12).dp)
+                    )
+                    Spacer(modifier = Modifier.height(4.dp))
+                    Text(
+                        text = stringResource(R.string.bubble_perm_intro),
+                        style = MaterialTheme.typography.bodyLarge.copy(
+                            fontFamily = GoogleSansFlex
+                        ),
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .verticalScroll(rememberScrollState()),
+                        verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
+                    ) {
+                        var isBubbleEnabled by remember { mutableStateOf(prefs.getBoolean("pref_bubble_enabled", true)) }
+
+                        val haptic = LocalHapticFeedback.current
+                        val interactionSource = remember { MutableInteractionSource() }
+                        val shape = RoundedCornerShape(64.dp)
+
+                        val handleBubbleToggle = {
+                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                            isBubbleEnabled = !isBubbleEnabled
+                            prefs.edit().putBoolean("pref_bubble_enabled", isBubbleEnabled).apply()
+                        }
+
+                        Card(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(shape)
+                                .clickable(
+                                    interactionSource = interactionSource,
+                                    indication = LocalIndication.current
+                                ) { handleBubbleToggle() },
+                            shape = shape,
+                            colors = CardDefaults.cardColors(
+                                containerColor = MaterialTheme.colorScheme.primaryContainer,
+                                contentColor = MaterialTheme.colorScheme.onPrimaryContainer
+                            ),
+                            elevation = CardDefaults.cardElevation(0.dp)
+                        ) {
+                            ListItem(
+                                modifier = Modifier.padding(vertical = 4.dp),
+                                headlineContent = {
+                                    Text(
+                                        text = stringResource(R.string.settings_bubble_enable_title),
+                                        fontFamily = GoogleSansFlex,
+                                        fontWeight = FontWeight.Bold,
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onPrimaryContainer
+                                    )
+                                },
+                                trailingContent = {
+                                    Switch(
+                                        checked = isBubbleEnabled,
+                                        onCheckedChange = { handleBubbleToggle() },
+                                        thumbContent = {
+                                            Icon(
+                                                imageVector = if (isBubbleEnabled) Icons.Rounded.Check else Icons.Rounded.Close,
+                                                contentDescription = null,
+                                                modifier = Modifier.size(SwitchDefaults.IconSize)
+                                            )
+                                        }
+                                    )
+                                },
+                                colors = ListItemDefaults.colors(containerColor = Color.Transparent)
                             )
                         }
+
+                        Spacer(modifier = Modifier.height(16.dp))
+
+                        val bubbleCount = 4
+                        var bubbleIndex = 0
+
+                        WelcomeSegmentedItem(
+                            icon = Icons.Rounded.Layers,
+                            iconColor = Color(0xFF67d4ff),
+                            iconTint = Color(0xFF004e5d),
+                            title = stringResource(R.string.perm_overlay_title),
+                            description = stringResource(R.string.perm_overlay_desc),
+                            index = bubbleIndex++,
+                            count = bubbleCount,
+                            enabled = isBubbleEnabled,
+                            control = {
+                                Switch(
+                                    checked = hasOverlayPermission,
+                                    enabled = isBubbleEnabled,
+                                    onCheckedChange = {
+                                        context.startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}")))
+                                    },
+                                    thumbContent = { Icon(if (hasOverlayPermission) Icons.Rounded.Check else Icons.Rounded.Close, null, modifier = Modifier.size(16.dp)) }
+                                )
+                            },
+                            onClick = {
+                                context.startActivity(Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}")))
+                            }
+                        )
+
+                        WelcomeSegmentedItem(
+                            icon = Icons.Rounded.DoNotDisturbOn,
+                            iconColor = Color(0xFFffb3ae),
+                            iconTint = Color(0xFF8a1a16),
+                            title = stringResource(R.string.perm_dnd_title),
+                            description = stringResource(R.string.perm_dnd_desc),
+                            index = bubbleIndex++,
+                            count = bubbleCount,
+                            enabled = isBubbleEnabled,
+                            control = {
+                                Switch(
+                                    checked = hasDndPermission,
+                                    enabled = isBubbleEnabled,
+                                    onCheckedChange = {
+                                        context.startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                                    },
+                                    thumbContent = { Icon(if (hasDndPermission) Icons.Rounded.Check else Icons.Rounded.Close, null, modifier = Modifier.size(16.dp)) }
+                                )
+                            },
+                            onClick = {
+                                context.startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                            }
+                        )
+
+                        WelcomeSegmentedItem(
+                            icon = Icons.Rounded.BrightnessHigh,
+                            iconColor = Color(0xFFfcbd00),
+                            iconTint = Color(0xFF6d3a01),
+                            title = stringResource(R.string.perm_write_settings_title),
+                            description = stringResource(R.string.perm_write_settings_desc),
+                            index = bubbleIndex++,
+                            count = bubbleCount,
+                            enabled = isBubbleEnabled,
+                            control = {
+                                Switch(
+                                    checked = hasWriteSettingsPermission,
+                                    enabled = isBubbleEnabled,
+                                    onCheckedChange = {
+                                        context.startActivity(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:${context.packageName}")))
+                                    },
+                                    thumbContent = { Icon(if (hasWriteSettingsPermission) Icons.Rounded.Check else Icons.Rounded.Close, null, modifier = Modifier.size(16.dp)) }
+                                )
+                            },
+                            onClick = {
+                                context.startActivity(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:${context.packageName}")))
+                            }
+                        )
+
+                        WelcomeSegmentedItem(
+                            icon = R.drawable.screenshot_frame,
+                            iconColor = Color(0xFF80da88),
+                            iconTint = Color(0xFF00522c),
+                            title = stringResource(R.string.perm_accessibility_title),
+                            description = stringResource(R.string.perm_accessibility_desc),
+                            index = bubbleIndex++,
+                            count = bubbleCount,
+                            enabled = isBubbleEnabled,
+                            control = {
+                                Switch(
+                                    checked = hasAccessibilityPermission,
+                                    enabled = isBubbleEnabled,
+                                    onCheckedChange = {
+                                        context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                                    },
+                                    thumbContent = { Icon(if (hasAccessibilityPermission) Icons.Rounded.Check else Icons.Rounded.Close, null, modifier = Modifier.size(16.dp)) }
+                                )
+                            },
+                            onClick = {
+                                context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                            }
+                        )
 
                         Spacer(modifier = Modifier.height(100.dp))
                     }
@@ -479,9 +749,8 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                     modifier = Modifier.fillMaxSize(),
                     horizontalAlignment = Alignment.Start
                 ) {
-                    Spacer(modifier = Modifier.height(80.dp))
-
-                    Column(modifier = Modifier.padding(bottom = 16.dp)) {
+                    Spacer(modifier = Modifier.height(48.dp))
+                    Column(modifier = Modifier.padding(bottom = 8.dp)) {
                         Text(
                             text = stringResource(R.string.feat_discover),
                             style = thinHeaderStyle,
@@ -493,11 +762,10 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                             fontWeight = FontWeight.Bold,
                             fontSize = 48.sp,
                             color = MaterialTheme.colorScheme.primary,
-                            lineHeight = 56.sp
+                            lineHeight = 48.sp,
+                            modifier = Modifier.offset(y = (-12).dp)
                         )
-
-                        Spacer(modifier = Modifier.height(16.dp))
-
+                        Spacer(modifier = Modifier.height(4.dp))
                         Text(
                             text = stringResource(R.string.feat_intro),
                             style = MaterialTheme.typography.bodyLarge.copy(
@@ -506,10 +774,8 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
-
                     Box(modifier = Modifier.weight(1f)) {
                         val scrollState = rememberScrollState()
-
                         val isAtBottom by remember {
                             derivedStateOf {
                                 val layoutInfo = scrollState.maxValue
@@ -524,81 +790,80 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                         Column(
                             modifier = Modifier
                                 .fillMaxSize()
-                                .verticalScroll(scrollState)
+                                .verticalScroll(scrollState),
+                            verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
                         ) {
-                            FeatureCard(
+                            val featCount = 7
+                            var featIndex = 0
+
+                            WelcomeSegmentedItem(
                                 icon = Icons.Rounded.DragHandle,
                                 iconColor = Color(0xFFfcbd00),
                                 iconTint = Color(0xFF6d3a01),
                                 title = stringResource(R.string.feat_order_title),
                                 description = stringResource(R.string.feat_order_desc),
-                                shape = topCardShape
+                                index = featIndex++,
+                                count = featCount
                             )
 
-                            Spacer(modifier = Modifier.height(2.dp))
-
-                            FeatureCard(
+                            WelcomeSegmentedItem(
                                 icon = Icons.Rounded.GridView,
                                 iconColor = Color(0xFF80da88),
                                 iconTint = Color(0xFF00522c),
                                 title = stringResource(R.string.feat_layout_title),
                                 description = stringResource(R.string.feat_layout_desc),
-                                shape = middleCardShape
+                                index = featIndex++,
+                                count = featCount
                             )
 
-                            Spacer(modifier = Modifier.height(2.dp))
-
-                            FeatureCard(
+                            WelcomeSegmentedItem(
                                 icon = Icons.Rounded.Person,
                                 iconColor = Color(0xFFffb683),
                                 iconTint = Color(0xFF753403),
                                 title = stringResource(R.string.feat_name_title),
                                 description = stringResource(R.string.feat_name_desc),
-                                shape = middleCardShape
+                                index = featIndex++,
+                                count = featCount
                             )
 
-                            Spacer(modifier = Modifier.height(2.dp))
-
-                            FeatureCard(
+                            WelcomeSegmentedItem(
                                 icon = Icons.Rounded.SwipeRight,
                                 iconColor = Color(0xFFffb3ae),
                                 iconTint = Color(0xFF8a1a16),
                                 title = stringResource(R.string.feat_manage_title),
                                 description = stringResource(R.string.feat_manage_desc),
-                                shape = middleCardShape
+                                index = featIndex++,
+                                count = featCount
                             )
 
-                            Spacer(modifier = Modifier.height(2.dp))
-
-                            FeatureCard(
+                            WelcomeSegmentedItem(
                                 icon = Icons.Rounded.ShoppingBag,
                                 iconColor = Color(0xFFffaee4),
                                 iconTint = Color(0xFF8d0053),
                                 title = stringResource(R.string.feat_store_title),
                                 description = stringResource(R.string.feat_store_desc),
-                                shape = middleCardShape
+                                index = featIndex++,
+                                count = featCount
                             )
 
-                            Spacer(modifier = Modifier.height(2.dp))
-
-                            FeatureCard(
+                            WelcomeSegmentedItem(
                                 icon = Icons.Rounded.History,
                                 iconColor = Color(0xFFd8b9fc),
                                 iconTint = Color(0xFF5629a4),
                                 title = stringResource(R.string.feat_history_title),
                                 description = stringResource(R.string.feat_history_desc),
-                                shape = middleCardShape
+                                index = featIndex++,
+                                count = featCount
                             )
 
-                            Spacer(modifier = Modifier.height(2.dp))
-
-                            FeatureCard(
+                            WelcomeSegmentedItem(
                                 icon = R.drawable.ic_phone_update,
                                 iconColor = Color(0xFF67d4ff),
                                 iconTint = Color(0xFF004e5d),
                                 title = stringResource(R.string.feat_update_title),
                                 description = stringResource(R.string.feat_update_desc),
-                                shape = bottomCardShape
+                                index = featIndex++,
+                                count = featCount
                             )
 
                             Spacer(modifier = Modifier.height(100.dp))
@@ -675,7 +940,6 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
             animationSpec = commonAnimSpec,
             label = "backWeight"
         )
-
         val spacerWeight by animateFloatAsState(
             targetValue = if (isFirstPage) 0.0001f else 0.05f,
             animationSpec = commonAnimSpec,
@@ -714,21 +978,17 @@ fun WelcomePagerScreen(onFinished: () -> Unit) {
                     modifier = Modifier.fillMaxSize()
                 )
             }
-
             Spacer(modifier = Modifier.weight(spacerWeight))
-
             Box(
                 modifier = Modifier
                     .weight(1f)
                     .fillMaxHeight()
             ) {
                 val isNextEnabled = !isLastPage || isLastPageScrolledToEnd
-
                 val alphaNext by animateFloatAsState(
                     targetValue = if (isNextEnabled) 1f else 0.5f,
                     label = "nextAlpha"
                 )
-
                 ExpressiveButton(
                     text = if (isLastPage) stringResource(R.string.get_started) else stringResource(R.string.next),
                     onClick = {
@@ -787,7 +1047,6 @@ fun RotatingShapeContainer(modifier: Modifier = Modifier) {
                 .fillMaxSize()
                 .rotate(rotation)
         )
-
         Icon(
             painter = painterResource(id = R.drawable.ic_launcher_monochrome),
             contentDescription = null,
@@ -797,208 +1056,36 @@ fun RotatingShapeContainer(modifier: Modifier = Modifier) {
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
-fun PermissionCard(
+fun WelcomeSegmentedItem(
     icon: Any,
     iconColor: Color,
     iconTint: Color,
     title: String,
     description: String,
-    shape: Shape,
-    control: @Composable () -> Unit,
-    onClick: () -> Unit
-) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val pressProgress by animateFloatAsState(
-        targetValue = if (isPressed) 1f else 0f,
-        animationSpec = tween(durationMillis = 200),
-        label = "anim_shape"
-    )
-
-    val animatedShape = remember(shape, pressProgress) {
-        if (shape is RoundedCornerShape) {
-            object : Shape {
-                override fun createOutline(
-                    size: Size,
-                    layoutDirection: LayoutDirection,
-                    density: Density
-                ): Outline {
-                    val targetPx = with(density) { 20.dp.toPx() }
-                    fun lerp(start: Float, stop: Float, fraction: Float) =
-                        (1 - fraction) * start + fraction * stop
-
-                    val ts = lerp(shape.topStart.toPx(size, density), targetPx, pressProgress)
-                    val te = lerp(shape.topEnd.toPx(size, density), targetPx, pressProgress)
-                    val bs = lerp(shape.bottomStart.toPx(size, density), targetPx, pressProgress)
-                    val be = lerp(shape.bottomEnd.toPx(size, density), targetPx, pressProgress)
-
-                    return Outline.Rounded(
-                        RoundRect(
-                            rect = Rect(
-                                0f,
-                                0f,
-                                size.width,
-                                size.height
-                            ),
-                            topLeft = CornerRadius(ts),
-                            topRight = CornerRadius(te),
-                            bottomRight = CornerRadius(be),
-                            bottomLeft = CornerRadius(bs)
-                        )
-                    )
-                }
-            }
-        } else shape
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(animatedShape),
-        shape = animatedShape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(
-                    text = title,
-                    fontFamily = GoogleSansFlex,
-                    fontWeight = FontWeight.Normal,
-                    style = MaterialTheme.typography.titleMedium
-                )
-            },
-            supportingContent = {
-                Text(
-                    text = description,
-                    fontFamily = GoogleSansFlex,
-                    fontWeight = FontWeight.Normal,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            },
-            leadingContent = {
-                Box(
-                    modifier = Modifier
-                        .size(48.dp)
-                        .clip(CircleShape)
-                        .background(iconColor),
-                    contentAlignment = Alignment.Center
-                ) {
-                    if (icon is ImageVector) {
-                        Icon(
-                            imageVector = icon,
-                            contentDescription = null,
-                            tint = iconTint,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    } else if (icon is Int) {
-                        Icon(
-                            painter = painterResource(id = icon),
-                            contentDescription = null,
-                            tint = iconTint,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
-                }
-            },
-            trailingContent = control,
-            modifier = Modifier
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = LocalIndication.current,
-                    onClick = onClick
-                )
-                .padding(vertical = 4.dp),
-            colors = ListItemDefaults.colors(
-                containerColor = Color.Transparent
-            )
-        )
-    }
-}
-
-@Composable
-fun FeatureCard(
-    icon: Any,
-    iconColor: Color,
-    iconTint: Color,
-    title: String,
-    description: String,
-    shape: Shape,
+    index: Int,
+    count: Int,
+    enabled: Boolean = true,
+    control: @Composable (() -> Unit)? = null,
     onClick: () -> Unit = {}
 ) {
-    val interactionSource = remember { MutableInteractionSource() }
-    val isPressed by interactionSource.collectIsPressedAsState()
-    val pressProgress by animateFloatAsState(
-        targetValue = if (isPressed) 1f else 0f,
-        animationSpec = tween(durationMillis = 200),
-        label = "anim_shape"
-    )
-
-    val animatedShape = remember(shape, pressProgress) {
-        if (shape is RoundedCornerShape) {
-            object : Shape {
-                override fun createOutline(
-                    size: Size,
-                    layoutDirection: LayoutDirection,
-                    density: Density
-                ): Outline {
-                    val targetPx = with(density) { 20.dp.toPx() }
-                    fun lerp(start: Float, stop: Float, fraction: Float) =
-                        (1 - fraction) * start + fraction * stop
-
-                    val ts = lerp(shape.topStart.toPx(size, density), targetPx, pressProgress)
-                    val te = lerp(shape.topEnd.toPx(size, density), targetPx, pressProgress)
-                    val bs = lerp(shape.bottomStart.toPx(size, density), targetPx, pressProgress)
-                    val be = lerp(shape.bottomEnd.toPx(size, density), targetPx, pressProgress)
-
-                    return Outline.Rounded(
-                        RoundRect(
-                            rect = Rect(
-                                0f,
-                                0f,
-                                size.width,
-                                size.height
-                            ),
-                            topLeft = CornerRadius(ts),
-                            topRight = CornerRadius(te),
-                            bottomRight = CornerRadius(be),
-                            bottomLeft = CornerRadius(bs)
-                        )
-                    )
-                }
-            }
-        } else shape
-    }
-
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clip(animatedShape),
-        shape = animatedShape,
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
-        elevation = CardDefaults.cardElevation(defaultElevation = 0.dp)
-    ) {
-        ListItem(
-            headlineContent = {
-                Text(
-                    text = title,
-                    fontFamily = GoogleSansFlex,
-                    fontWeight = FontWeight.Normal,
-                    style = MaterialTheme.typography.titleMedium
-                )
-            },
-            supportingContent = {
-                Text(
-                    text = description,
-                    fontFamily = GoogleSansFlex,
-                    fontWeight = FontWeight.Normal,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onSurfaceVariant
-                )
-            },
-            leadingContent = {
+    SegmentedListItem(
+        selected = false,
+        onClick = { if (enabled) onClick() },
+        modifier = if (count <= 1) Modifier.clip(RoundedCornerShape(28.dp)) else Modifier,
+        colors = ListItemDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+        ),
+        shapes = ListItemDefaults.segmentedShapes(index = index, count = count),
+        content = {
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .alpha(if (enabled) 1f else 0.5f)
+                    .padding(vertical = 4.dp),
+                verticalAlignment = Alignment.CenterVertically
+            ) {
                 Box(
                     modifier = Modifier
                         .size(48.dp)
@@ -1022,19 +1109,31 @@ fun FeatureCard(
                         )
                     }
                 }
-            },
-            modifier = Modifier
-                .clickable(
-                    interactionSource = interactionSource,
-                    indication = LocalIndication.current,
-                    onClick = onClick
-                )
-                .padding(vertical = 4.dp),
-            colors = ListItemDefaults.colors(
-                containerColor = Color.Transparent
-            )
-        )
-    }
+                Spacer(modifier = Modifier.width(16.dp))
+                Column(modifier = Modifier.weight(1f)) {
+                    Text(
+                        text = title,
+                        fontFamily = GoogleSansFlex,
+                        fontWeight = FontWeight.Normal,
+                        style = MaterialTheme.typography.titleMedium
+                    )
+                    if (description.isNotEmpty()) {
+                        Text(
+                            text = description,
+                            fontFamily = GoogleSansFlex,
+                            fontWeight = FontWeight.Normal,
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onSurfaceVariant
+                        )
+                    }
+                }
+                if (control != null) {
+                    Spacer(modifier = Modifier.width(16.dp))
+                    control()
+                }
+            }
+        }
+    )
 }
 
 @Composable
@@ -1055,10 +1154,12 @@ fun ExpressiveButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-
     val cornerPercent by animateIntAsState(
-        targetValue = if (isPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "btnMorph"
     )
 
@@ -1097,10 +1198,12 @@ fun ExpressiveOutlinedButton(
 ) {
     val interactionSource = remember { MutableInteractionSource() }
     val isPressed by interactionSource.collectIsPressedAsState()
-
     val cornerPercent by animateIntAsState(
-        targetValue = if (isPressed) 15 else 50,
-        animationSpec = tween(durationMillis = 200),
+        targetValue = if (isPressed) 20 else 50,
+        animationSpec = spring(
+            dampingRatio = Spring.DampingRatioMediumBouncy,
+            stiffness = Spring.StiffnessMediumLow
+        ),
         label = "btnMorph"
     )
 

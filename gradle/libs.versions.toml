@@ -1,20 +1,21 @@
 [versions]
 agp = "9.2.1"
 composeMarkdown = "0.5.4"
-kotlin = "2.4.0"
+kotlin = "2.4.10"
 coreKtx = "1.19.0"
 coreSplashscreen = "1.2.0"
 graphicsShapes = "1.1.0"
 lifecycleRuntimeKtx = "2.11.0"
 activityCompose = "1.13.0"
-composeBom = "2026.06.01"
-material3 = "1.5.0-alpha23"
+composeBom = "2026.08.00"
+material3 = "1.5.0-alpha26"
 coil = "2.7.0"
 reorderable = "3.1.0"
-foundation = "1.11.4"
-uiText = "1.11.4"
-animation = "1.11.4"
-animationCore = "1.11.4"
+foundation = "1.12.0"
+uiText = "1.12.0"
+animation = "1.12.0"
+animationCore = "1.12.0"
+material3Version = "1.5.0-alpha26"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -37,6 +38,7 @@ androidx-compose-foundation = { group = "androidx.compose.foundation", name = "f
 androidx-compose-ui-text = { group = "androidx.compose.ui", name = "ui-text", version.ref = "uiText" }
 androidx-compose-animation = { group = "androidx.compose.animation", name = "animation", version.ref = "animation" }
 androidx-compose-animation-core = { group = "androidx.compose.animation", name = "animation-core", version.ref = "animationCore" }
+androidx-material3 = { group = "androidx.compose.material3", name = "material3", version.ref = "material3Version" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

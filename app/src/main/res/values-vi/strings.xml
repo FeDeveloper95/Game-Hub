@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">trò chơi đã sẵn sàng</string>
+    <string name="add_game">Thêm trò chơi</string>
+    <string name="search_apps">Tìm kiếm ứng dụng…</string>
+    <string name="cancel">Hủy</string>
+    <string name="remove">Xóa</string>
+    <string name="play">Chơi</string>
+    <string name="later">Để sau</string>
+    <string name="save">Lưu</string>
+    <string name="discard">Hủy</string>
+
+    <string name="next">Tiếp theo</string>
+    <string name="back">Quay lại</string>
+    <string name="get_started">Bắt đầu</string>
+
+    <string name="welcome_to">Chào mừng đến với</string>
+    <string name="welcome_preparing_subtitle">Hãy để chúng tôi chuẩn bị mọi thứ cho bạn.</string>
+
+    <string name="perm_required">Được đề xuất</string>
+    <string name="perm_permissions">Quyền</string>
+    <string name="perm_intro_text">Các quyền này là tùy chọn nhưng rất được khuyến nghị để Game Hub hoạt động trơn tru.</string>
+
+    <string name="perm_notif_title">Thông báo</string>
+    <string name="perm_notif_desc">Biết ngay khi có bản cập nhật mới.</string>
+
+    <string name="perm_install_title">Cài đặt ứng dụng</string>
+    <string name="perm_install_desc">Bắt buộc để tải xuống và cài đặt các bản cập nhật.</string>
+
+    <string name="perm_usage_desc">Bắt buộc để theo dõi thời gian chơi trò chơi và số liệu thống kê khởi chạy.</string>
+
+    <string name="feat_discover">Khám phá</string>
+    <string name="feat_features">Tính năng</string>
+    <string name="feat_intro">Dưới đây là những gì bạn có thể làm với Game Hub mới của mình.</string>
+
+    <string name="feat_order_title">Kiểm soát toàn diện</string>
+
+    <string name="feat_layout_title">Thay đổi bố cục</string>
+    <string name="feat_layout_desc">Chuyển đến Cài đặt để thay đổi kiểu thẻ: Mặc định, Ngang hoặc Lưới. Tùy chỉnh theo ý bạn.</string>
+
+    <string name="feat_name_title">Dấu ấn cá nhân</string>
+    <string name="feat_name_desc">Hiển thị tên của bạn trong tiêu đề. Tùy chỉnh hoặc ẩn nó trong Cài đặt.</string>
+
+    <string name="feat_manage_title">Quản lý dễ dàng</string>
+    <string name="feat_manage_desc">Nhấn + để thêm trò chơi. Vuốt sang phải để xóa, vuốt sang trái để xem số liệu thống kê về thời gian chơi.</string>
+
+    <string name="feat_update_title">Luôn cập nhật</string>
+    <string name="feat_update_desc">Kiểm tra các bản cập nhật Game Hub trực tiếp trong Cài đặt ứng dụng. Không bao giờ bỏ lỡ bất kỳ tính năng nào.</string>
+
+    <string name="feat_store_title">Khám phá trò chơi</string>
+    <string name="feat_store_desc">Tìm các tựa game mới thông qua Cửa hàng Google Play. Bạn có thể vô hiệu hóa điều này trong Cài đặt.</string>
+
+    <string name="feat_history_title">Lịch sử chơi</string>
+    <string name="feat_history_desc">Theo dõi số lần bạn đã khởi chạy mỗi trò chơi. Bộ đếm này có thể được ẩn trong Cài đặt.</string>
+
+    <string name="no_games_title">Không tìm thấy trò chơi nào</string>
+    <string name="no_games_subtitle">Nhấn + để thêm</string>
+    <string name="download_games">Nhận trò chơi mới</string>
+    <string name="add_to_library">Thêm vào thư viện</string>
+    <string name="remove_game_title">Xóa trò chơi?</string>
+    <string name="remove_game_desc">Thao tác này sẽ xóa %1$s khỏi Game Hub.</string>
+
+    <string name="edit_mode_title">Chỉnh sửa</string>
+
+    <string name="settings_title">Cài đặt</string>
+    <string name="settings_header_appearance">Giao diện</string>
+    <string name="settings_header_preferences">Tùy chọn</string>
+    <string name="settings_header_info">Thông tin</string>
+
+    <string name="settings_theme_system">Mặc định của hệ thống</string>
+    <string name="settings_theme_light">Sáng</string>
+    <string name="settings_theme_dark">Tối</string>
+    <string name="settings_card_style_title">Kiểu thẻ</string>
+    <string name="settings_card_style_default">Mặc định</string>
+    <string name="settings_card_style_horizontal">Ngang</string>
+    <string name="settings_card_style_grid">Lưới</string>
+
+    <string name="settings_show_name_title">Hiển thị tên người dùng</string>
+    <string name="settings_show_name_desc">Hiển thị tên của bạn trong tiêu đề</string>
+    <string name="settings_edit_name_title">Tên của bạn</string>
+    <string name="dialog_edit_name_title">Nhập tên của bạn</string>
+    <string name="dialog_edit_name_hint">Tên</string>
+
+    <string name="settings_sort_title">Thứ tự trò chơi</string>
+    <string name="sort_alphabetical">Bảng chữ cái</string>
+    <string name="sort_playtime">Thời gian chơi</string>
+    <string name="sort_custom">Tùy chỉnh</string>
+
+    <string name="settings_show_launch_count_title">Hiển thị số lần khởi chạy</string>
+    <string name="settings_show_launch_count_desc">Hiển thị số lần bạn đã chơi</string>
+
+    <string name="settings_show_playtime_title">Hiển thị thời gian chơi</string>
+    <string name="settings_show_playtime_desc">Hiển thị số liệu thống kê sử dụng</string>
+
+    <string name="settings_stats_interval_title">Khoảng thời gian thống kê</string>
+    <string name="interval_daily">Hàng ngày</string>
+    <string name="interval_weekly">Hàng tuần</string>
+    <string name="interval_monthly">Hàng tháng</string>
+    <string name="interval_yearly">Hàng năm</string>
+
+    <string name="settings_show_get_more_title">Hiển thị \"Nhận thêm trò chơi\"</string>
+    <string name="settings_show_get_more_desc">Hiển thị liên kết đến cửa hàng</string>
+
+    <string name="settings_advanced_title">Nâng cao</string>
+    <string name="settings_advanced_desc">Các tính năng thử nghiệm và bản cập nhật</string>
+
+    <string name="settings_version_title">Phiên bản ứng dụng</string>
+    <string name="settings_developer_title">Nhà phát triển</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">Báo cáo lỗi / tính năng</string>
+    <string name="settings_report_desc">Trò chuyện với nhà phát triển trên Telegram</string>
+
+    <string name="settings_check_updates_title">Kiểm tra bản cập nhật</string>
+    <string name="settings_check_updates_desc">Tìm phiên bản mới nhất</string>
+    <string name="settings_auto_updates_title">Cập nhật tự động</string>
+    <string name="settings_auto_updates_desc">Kiểm tra các bản cập nhật khi khởi động</string>
+
+    <string name="update_latest_version_msg">Hiện không có bản cập nhật nào.</string>
+    <string name="update_available">Đã có phiên bản %1$s!</string>
+    <string name="update_action">Cập nhật</string>
+    <string name="update_error_msg">Không thể kiểm tra hoặc tải xuống bản cập nhật.</string>
+    <string name="unknown">Không xác định</string>
+
+    <string name="settings_setup_title">Thiết lập ban đầu</string>
+    <string name="settings_setup_desc">Chạy lại trình hướng dẫn chào mừng</string>
+    <string name="settings_backup_header">Sao lưu và Khôi phục</string>
+    <string name="settings_export_title">Xuất cài đặt</string>
+    <string name="settings_export_desc">Lưu cấu hình và danh sách trò chơi</string>
+    <string name="settings_import_title">Nhập cài đặt</string>
+    <string name="settings_import_desc">Khôi phục từ tệp sao lưu</string>
+    <string name="dialog_restart_title">Yêu cầu khởi động lại</string>
+    <string name="dialog_restart_desc">Cài đặt đã được nhập. Khởi động lại ứng dụng để áp dụng các thay đổi.</string>
+    <string name="restart_now">Khởi động lại ngay</string>
+    <string name="export_success">Đã xuất cài đặt thành công</string>
+    <string name="export_error">Lỗi khi xuất cài đặt</string>
+    <string name="import_error">Lỗi khi nhập cài đặt</string>
+
+    <string name="community_title">Tham gia cộng đồng</string>
+    <string name="community_desc">Tham gia kênh Telegram của tôi để không bỏ lỡ những tin tức và bản cập nhật mới nhất về các dự án của tôi, cùng với một số thông tin độc quyền!</string>
+    <string name="no_thanks">Không, cảm ơn</string>
+    <string name="sure_action">Chắc chắn rồi!</string>
+    <string name="see_source_code">Xem mã nguồn</string>
+    <string name="check_updates_action">Kiểm tra bản cập nhật</string>
+    <string name="cancel_action">Hủy</string>
+    <string name="edit_app_icon_title">Chọn biểu tượng</string>
+    <string name="edit_app_icons">Biểu tượng ứng dụng</string>
+    <string name="edit_builtin_icons">Biểu tượng tích hợp sẵn</string>
+    <string name="edit_gallery">Thư viện</string>
+    <string name="edit_restore_icon">Khôi phục biểu tượng</string>
+    <string name="edit_restore_title">Khôi phục tiêu đề</string>
+    <string name="edit_app_name">Tên ứng dụng</string>
+    <string name="select_app_title">Chọn ứng dụng</string>
+    <string name="settings_testing_header">Thử nghiệm</string>
+    <string name="settings_test_telegram_title">Cộng đồng</string>
+    <string name="settings_test_telegram_desc">Tham gia nhóm Telegram của chúng tôi</string>
+    <string name="settings_test_crash_title">Kiểm tra sự cố</string>
+    <string name="settings_test_crash_desc">Buộc xảy ra sự cố để kiểm tra báo cáo lỗi</string>
+    <string name="settings_danger_zone_header">Khu vực nguy hiểm</string>
+    <string name="settings_reset_title">Khôi phục cài đặt gốc</string>
+    <string name="settings_reset_desc">Xóa toàn bộ dữ liệu và khôi phục cài đặt mặc định</string>
+    <string name="settings_reset_confirmation_desc">Bạn có chắc chắn muốn đặt lại ứng dụng không? Tất cả các trò chơi, tùy chỉnh và cài đặt đã lưu của bạn sẽ bị xóa vĩnh viễn. Thao tác này không thể hoàn tác.</string>
+    <string name="settings_reset_action">Đặt lại ứng dụng</string>
+    <string name="uninstall">Gỡ cài đặt</string>
+    <string name="settings_grid_columns_title">Cột lưới</string>
+    <string name="add_favorite">Thêm vào mục yêu thích</string>
+    <string name="remove_favorite">Xóa khỏi mục yêu thích</string>
+    <string name="favorites">Mục yêu thích</string>
+    <string name="feat_order_desc">Nhấn vào nút bút chì để vào Chế độ chỉnh sửa hoặc nhấn và giữ một trò chơi để tùy chỉnh giao diện của trò chơi đó.</string>
+
+    <string name="controller_connected">Đã kết nối tay cầm</string>
+    <string name="action_settings">Cài đặt</string>
+    <string name="action_ok">OK</string>
+    <string name="settings_test_controller_title">Kết nối tay cầm</string>
+    <string name="settings_test_controller_desc">Hiển thị cửa sổ bật lên trên điện thoại của bạn khi có tay cầm được kết nối</string>
+    <string name="settings_test_controller_simulate_title">Mô phỏng kết nối tay cầm</string>
+    <string name="settings_test_controller_simulate_desc">Hiển thị bảng dưới cùng kết nối tay cầm</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Tay cầm không dây Xbox</string>
+    <string name="controller_name_playstation">Tay cầm không dây DualSense</string>
+    <string name="controller_name_joycon">Joy-Con (T/P)</string>
+    <string name="controller_generic">Tay cầm chung</string>
+    <string name="controller_name_generic">Tay cầm không xác định</string>
+    <string name="settings_header_more">Thêm</string>
+    <string name="settings_game_bubble_title">Bong bóng trò chơi</string>
+    <string name="settings_game_bubble_desc">Quản lý cài đặt Bong bóng trò chơi</string>
+    <string name="settings_bubble_enable_title">Bật Bong bóng trò chơi</string>
+    <string name="settings_bubble_autohide_title">Tự động ẩn</string>
+    <string name="settings_bubble_autohide_desc">Thu nhỏ vào cạnh màn hình sau 3 giây</string>
+    <string name="settings_bubble_tools_title">Công cụ Bong bóng trò chơi</string>
+    <string name="tool_fps">Bộ đếm FPS</string>
+    <string name="tool_dnd">Không làm phiền</string>
+    <string name="tool_brightness">Độ sáng tối đa</string>
+    <string name="tool_screenshot">Ảnh chụp màn hình</string>
+    <string name="tool_ping">Giám sát Ping</string>
+    <string name="tool_boost">Tăng tốc RAM</string>
+    <string name="open_in_store">Mở trong cửa hàng</string>
+    <string name="move_up">Di chuyển lên</string>
+    <string name="move_down">Di chuyển xuống</string>
+    <string name="stats">Thống kê</string>
+    <string name="perm_bluetooth_title">Truy cập Bluetooth</string>
+    <string name="perm_bluetooth_desc">Bắt buộc để kết nối và quản lý tay cầm của bạn.</string>
+    <string name="bubble_perm_title">Bong bóng trò chơi</string>
+    <string name="bubble_perm_subtitle">Quyền</string>
+    <string name="bubble_perm_intro">Cấp các quyền này để bật các tính năng nâng cao của Bong bóng trò chơi.</string>
+    <string name="perm_overlay_title">Hiển thị trên các ứng dụng khác</string>
+    <string name="perm_overlay_desc">Bắt buộc để hiển thị Bong bóng trò chơi trong khi chơi.</string>
+    <string name="perm_dnd_title">Không làm phiền</string>
+    <string name="perm_dnd_desc">Chuyển đổi chế độ Không làm phiền từ Bong bóng trò chơi.</string>
+    <string name="perm_write_settings_title">Sửa đổi cài đặt hệ thống</string>
+    <string name="perm_write_settings_desc">Điều chỉnh độ sáng màn hình từ Bong bóng trò chơi.</string>
+    <string name="perm_accessibility_title">Dịch vụ trợ năng</string>
+    <string name="perm_accessibility_desc">Chụp ảnh màn hình trực tiếp từ Bong bóng trò chơi.</string>
+
+</resources>

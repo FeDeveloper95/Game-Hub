@@ -61,6 +61,7 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -77,10 +78,13 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalHapticFeedback
+import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
 import com.fedeveloper95.games.elements.UI.ExpressiveIconButton
 import com.fedeveloper95.games.elements.ui.GameHubTheme
 import com.fedeveloper95.games.elements.ui.GoogleSansFlex
@@ -117,6 +121,54 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
     var isBubbleEnabled by remember { mutableStateOf(prefs.getBoolean("pref_bubble_enabled", false)) }
     var isAutoHideEnabled by remember { mutableStateOf(prefs.getBoolean("pref_bubble_autohide", true)) }
 
+    val nm = context.getSystemService(Context.NOTIFICATION_SERVICE) as android.app.NotificationManager
+    var hasDndPermission by remember { mutableStateOf(nm.isNotificationPolicyAccessGranted) }
+    var hasWriteSettingsPermission by remember { mutableStateOf(Settings.System.canWrite(context)) }
+    var hasAccessibilityPermission by remember { mutableStateOf(isAccessibilityServiceEnabled(context, com.fedeveloper95.games.services.GameBubbleAccessibilityService::class.java)) }
+    var pendingToolToggle by remember { mutableStateOf<String?>(null) }
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) {
+                hasDndPermission = nm.isNotificationPolicyAccessGranted
+                hasWriteSettingsPermission = Settings.System.canWrite(context)
+                hasAccessibilityPermission = isAccessibilityServiceEnabled(context, com.fedeveloper95.games.services.GameBubbleAccessibilityService::class.java)
+
+                if (!hasDndPermission) prefs.edit().putBoolean("pref_bubble_tool_dnd", false).apply()
+                if (!hasWriteSettingsPermission) prefs.edit().putBoolean("pref_bubble_tool_brightness", false).apply()
+                if (!hasAccessibilityPermission) prefs.edit().putBoolean("pref_bubble_tool_screenshot", false).apply()
+
+                pendingToolToggle?.let { toolId ->
+                    val hasPerm = when (toolId) {
+                        "dnd" -> hasDndPermission
+                        "brightness" -> hasWriteSettingsPermission
+                        "screenshot" -> hasAccessibilityPermission
+                        else -> true
+                    }
+                    if (hasPerm) {
+                        prefs.edit().putBoolean("pref_bubble_tool_$toolId", true).apply()
+                    }
+                    pendingToolToggle = null
+                }
+
+                val hasOverlay = Settings.canDrawOverlays(context)
+                val prefEnabled = prefs.getBoolean("pref_bubble_enabled", false)
+
+                if (prefEnabled && !hasOverlay) {
+                    isBubbleEnabled = false
+                    prefs.edit().putBoolean("pref_bubble_enabled", false).apply()
+                } else if (prefEnabled && hasOverlay) {
+                    isBubbleEnabled = true
+                } else {
+                    isBubbleEnabled = false
+                }
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
     val defaultTools = listOf("fps", "dnd", "brightness", "screenshot", "ping", "boost")
     var toolsOrder by remember {
         mutableStateOf(
@@ -124,12 +176,32 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
         )
     }
 
-    val permissionLauncher = rememberLauncherForActivityResult(
+    val writeSettingsLauncher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.StartActivityForResult()
     ) {
-        val hasPermission = Settings.canDrawOverlays(context)
-        isBubbleEnabled = hasPermission
-        prefs.edit().putBoolean("pref_bubble_enabled", hasPermission).apply()
+        val hasPermissions = Settings.canDrawOverlays(context) && Settings.System.canWrite(context)
+        isBubbleEnabled = hasPermissions
+        prefs.edit().putBoolean("pref_bubble_enabled", hasPermissions).apply()
+    }
+
+    val overlayLauncher = rememberLauncherForActivityResult(
+        contract = ActivityResultContracts.StartActivityForResult()
+    ) {
+        if (Settings.canDrawOverlays(context)) {
+            if (!Settings.System.canWrite(context)) {
+                val intent = Intent(
+                    Settings.ACTION_MANAGE_WRITE_SETTINGS,
+                    Uri.parse("package:${context.packageName}")
+                )
+                writeSettingsLauncher.launch(intent)
+            } else {
+                isBubbleEnabled = true
+                prefs.edit().putBoolean("pref_bubble_enabled", true).apply()
+            }
+        } else {
+            isBubbleEnabled = false
+            prefs.edit().putBoolean("pref_bubble_enabled", false).apply()
+        }
     }
 
     val toolDetails = mapOf(
@@ -146,9 +218,11 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
         if (!isBubbleEnabled) return@rememberReorderableLazyListState
         val fromKey = from.key as? String ?: return@rememberReorderableLazyListState
         val toKey = to.key as? String ?: return@rememberReorderableLazyListState
+
         val currentList = toolsOrder.toMutableList()
         val fromIndex = currentList.indexOf(fromKey)
         val toIndex = currentList.indexOf(toKey)
+
         if (fromIndex != -1 && toIndex != -1) {
             val item = currentList.removeAt(fromIndex)
             currentList.add(toIndex, item)
@@ -198,6 +272,7 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
             verticalArrangement = Arrangement.spacedBy(ListItemDefaults.SegmentedGap)
         ) {
             item { Spacer(modifier = Modifier.height(20.dp)) }
+
             item {
                 Box(
                     modifier = Modifier
@@ -213,22 +288,36 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
                     )
                 }
             }
+
             item {
                 val interactionSource = remember { MutableInteractionSource() }
                 val shape = RoundedCornerShape(64.dp)
+
                 val handleToggle = {
                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                    if (!isBubbleEnabled && !Settings.canDrawOverlays(context)) {
-                        val intent = Intent(
-                            Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
-                            Uri.parse("package:${context.packageName}")
-                        )
-                        permissionLauncher.launch(intent)
+                    if (!isBubbleEnabled) {
+                        if (!Settings.canDrawOverlays(context)) {
+                            val intent = Intent(
+                                Settings.ACTION_MANAGE_OVERLAY_PERMISSION,
+                                Uri.parse("package:${context.packageName}")
+                            )
+                            overlayLauncher.launch(intent)
+                        } else if (!Settings.System.canWrite(context)) {
+                            val intent = Intent(
+                                Settings.ACTION_MANAGE_WRITE_SETTINGS,
+                                Uri.parse("package:${context.packageName}")
+                            )
+                            writeSettingsLauncher.launch(intent)
+                        } else {
+                            isBubbleEnabled = true
+                            prefs.edit().putBoolean("pref_bubble_enabled", true).apply()
+                        }
                     } else {
-                        isBubbleEnabled = !isBubbleEnabled
-                        prefs.edit().putBoolean("pref_bubble_enabled", isBubbleEnabled).apply()
+                        isBubbleEnabled = false
+                        prefs.edit().putBoolean("pref_bubble_enabled", false).apply()
                     }
                 }
+
                 Card(
                     modifier = Modifier
                         .fillMaxWidth()
@@ -275,6 +364,7 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
                 }
                 Spacer(modifier = Modifier.height(32.dp))
             }
+
             item {
                 GameBubbleSegmentedSwitchItem(
                     icon = Icons.Rounded.VisibilityOff,
@@ -294,6 +384,7 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
                 )
                 Spacer(modifier = Modifier.height(32.dp))
             }
+
             item {
                 Text(
                     text = stringResource(R.string.settings_bubble_tools_title),
@@ -307,12 +398,22 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
                         .alpha(if (isBubbleEnabled) 1f else 0.5f)
                 )
             }
+
             itemsIndexed(toolsOrder, key = { _, item -> item }) { index, toolId ->
                 val details = toolDetails[toolId]
                 if (details != null) {
-                    var isToolEnabled by remember {
-                        mutableStateOf(prefs.getBoolean("pref_bubble_tool_$toolId", true))
+                    val isToolEnabled by remember(hasDndPermission, hasWriteSettingsPermission, hasAccessibilityPermission) {
+                        mutableStateOf(
+                            prefs.getBoolean("pref_bubble_tool_$toolId", true) &&
+                                    when (toolId) {
+                                        "dnd" -> hasDndPermission
+                                        "brightness" -> hasWriteSettingsPermission
+                                        "screenshot" -> hasAccessibilityPermission
+                                        else -> true
+                                    }
+                        )
                     }
+
                     ReorderableItem(reorderState, key = toolId) { isDragging ->
                         val elevation by animateDpAsState(
                             targetValue = if (isDragging) 8.dp else 0.dp,
@@ -336,10 +437,28 @@ fun GameBubbleSettingsScreen(onBack: () -> Unit) {
                                 checked = isToolEnabled,
                                 enabled = isBubbleEnabled,
                                 isCompact = true,
-                                onCheckedChange = {
+                                onCheckedChange = { isChecked ->
                                     haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                    isToolEnabled = it
-                                    prefs.edit().putBoolean("pref_bubble_tool_$toolId", it).apply()
+                                    if (isChecked) {
+                                        when (toolId) {
+                                            "dnd" -> if (!hasDndPermission) {
+                                                pendingToolToggle = toolId
+                                                context.startActivity(Intent(Settings.ACTION_NOTIFICATION_POLICY_ACCESS_SETTINGS))
+                                                return@GameBubbleSegmentedSwitchItem
+                                            }
+                                            "brightness" -> if (!hasWriteSettingsPermission) {
+                                                pendingToolToggle = toolId
+                                                context.startActivity(Intent(Settings.ACTION_MANAGE_WRITE_SETTINGS, Uri.parse("package:${context.packageName}")))
+                                                return@GameBubbleSegmentedSwitchItem
+                                            }
+                                            "screenshot" -> if (!hasAccessibilityPermission) {
+                                                pendingToolToggle = toolId
+                                                context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                                                return@GameBubbleSegmentedSwitchItem
+                                            }
+                                        }
+                                    }
+                                    prefs.edit().putBoolean("pref_bubble_tool_$toolId", isChecked).apply()
                                 },
                                 dragHandleModifier = if (isBubbleEnabled) Modifier.draggableHandle() else Modifier
                             )

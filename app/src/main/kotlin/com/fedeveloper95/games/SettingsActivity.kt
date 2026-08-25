@@ -63,7 +63,6 @@ import androidx.compose.material.icons.rounded.ViewAgenda
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -78,7 +77,9 @@ import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.ToggleButton
 import androidx.compose.material3.ToggleButtonDefaults
+import androidx.compose.material3.ToggleButtonShapes
 import androidx.compose.material3.TopAppBarDefaults
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -113,26 +114,20 @@ class SettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-
         val pm = packageManager
         val prefs = getSharedPreferences("game_hub_settings", MODE_PRIVATE)
-
         if (prefs.getString(PREF_APP_ICON, "Expressive") != "Expressive") {
             prefs.edit().putString(PREF_APP_ICON, "Expressive").apply()
             val expressiveComponent = ComponentName(this, "com.fedeveloper95.games.ExpressiveIcon")
             val flatComponent = ComponentName(this, "com.fedeveloper95.games.FlatIcon")
-
             pm.setComponentEnabledSetting(expressiveComponent, PackageManager.COMPONENT_ENABLED_STATE_ENABLED, PackageManager.DONT_KILL_APP)
             pm.setComponentEnabledSetting(flatComponent, PackageManager.COMPONENT_ENABLED_STATE_DISABLED, PackageManager.DONT_KILL_APP)
         }
 
         setContent {
             val context = LocalContext.current
-            val composePrefs = remember { context.getSharedPreferences("game_hub_settings",
-                MODE_PRIVATE
-            ) }
+            val composePrefs = remember { context.getSharedPreferences("game_hub_settings", MODE_PRIVATE) }
             val savedTheme = composePrefs.getInt(PREF_THEME, THEME_SYSTEM)
-
             var currentThemeOverride by remember { mutableIntStateOf(savedTheme) }
 
             Crossfade(
@@ -167,7 +162,6 @@ const val PREF_CARD_STYLE = "pref_card_style"
 const val CARD_STYLE_DEFAULT = "Default"
 const val CARD_STYLE_HORIZONTAL = "Horizontal"
 const val CARD_STYLE_GRID = "Grid"
-
 const val PREF_GRID_COLUMNS = "pref_grid_columns"
 const val PREF_SHOW_GET_MORE_GAMES = "pref_show_get_more_games"
 const val PREF_SHOW_LAUNCH_COUNT = "pref_show_launch_count"
@@ -217,7 +211,6 @@ fun SettingsScreen(
     var showStyleDialog by remember { mutableStateOf(false) }
     var showSortDialog by remember { mutableStateOf(false) }
     var showNameDialog by remember { mutableStateOf(false) }
-    var showThemeDialog by remember { mutableStateOf(false) }
 
     val isPixel = remember {
         val brand = Build.BRAND
@@ -278,7 +271,6 @@ fun SettingsScreen(
                 .padding(horizontal = 16.dp)
                 .padding(top = 8.dp, bottom = padding.calculateBottomPadding() + 48.dp)
         ) {
-
             Text(
                 text = stringResource(R.string.settings_header_appearance),
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -293,50 +285,87 @@ fun SettingsScreen(
                 val appCount = 3 + (if (currentCardStyle == CARD_STYLE_GRID) 1 else 0) + (if (showUserName) 1 else 0)
                 var appIndex = 0
 
-                SegmentedListItem(
-                    selected = false,
-                    onClick = {},
-                    colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
-                    shapes = ListItemDefaults.segmentedShapes(index = minOf(appIndex++, appCount - 1), count = appCount),
-                    content = {
-                        Row(
+                val themeIndex = minOf(appIndex++, appCount - 1)
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = RoundedCornerShape(
+                        topStart = if (themeIndex == 0) 16.dp else 4.dp,
+                        topEnd = if (themeIndex == 0) 16.dp else 4.dp,
+                        bottomStart = if (themeIndex == appCount - 1) 16.dp else 4.dp,
+                        bottomEnd = if (themeIndex == appCount - 1) 16.dp else 4.dp
+                    ),
+                    color = MaterialTheme.colorScheme.surfaceContainerHigh
+                ) {
+                    Row(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 16.dp, vertical = 12.dp),
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Box(
                             modifier = Modifier
-                                .fillMaxWidth()
-                                .padding(vertical = 4.dp),
-                            verticalAlignment = Alignment.CenterVertically
+                                .size(48.dp)
+                                .clip(CircleShape)
+                                .background(Color(0xFFfcbd00)),
+                            contentAlignment = Alignment.Center
                         ) {
-                            Box(
+                            Icon(
+                                imageVector = Icons.Rounded.Palette,
+                                contentDescription = null,
+                                tint = Color(0xFF6d3a01),
+                                modifier = Modifier.size(24.dp)
+                            )
+                        }
+                        Spacer(modifier = Modifier.width(16.dp))
+                        Column(
+                            modifier = Modifier
+                                .weight(1f)
+                                .padding(vertical = 8.dp)
+                        ) {
+                            ToggleButton(
+                                checked = currentTheme == THEME_SYSTEM,
+                                onCheckedChange = {
+                                    haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    onThemeChanged(THEME_SYSTEM)
+                                    prefs.edit().putInt(PREF_THEME, THEME_SYSTEM).apply()
+                                },
                                 modifier = Modifier
-                                    .size(48.dp)
-                                    .clip(CircleShape)
-                                    .background(Color(0xFFfcbd00)),
-                                contentAlignment = Alignment.Center
+                                    .fillMaxWidth()
+                                    .height(40.dp),
+                                shapes = ToggleButtonShapes(
+                                    shape = RoundedCornerShape(topStartPercent = 50, topEndPercent = 50, bottomStartPercent = 15, bottomEndPercent = 15),
+                                    pressedShape = ToggleButtonDefaults.pressedShape,
+                                    checkedShape = RoundedCornerShape(50)
+                                ),
+                                colors = ToggleButtonDefaults.toggleButtonColors(
+                                    containerColor = Color.Transparent,
+                                    checkedContainerColor = MaterialTheme.colorScheme.primary,
+                                    contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                    checkedContentColor = MaterialTheme.colorScheme.onPrimary
+                                ),
+                                border = if (currentTheme == THEME_SYSTEM) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
                             ) {
-                                Icon(
-                                    imageVector = Icons.Rounded.Palette,
-                                    contentDescription = null,
-                                    tint = Color(0xFF6d3a01),
-                                    modifier = Modifier.size(24.dp)
-                                )
+                                Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
+                                    Icon(Icons.Rounded.Smartphone, contentDescription = null, modifier = Modifier.size(20.dp))
+                                    Spacer(Modifier.width(8.dp))
+                                    Text(stringResource(R.string.settings_theme_system), fontFamily = GoogleSansFlex)
+                                }
                             }
-                            Spacer(modifier = Modifier.width(16.dp))
-                            Column(
-                                modifier = Modifier
-                                    .weight(1f)
-                                    .padding(vertical = 8.dp)
+                            Spacer(modifier = Modifier.height(2.dp))
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.spacedBy(2.dp)
                             ) {
                                 ToggleButton(
-                                    checked = currentTheme == THEME_SYSTEM,
+                                    checked = currentTheme == THEME_DARK,
                                     onCheckedChange = {
                                         haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                        onThemeChanged(THEME_SYSTEM)
-                                        prefs.edit().putInt(PREF_THEME, THEME_SYSTEM).apply()
+                                        onThemeChanged(THEME_DARK)
+                                        prefs.edit().putInt(PREF_THEME, THEME_DARK).apply()
                                     },
-                                    modifier = Modifier
-                                        .fillMaxWidth()
-                                        .height(40.dp),
-                                    shapes = ToggleButtonDefaults.shapes(
-                                        shape = RoundedCornerShape(topStartPercent = 50, topEndPercent = 50, bottomStartPercent = 15, bottomEndPercent = 15),
+                                    shapes = ToggleButtonShapes(
+                                        shape = RoundedCornerShape(topStartPercent = 15, bottomStartPercent = 50, topEndPercent = 15, bottomEndPercent = 15),
+                                        pressedShape = ToggleButtonDefaults.pressedShape,
                                         checkedShape = RoundedCornerShape(50)
                                     ),
                                     colors = ToggleButtonDefaults.toggleButtonColors(
@@ -345,76 +374,46 @@ fun SettingsScreen(
                                         contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
                                         checkedContentColor = MaterialTheme.colorScheme.onPrimary
                                     ),
-                                    border = if (currentTheme == THEME_SYSTEM) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant)
+                                    border = if (currentTheme == THEME_DARK) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                                    modifier = Modifier.weight(1f).height(40.dp)
                                 ) {
                                     Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
-                                        Icon(Icons.Rounded.Smartphone, contentDescription = null, modifier = Modifier.size(20.dp))
+                                        Icon(Icons.Rounded.DarkMode, contentDescription = null, modifier = Modifier.size(20.dp))
                                         Spacer(Modifier.width(8.dp))
-                                        Text(stringResource(R.string.settings_theme_system), fontFamily = GoogleSansFlex)
+                                        Text(stringResource(R.string.settings_theme_dark), fontFamily = GoogleSansFlex)
                                     }
                                 }
-                                Spacer(modifier = Modifier.height(2.dp))
-                                Row(
-                                    modifier = Modifier.fillMaxWidth(),
-                                    horizontalArrangement = Arrangement.spacedBy(2.dp)
+                                ToggleButton(
+                                    checked = currentTheme == THEME_LIGHT,
+                                    onCheckedChange = {
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                        onThemeChanged(THEME_LIGHT)
+                                        prefs.edit().putInt(PREF_THEME, THEME_LIGHT).apply()
+                                    },
+                                    shapes = ToggleButtonShapes(
+                                        shape = RoundedCornerShape(topStartPercent = 15, bottomStartPercent = 15, topEndPercent = 15, bottomEndPercent = 50),
+                                        pressedShape = ToggleButtonDefaults.pressedShape,
+                                        checkedShape = RoundedCornerShape(50)
+                                    ),
+                                    colors = ToggleButtonDefaults.toggleButtonColors(
+                                        containerColor = Color.Transparent,
+                                        checkedContainerColor = MaterialTheme.colorScheme.primary,
+                                        contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
+                                        checkedContentColor = MaterialTheme.colorScheme.onPrimary
+                                    ),
+                                    border = if (currentTheme == THEME_LIGHT) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
+                                    modifier = Modifier.weight(1f).height(40.dp)
                                 ) {
-                                    ToggleButton(
-                                        checked = currentTheme == THEME_DARK,
-                                        onCheckedChange = {
-                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                            onThemeChanged(THEME_DARK)
-                                            prefs.edit().putInt(PREF_THEME, THEME_DARK).apply()
-                                        },
-                                        shapes = ToggleButtonDefaults.shapes(
-                                            shape = RoundedCornerShape(topStartPercent = 15, bottomStartPercent = 50, topEndPercent = 15, bottomEndPercent = 15),
-                                            checkedShape = RoundedCornerShape(50)
-                                        ),
-                                        colors = ToggleButtonDefaults.toggleButtonColors(
-                                            containerColor = Color.Transparent,
-                                            checkedContainerColor = MaterialTheme.colorScheme.primary,
-                                            contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                            checkedContentColor = MaterialTheme.colorScheme.onPrimary
-                                        ),
-                                        border = if (currentTheme == THEME_DARK) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                                        modifier = Modifier.weight(1f).height(40.dp)
-                                    ) {
-                                        Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
-                                            Icon(Icons.Rounded.DarkMode, contentDescription = null, modifier = Modifier.size(20.dp))
-                                            Spacer(Modifier.width(8.dp))
-                                            Text(stringResource(R.string.settings_theme_dark), fontFamily = GoogleSansFlex)
-                                        }
-                                    }
-                                    ToggleButton(
-                                        checked = currentTheme == THEME_LIGHT,
-                                        onCheckedChange = {
-                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                            onThemeChanged(THEME_LIGHT)
-                                            prefs.edit().putInt(PREF_THEME, THEME_LIGHT).apply()
-                                        },
-                                        shapes = ToggleButtonDefaults.shapes(
-                                            shape = RoundedCornerShape(topStartPercent = 15, bottomStartPercent = 15, topEndPercent = 15, bottomEndPercent = 50),
-                                            checkedShape = RoundedCornerShape(50)
-                                        ),
-                                        colors = ToggleButtonDefaults.toggleButtonColors(
-                                            containerColor = Color.Transparent,
-                                            checkedContainerColor = MaterialTheme.colorScheme.primary,
-                                            contentColor = MaterialTheme.colorScheme.onSurfaceVariant,
-                                            checkedContentColor = MaterialTheme.colorScheme.onPrimary
-                                        ),
-                                        border = if (currentTheme == THEME_LIGHT) null else BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                                        modifier = Modifier.weight(1f).height(40.dp)
-                                    ) {
-                                        Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
-                                            Icon(Icons.Rounded.LightMode, contentDescription = null, modifier = Modifier.size(20.dp))
-                                            Spacer(Modifier.width(8.dp))
-                                            Text(stringResource(R.string.settings_theme_light), fontFamily = GoogleSansFlex)
-                                        }
+                                    Row(horizontalArrangement = Arrangement.Center, verticalAlignment = Alignment.CenterVertically) {
+                                        Icon(Icons.Rounded.LightMode, contentDescription = null, modifier = Modifier.size(20.dp))
+                                        Spacer(Modifier.width(8.dp))
+                                        Text(stringResource(R.string.settings_theme_light), fontFamily = GoogleSansFlex)
                                     }
                                 }
                             }
                         }
                     }
-                )
+                }
 
                 GameSettingsSegmentedItem(
                     icon = Icons.Rounded.ViewAgenda,
@@ -432,42 +431,46 @@ fun SettingsScreen(
                     enter = fadeIn() + expandVertically(),
                     exit = fadeOut() + shrinkVertically()
                 ) {
-                    SegmentedListItem(
-                        selected = false,
-                        onClick = {},
-                        colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
-                        shapes = ListItemDefaults.segmentedShapes(index = minOf(appIndex++, appCount - 1), count = appCount),
-                        content = {
-                            Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
-                                Text(
-                                    text = stringResource(R.string.settings_grid_columns_title),
-                                    fontFamily = GoogleSansFlex,
-                                    style = MaterialTheme.typography.titleMedium,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                                Spacer(modifier = Modifier.height(16.dp))
-                                SingleChoiceSegmentedButtonRow(
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    listOf(2, 3, 4).forEachIndexed { index, columns ->
-                                        SegmentedButton(
-                                            selected = gridColumns == columns,
-                                            onClick = {
-                                                gridColumns = columns
-                                                prefs.edit().putInt(PREF_GRID_COLUMNS, columns).apply()
-                                            },
-                                            shape = SegmentedButtonDefaults.itemShape(index = index, count = 3)
-                                        ) {
-                                            Text(
-                                                text = columns.toString(),
-                                                fontFamily = GoogleSansFlex
-                                            )
-                                        }
+                    val gridIndex = minOf(appIndex++, appCount - 1)
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(
+                            topStart = if (gridIndex == 0) 28.dp else 4.dp,
+                            topEnd = if (gridIndex == 0) 28.dp else 4.dp,
+                            bottomStart = if (gridIndex == appCount - 1) 28.dp else 4.dp,
+                            bottomEnd = if (gridIndex == appCount - 1) 28.dp else 4.dp
+                        ),
+                        color = MaterialTheme.colorScheme.surfaceContainerHigh
+                    ) {
+                        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp)) {
+                            Text(
+                                text = stringResource(R.string.settings_grid_columns_title),
+                                fontFamily = GoogleSansFlex,
+                                style = MaterialTheme.typography.titleMedium,
+                                color = MaterialTheme.colorScheme.onSurface
+                            )
+                            Spacer(modifier = Modifier.height(16.dp))
+                            SingleChoiceSegmentedButtonRow(
+                                modifier = Modifier.fillMaxWidth()
+                            ) {
+                                listOf(2, 3, 4).forEachIndexed { index, columns ->
+                                    SegmentedButton(
+                                        selected = gridColumns == columns,
+                                        onClick = {
+                                            gridColumns = columns
+                                            prefs.edit().putInt(PREF_GRID_COLUMNS, columns).apply()
+                                        },
+                                        shape = SegmentedButtonDefaults.itemShape(index = index, count = 3)
+                                    ) {
+                                        Text(
+                                            text = columns.toString(),
+                                            fontFamily = GoogleSansFlex
+                                        )
                                     }
                                 }
                             }
                         }
-                    )
+                    }
                 }
 
                 GameSettingsSegmentedItem(
@@ -529,7 +532,6 @@ fun SettingsScreen(
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-
             Text(
                 text = stringResource(R.string.settings_header_preferences),
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -644,66 +646,68 @@ fun SettingsScreen(
                     enter = fadeIn() + expandVertically(),
                     exit = fadeOut() + shrinkVertically()
                 ) {
-                    SegmentedListItem(
-                        selected = false,
-                        onClick = {},
-                        colors = ListItemDefaults.colors(containerColor = MaterialTheme.colorScheme.surfaceContainerHigh),
-                        shapes = ListItemDefaults.segmentedShapes(index = minOf(prefIndex++, prefCount - 1), count = prefCount),
-                        content = {
-                            Column(modifier = Modifier.fillMaxWidth().padding(vertical = 8.dp)) {
-                                Row(verticalAlignment = Alignment.CenterVertically) {
-                                    Box(
-                                        modifier = Modifier
-                                            .size(48.dp)
-                                            .clip(CircleShape)
-                                            .background(Color(0xFFffb3ae)),
-                                        contentAlignment = Alignment.Center
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Rounded.DateRange,
-                                            contentDescription = null,
-                                            tint = Color(0xFF8a1a16),
-                                            modifier = Modifier.size(24.dp)
-                                        )
-                                    }
-                                    Spacer(modifier = Modifier.width(16.dp))
-                                    Column {
-                                        Text(
-                                            text = stringResource(R.string.settings_stats_interval_title),
-                                            fontFamily = GoogleSansFlex,
-                                            style = MaterialTheme.typography.titleMedium
-                                        )
-                                        Text(
-                                            text = when (statsInterval.roundToInt()) {
-                                                0 -> stringResource(R.string.interval_daily)
-                                                1 -> stringResource(R.string.interval_weekly)
-                                                2 -> stringResource(R.string.interval_monthly)
-                                                else -> stringResource(R.string.interval_yearly)
-                                            },
-                                            fontFamily = GoogleSansFlex,
-                                            style = MaterialTheme.typography.bodyMedium,
-                                            color = MaterialTheme.colorScheme.onSurfaceVariant
-                                        )
-                                    }
+                    val pIndex = minOf(prefIndex++, prefCount - 1)
+                    Surface(
+                        modifier = Modifier.fillMaxWidth(),
+                        shape = RoundedCornerShape(
+                            topStart = if (pIndex == 0) 28.dp else 4.dp,
+                            topEnd = if (pIndex == 0) 28.dp else 4.dp,
+                            bottomStart = if (pIndex == prefCount - 1) 28.dp else 4.dp,
+                            bottomEnd = if (pIndex == prefCount - 1) 28.dp else 4.dp
+                        ),
+                        color = MaterialTheme.colorScheme.surfaceContainerHigh
+                    ) {
+                        Column(modifier = Modifier.fillMaxWidth().padding(horizontal = 16.dp, vertical = 16.dp)) {
+                            Row(verticalAlignment = Alignment.CenterVertically) {
+                                Box(
+                                    modifier = Modifier
+                                        .size(48.dp)
+                                        .clip(CircleShape)
+                                        .background(Color(0xFFffb3ae)),
+                                    contentAlignment = Alignment.Center
+                                ) {
+                                    Icon(
+                                        imageVector = Icons.Rounded.DateRange,
+                                        contentDescription = null,
+                                        tint = Color(0xFF8a1a16),
+                                        modifier = Modifier.size(24.dp)
+                                    )
                                 }
-
-                                Spacer(modifier = Modifier.height(16.dp))
-
-                                Slider(
-                                    value = statsInterval,
-                                    onValueChange = {
-                                        if (statsInterval != it) {
-                                            haptic.performHapticFeedback(HapticFeedbackType.LongPress)
-                                        }
-                                        statsInterval = it
-                                        prefs.edit().putFloat(PREF_STATS_INTERVAL, it).apply()
-                                    },
-                                    valueRange = 0f..3f,
-                                    steps = 2
-                                )
+                                Spacer(modifier = Modifier.width(16.dp))
+                                Column {
+                                    Text(
+                                        text = stringResource(R.string.settings_stats_interval_title),
+                                        fontFamily = GoogleSansFlex,
+                                        style = MaterialTheme.typography.titleMedium
+                                    )
+                                    Text(
+                                        text = when (statsInterval.roundToInt()) {
+                                            0 -> stringResource(R.string.interval_daily)
+                                            1 -> stringResource(R.string.interval_weekly)
+                                            2 -> stringResource(R.string.interval_monthly)
+                                            else -> stringResource(R.string.interval_yearly)
+                                        },
+                                        fontFamily = GoogleSansFlex,
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                                    )
+                                }
                             }
+                            Spacer(modifier = Modifier.height(16.dp))
+                            Slider(
+                                value = statsInterval,
+                                onValueChange = {
+                                    if (statsInterval != it) {
+                                        haptic.performHapticFeedback(HapticFeedbackType.LongPress)
+                                    }
+                                    statsInterval = it
+                                    prefs.edit().putFloat(PREF_STATS_INTERVAL, it).apply()
+                                },
+                                valueRange = 0f..3f,
+                                steps = 2
+                            )
                         }
-                    )
+                    }
                 }
 
                 GameSettingsSegmentedItem(
@@ -748,7 +752,6 @@ fun SettingsScreen(
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-
             Text(
                 text = stringResource(R.string.settings_header_more),
                 style = MaterialTheme.typography.titleMedium.copy(
@@ -792,7 +795,6 @@ fun SettingsScreen(
                         val newValue = !testControllerFeatures
                         testControllerFeatures = newValue
                         prefs.edit().putBoolean("test_controller_features", newValue).apply()
-
                         if (newValue) {
                             if (!Settings.canDrawOverlays(context)) {
                                 val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}"))
@@ -812,7 +814,6 @@ fun SettingsScreen(
                                 haptic.performHapticFeedback(HapticFeedbackType.LongPress)
                                 testControllerFeatures = it
                                 prefs.edit().putBoolean("test_controller_features", it).apply()
-
                                 if (it) {
                                     if (!Settings.canDrawOverlays(context)) {
                                         val intent = Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION, Uri.parse("package:${context.packageName}"))
@@ -852,7 +853,6 @@ fun SettingsScreen(
             }
 
             Spacer(modifier = Modifier.height(32.dp))
-
             Text(
                 text = stringResource(R.string.settings_header_info),
                 style = MaterialTheme.typography.titleMedium.copy(

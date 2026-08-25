@@ -1,0 +1,216 @@
+<resources>
+    <string name="app_name">Game Hub</string>
+    <string name="games_count_suffix">गेम तैयार हैं</string>
+    <string name="add_game">गेम जोड़ें</string>
+    <string name="search_apps">ऐप्स खोजें…</string>
+    <string name="cancel">रद्द करें</string>
+    <string name="remove">हटाएं</string>
+    <string name="play">खेलें</string>
+    <string name="later">बाद में</string>
+    <string name="save">सहेजें</string>
+    <string name="discard">रद्द करें</string>
+
+    <string name="next">अगला</string>
+    <string name="back">पीछे</string>
+    <string name="get_started">शुरू करें</string>
+
+    <string name="welcome_to">में आपका स्वागत है</string>
+    <string name="welcome_preparing_subtitle">आइए आपके लिए सब कुछ तैयार करें।</string>
+
+    <string name="perm_required">अनुशंसित</string>
+    <string name="perm_permissions">अनुमतियां</string>
+    <string name="perm_intro_text">ये अनुमतियां वैकल्पिक हैं लेकिन Game Hub को सुचारू रूप से चलाने के लिए अत्यधिक अनुशंसित हैं।</string>
+
+    <string name="perm_notif_title">सूचनाएं</string>
+    <string name="perm_notif_desc">नया अपडेट आने पर तुरंत जानें।</string>
+
+    <string name="perm_install_title">ऐप इंस्टॉलेशन</string>
+    <string name="perm_install_desc">अपडेट डाउनलोड और इंस्टॉल करने के लिए आवश्यक है।</string>
+
+    <string name="perm_usage_desc">गेम प्लेटाइम और लॉन्च आँकड़ों को ट्रैक करने के लिए आवश्यक है।</string>
+
+    <string name="feat_discover">खोजें</string>
+    <string name="feat_features">विशेषताएं</string>
+    <string name="feat_intro">यहां बताया गया है कि आप अपने नए Game Hub के साथ क्या कर सकते हैं।</string>
+
+    <string name="feat_order_title">पूर्ण नियंत्रण</string>
+
+    <string name="feat_layout_title">आकार बदलना</string>
+    <string name="feat_layout_desc">कार्ड शैली बदलने के लिए सेटिंग्स में जाएं: डिफ़ॉल्ट, क्षैतिज, या ग्रिड। इसे अपना बनाएं।</string>
+
+    <string name="feat_name_title">व्यक्तिगत स्पर्श</string>
+    <string name="feat_name_desc">हेडर में अपना नाम प्रदर्शित करें। इसे कस्टमाइज़ करें या सेटिंग्स में छिपाएं।</string>
+
+    <string name="feat_manage_title">आसान प्रबंधन</string>
+    <string name="feat_manage_desc">गेम जोड़ने के लिए + टैप करें। हटाने के लिए दाईं ओर स्वाइप करें, प्लेटाइम आँकड़े देखने के लिए बाईं ओर स्वाइप करें।</string>
+
+    <string name="feat_update_title">अपडेट रहें</string>
+    <string name="feat_update_desc">ऐप सेटिंग्स में सीधे Game Hub अपडेट की जांच करें। कोई भी सुविधा कभी न चूकें।</string>
+
+    <string name="feat_store_title">गेम खोजें</string>
+    <string name="feat_store_desc">Google Play Store के माध्यम से नए शीर्षक खोजें। आप इसे सेटिंग्स में अक्षम कर सकते हैं।</string>
+
+    <string name="feat_history_title">खेल इतिहास</string>
+    <string name="feat_history_desc">ट्रैक करें कि आपने प्रत्येक गेम को कितनी बार लॉन्च किया है। इस काउंटर को सेटिंग्स में छिपाया जा सकता है।</string>
+
+    <string name="no_games_title">कोई गेम नहीं मिला</string>
+    <string name="no_games_subtitle">एक जोड़ने के लिए + दबाएं</string>
+    <string name="download_games">नए गेम प्राप्त करें</string>
+    <string name="add_to_library">लाइब्रेरी में जोड़ें</string>
+    <string name="remove_game_title">गेम हटाएं?</string>
+    <string name="remove_game_desc">यह Game Hub से %1$s को हटा देगा।</string>
+
+    <string name="edit_mode_title">संपादित करें</string>
+
+    <string name="settings_title">सेटिंग्स</string>
+    <string name="settings_header_appearance">दिखावट</string>
+    <string name="settings_header_preferences">प्राथमिकताएं</string>
+    <string name="settings_header_info">जानकारी</string>
+
+    <string name="settings_theme_system">सिस्टम डिफ़ॉल्ट</string>
+    <string name="settings_theme_light">हल्का</string>
+    <string name="settings_theme_dark">गहरा</string>
+    <string name="settings_card_style_title">कार्ड शैली</string>
+    <string name="settings_card_style_default">डिफ़ॉल्ट</string>
+    <string name="settings_card_style_horizontal">क्षैतिज</string>
+    <string name="settings_card_style_grid">ग्रिड</string>
+
+    <string name="settings_show_name_title">उपयोगकर्ता नाम दिखाएं</string>
+    <string name="settings_show_name_desc">हेडर में अपना नाम प्रदर्शित करें</string>
+    <string name="settings_edit_name_title">आपका नाम</string>
+    <string name="dialog_edit_name_title">अपना नाम दर्ज करें</string>
+    <string name="dialog_edit_name_hint">नाम</string>
+
+    <string name="settings_sort_title">गेम क्रम</string>
+    <string name="sort_alphabetical">वर्णानुक्रमिक</string>
+    <string name="sort_playtime">खेलने का समय</string>
+    <string name="sort_custom">कस्टम</string>
+
+    <string name="settings_show_launch_count_title">लॉन्च संख्या दिखाएं</string>
+    <string name="settings_show_launch_count_desc">दिखाएं कि आपने कितनी बार खेला है</string>
+
+    <string name="settings_show_playtime_title">खेलने का समय दिखाएं</string>
+    <string name="settings_show_playtime_desc">उपयोग के आँकड़े प्रदर्शित करें</string>
+
+    <string name="settings_stats_interval_title">आँकड़े अंतराल</string>
+    <string name="interval_daily">दैनिक</string>
+    <string name="interval_weekly">साप्ताहिक</string>
+    <string name="interval_monthly">मासिक</string>
+    <string name="interval_yearly">वार्षिक</string>
+
+    <string name="settings_show_get_more_title">अधिक गेम प्राप्त करें दिखाएं</string>
+    <string name="settings_show_get_more_desc">स्टोर का लिंक दिखाएं</string>
+
+    <string name="settings_advanced_title">उन्नत</string>
+    <string name="settings_advanced_desc">प्रायोगिक सुविधाएं और अपडेट</string>
+
+    <string name="settings_version_title">ऐप संस्करण</string>
+    <string name="settings_developer_title">डेवलपर</string>
+    <string name="settings_developer_name">FeDeveloper95</string>
+    <string name="settings_report_title">बग / सुविधा की रिपोर्ट करें</string>
+    <string name="settings_report_desc">टेलीग्राम पर डेवलपर से चैट करें</string>
+
+    <string name="settings_check_updates_title">अपडेट की जांच करें</string>
+    <string name="settings_check_updates_desc">नवीनतम संस्करण खोजें</string>
+    <string name="settings_auto_updates_title">स्वचालित अपडेट</string>
+    <string name="settings_auto_updates_desc">स्टार्टअप पर अपडेट की जांच करें</string>
+
+    <string name="update_latest_version_msg">फिलहाल कोई अपडेट उपलब्ध नहीं है।</string>
+    <string name="update_available">संस्करण %1$s उपलब्ध है!</string>
+    <string name="update_action">अपडेट करें</string>
+    <string name="update_error_msg">अपडेट की जांच या डाउनलोड नहीं किया जा सका।</string>
+    <string name="unknown">अज्ञात</string>
+
+    <string name="settings_setup_title">प्रारंभिक सेटअप</string>
+    <string name="settings_setup_desc">स्वागत विज़ार्ड फिर से चलाएं</string>
+    <string name="settings_backup_header">बैकअप और पुनर्स्थापना</string>
+    <string name="settings_export_title">सेटिंग्स निर्यात करें</string>
+    <string name="settings_export_desc">कॉन्फ़िगरेशन और गेम सूची सहेजें</string>
+    <string name="settings_import_title">सेटिंग्स आयात करें</string>
+    <string name="settings_import_desc">बैकअप फ़ाइल से पुनर्स्थापित करें</string>
+    <string name="dialog_restart_title">पुनरारंभ आवश्यक है</string>
+    <string name="dialog_restart_desc">सेटिंग्स आयात कर ली गई हैं। परिवर्तन लागू करने के लिए ऐप को पुनरारंभ करें।</string>
+    <string name="restart_now">अभी पुनरारंभ करें</string>
+    <string name="export_success">सेटिंग्स सफलतापूर्वक निर्यात की गईं</string>
+    <string name="export_error">सेटिंग्स निर्यात करने में त्रुटि</string>
+    <string name="import_error">सेटिंग्स आयात करने में त्रुटि</string>
+
+    <string name="community_title">समुदाय में शामिल हों</string>
+    <string name="community_desc">मेरे प्रोजेक्ट्स पर नवीनतम समाचार और अपडेट, साथ ही कुछ विशेष स्नीक पीक्स को याद न करने के लिए मेरे टेलीग्राम चैनल से जुड़ें!</string>
+    <string name="no_thanks">नहीं, धन्यवाद</string>
+    <string name="sure_action">ज़रूर!</string>
+    <string name="see_source_code">स्रोत कोड देखें</string>
+    <string name="check_updates_action">अपडेट की जांच करें</string>
+    <string name="cancel_action">रद्द करें</string>
+    <string name="edit_app_icon_title">आइकन चुनें</string>
+    <string name="edit_app_icons">ऐप आइकन</string>
+    <string name="edit_builtin_icons">अंतर्निहित आइकन</string>
+    <string name="edit_gallery">गैलरी</string>
+    <string name="edit_restore_icon">आइकन पुनर्स्थापित करें</string>
+    <string name="edit_restore_title">शीर्षक पुनर्स्थापित करें</string>
+    <string name="edit_app_name">ऐप का नाम</string>
+    <string name="select_app_title">ऐप चुनें</string>
+    <string name="settings_testing_header">परीक्षण</string>
+    <string name="settings_test_telegram_title">समुदाय</string>
+    <string name="settings_test_telegram_desc">हमारे टेलीग्राम समूह से जुड़ें</string>
+    <string name="settings_test_crash_title">क्रैश का परीक्षण करें</string>
+    <string name="settings_test_crash_desc">त्रुटि रिपोर्टिंग का परीक्षण करने के लिए क्रैश को बाध्य करें</string>
+    <string name="settings_danger_zone_header">खतरे का क्षेत्र</string>
+    <string name="settings_reset_title">फ़ैक्टरी रीसेट</string>
+    <string name="settings_reset_desc">सभी डेटा हटाएं और डिफ़ॉल्ट सेटिंग्स पुनर्स्थापित करें</string>
+    <string name="settings_reset_confirmation_desc">क्या आप वाकई ऐप को रीसेट करना चाहते हैं? आपके सभी सहेजे गए गेम, अनुकूलन और सेटिंग्स स्थायी रूप से हटा दी जाएंगी। इस क्रिया को पूर्ववत नहीं किया जा सकता है।</string>
+    <string name="settings_reset_action">ऐप रीसेट करें</string>
+    <string name="uninstall">अनइंस्टॉल करें</string>
+    <string name="settings_grid_columns_title">ग्रिड कॉलम</string>
+    <string name="add_favorite">पसंदीदा में जोड़ें</string>
+    <string name="remove_favorite">पसंदीदा से हटाएं</string>
+    <string name="favorites">पसंदीदा</string>
+    <string name="feat_order_desc">संपादन मोड में प्रवेश करने के लिए पेंसिल बटन पर टैप करें या इसकी उपस्थिति को अनुकूलित करने के लिए गेम को दबाए रखें।</string>
+
+    <string name="controller_connected">नियंत्रक कनेक्ट हो गया</string>
+    <string name="action_settings">सेटिंग्स</string>
+    <string name="action_ok">ठीक है</string>
+    <string name="settings_test_controller_title">नियंत्रक कनेक्शन</string>
+    <string name="settings_test_controller_desc">नियंत्रक कनेक्ट होने पर अपने फ़ोन पर पॉपअप दिखाएं</string>
+    <string name="settings_test_controller_simulate_title">नियंत्रक कनेक्शन का अनुकरण करें</string>
+    <string name="settings_test_controller_simulate_desc">नियंत्रक कनेक्शन निचली शीट दिखाएं</string>
+    <string name="controller_xbox">Xbox</string>
+    <string name="controller_playstation">PlayStation</string>
+    <string name="controller_joycon">Joy-Con</string>
+    <string name="controller_name_xbox">Xbox वायरलेस नियंत्रक</string>
+    <string name="controller_name_playstation">DualSense वायरलेस नियंत्रक</string>
+    <string name="controller_name_joycon">Joy-Con (L/R)</string>
+    <string name="controller_generic">सामान्य नियंत्रक</string>
+    <string name="controller_name_generic">अज्ञात नियंत्रक</string>
+    <string name="settings_header_more">अधिक</string>
+    <string name="settings_game_bubble_title">गेम बबल</string>
+    <string name="settings_game_bubble_desc">गेम बबल सेटिंग्स प्रबंधित करें</string>
+    <string name="settings_bubble_enable_title">गेम बबल सक्षम करें</string>
+    <string name="settings_bubble_autohide_title">स्वतः छिपाएं</string>
+    <string name="settings_bubble_autohide_desc">3 सेकंड के बाद स्क्रीन किनारे पर छोटा करें</string>
+    <string name="settings_bubble_tools_title">गेम बबल टूल</string>
+    <string name="tool_fps">FPS काउंटर</string>
+    <string name="tool_dnd">परेशान न करें</string>
+    <string name="tool_brightness">अधिकतम चमक</string>
+    <string name="tool_screenshot">स्क्रीनशॉट</string>
+    <string name="tool_ping">पिंग मॉनिटर</string>
+    <string name="tool_boost">RAM बूस्ट</string>
+    <string name="open_in_store">स्टोर में खोलें</string>
+    <string name="move_up">ऊपर ले जाएं</string>
+    <string name="move_down">नीचे ले जाएं</string>
+    <string name="stats">आँकड़े</string>
+    <string name="perm_bluetooth_title">ब्लूटूथ एक्सेस</string>
+    <string name="perm_bluetooth_desc">अपने नियंत्रकों को कनेक्ट करने और प्रबंधित करने के लिए आवश्यक है।</string>
+    <string name="bubble_perm_title">गेम बबल</string>
+    <string name="bubble_perm_subtitle">अनुमतियां</string>
+    <string name="bubble_perm_intro">उन्नत गेम बबल सुविधाओं को सक्षम करने के लिए ये अनुमतियां प्रदान करें।</string>
+    <string name="perm_overlay_title">अन्य ऐप्स पर प्रदर्शित करें</string>
+    <string name="perm_overlay_desc">खेलते समय गेम बबल दिखाने के लिए आवश्यक है।</string>
+    <string name="perm_dnd_title">परेशान न करें</string>
+    <string name="perm_dnd_desc">गेम बबल से परेशान न करें मोड को टॉगल करें।</string>
+    <string name="perm_write_settings_title">सिस्टम सेटिंग्स संशोधित करें</string>
+    <string name="perm_write_settings_desc">गेम बबल से स्क्रीन की चमक समायोजित करें।</string>
+    <string name="perm_accessibility_title">पहुंच-योग्यता सेवा</string>
+    <string name="perm_accessibility_desc">गेम बबल से सीधे स्क्रीनशॉट लें।</string>
+
+</resources>
