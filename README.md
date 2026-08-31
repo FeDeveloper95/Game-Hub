@@ -12,7 +12,7 @@
 
 ### :art: Design
 
-The UI is crafted following the latest **Material 3 Expressive** guidelines. Game Hub works seamlessly on every device, whether you use a regular phone, a foldable or a tablet.
+The UI is crafted following the latest **Material 3 Expressive** guidelines. Game Hub works seamlessly on every device, whether you use a regular phone, a foldable, a tablet or even a laptop.
 
 ### :light_blue_heart: Loved help
 
@@ -23,6 +23,7 @@ Special thanks to my awesome girlfriend, [Gaia](https://github.com/Gaia-Kapo), w
 Found a bug or have a feature request? **Create a new issue (preferred)** or reach me directly via [Telegram](https://t.me/fedeveloper95). 
 
 ### :bangbang: Disclaimer
+Remember that the only official way to download this app is from this repo's release page. Don't trust any other source as it could be dangerous.
 No fork of this project will receive support, if you use a fork, ask the forker to support you.
 
 

@@ -70,7 +70,6 @@ fun MoreBottomSheet(
     val showLaunchCount = prefs.getBoolean("pref_show_launch_count", true)
     val showPlayTime = prefs.getBoolean("pref_show_play_time", true)
     val showStats = showLaunchCount || showPlayTime
-
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
     val scope = rememberCoroutineScope()
     val isDark = isSystemInDarkTheme()
@@ -100,8 +99,8 @@ fun MoreBottomSheet(
                 Row(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .defaultMinSize(minHeight = 72.dp)
-                        .padding(start = 8.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
+                        .defaultMinSize(minHeight = 90.dp)
+                        .padding(start = 16.dp, end = 16.dp, top = 8.dp, bottom = 8.dp),
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     GameIconDisplay(
